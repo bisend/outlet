@@ -6,7 +6,12 @@
  */
 
 require('./bootstrap');
-
+require('./fontawesome-all.min');
+require('./header');
+require('./dropdownBlock');
+require('./mobileNav');
+require('./selectDrop');
+require('./mobileFilters');
 window.Vue = require('vue');
 
 /**

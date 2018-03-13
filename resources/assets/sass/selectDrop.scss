@@ -1,0 +1,98 @@
+.drop-menu-select {
+  width: 100%;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 0;
+  transition: all .5s ease;
+  position: relative;
+  font-size: 15px;
+  color: #000;
+  height: 100%;
+  text-align: left;
+  outline: none;
+  border: 1px solid #000;
+  font-weight: 400;
+  .select {
+    cursor: pointer;
+    display: block;
+    padding: 9px 12px;
+    outline: none;
+    margin-bottom: 0;
+    z-index: 8888;
+    span{
+      /*color: #555;*/
+      z-index: 8888;
+    }
+    i {
+      font-size: 13px;
+      color: #909090;
+      cursor: pointer;
+      transition: all .5s ease;
+      float: right;
+      margin-top: 5px;
+      outline: none;
+    }
+  }
+  &:hover{
+    outline: none;
+  }
+  &:active{
+    outline: none;
+  }
+  .active{
+    outline: none;
+    .select{
+      i{
+        transform: rotate(180deg)
+      }
+    }
+    &:hover{
+      outline: none;
+    }
+  }
+  .dropeddown{
+    position: absolute;
+    background-color: #fff;
+    width: calc(100% + 2px);
+    left: 0;
+    margin-top: 0px;
+    overflow: hidden;
+    display: none;
+    overflow-y: auto;
+    z-index: 9;
+    outline: none;
+    border: 1px solid #000;
+    z-index: 8888;
+    margin-left: -1px;
+    padding: 0;
+    list-style: none;
+    outline: none;
+    z-index: 8888;
+    li{
+      padding: 10px 15px;
+      transition: all .2s ease;
+      cursor: pointer;
+      outline: none;
+      border-bottom: 1px solid #eee;
+      color: #444;
+      font-weight: 100;
+      z-index: 8888;
+      &:hover{
+        outline: none;
+        -moz-box-shadow: 0 6px 10px -10px rgba(0, 0, 0, 0.4);
+        -webkit-box-shadow:0 6px 10px -10px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 6px 10px -10px rgba(0, 0, 0, 0.4);
+
+        -webkit-transition: .2s ease all;
+        -o-transition: .2s ease all;
+        transition: .2s ease all;
+        color: #aeaeae;
+      }
+      &:active{
+        outline: none;
+      }
+    }
+  }
+}
+
+

@@ -14,9 +14,15 @@
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 
 
+
 </head>
 <body>
 
+<div class="mobile-nav-bg"></div>
+
+@include('partial.header')
+
+<div class="after-header-mrg"></div>
 
 {{--CONTENT AREA--}}
 @yield('content')

@@ -1,0 +1,35 @@
+.left-navbar{
+  .filters{
+    .dropdown-div{
+      .dropdown-div-btn{
+        color: #333333;
+        border-bottom: 2px solid #999999!important;
+        font-weight: 700;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        span{
+          color: #333333;
+        }
+      }
+      .dropdown-div-content{
+        ul{
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+    .filters-save{
+      margin: 20px 0;
+      a{
+        color: #ffffff;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.grid-item{
+  .grid-item-header{
+    padding-bottom: 32px;
+  }
+}

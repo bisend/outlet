@@ -1,14 +1,28 @@
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import "fonts";
+
+@import "global";
 
 // Variables
 @import "variables";
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+@import "header";
+@import "button";
+@import "label";
+@import "dropdownDiv";
+@import "breadcrumb";
+@import "category";
+@import "check";
+@import "prodItem";
+@import "pagination";
+@import "selectDrop";
+
+@import "mobileFilters";
+
+
+
+

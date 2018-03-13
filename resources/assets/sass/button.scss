@@ -1,0 +1,45 @@
+.btn{
+  width: 100%;
+  background-color: #111111;
+  color: #ffffff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 23px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  outline: none;
+  &:hover{
+    background-color: #e65540;
+    color: #ffffff;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+
+    outline: none;
+  }
+
+  &:focus{
+    outline: none;
+    color: #ffffff;
+  }
+
+  &:active{
+    outline: none;
+    color: #ffffff;
+  }
+
+  &:visited{
+    outline: none;
+    color: #ffffff;
+  }
+}
+
+.btn.active{
+  background-color: #e65540;
+  color: #fff;
+}
