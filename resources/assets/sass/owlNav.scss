@@ -1,0 +1,57 @@
+.owl-carousel{
+  .owl-nav{
+    .owl-prev{
+      left: -37px;
+      top: 22px;
+
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      background: #111111!important;
+      color: #fff!important;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+
+      border-radius: 50%;
+
+      span{
+        font-size: 23px;
+        line-height: 0;
+      }
+    }
+
+    .owl-next{
+      right: -37px;
+      top: 22px;
+
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      background: #111111!important;
+      color: #fff!important;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+
+      border-radius: 50%;
+
+      span{
+        font-size: 23px;
+        line-height: 0;
+      }
+    }
+
+    .owl-next,
+    .owl-prev{
+      &:hover{
+        background-color: #e65540!important;
+      }
+    }
+
+  }
+}

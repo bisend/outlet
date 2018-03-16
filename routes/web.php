@@ -27,6 +27,10 @@ Route::get('/product', function () {
     return view('pages.product');
 })->name('product');
 
+Route::get('/search', function () {
+    return view('pages.search');
+})->name('search');
+
 
 
 

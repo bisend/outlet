@@ -10,9 +10,19 @@ require('./fontawesome-all.min');
 require('./header');
 require('./dropdownBlock');
 require('./mobileNav');
-require('./selectDrop');
 require('./mobileFilters');
 window.Vue = require('vue');
+
+import vSelect from 'vue-select';
+Vue.component('v-select', vSelect);
+
+require('./category/SortSelect');
+
+require('../plugins/owl/js/owl.carousel');
+require('../plugins/owl/js/owl.navigation');
+
+require('./owlCarousel');
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

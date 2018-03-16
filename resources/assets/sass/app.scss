@@ -19,10 +19,16 @@
 @import "check";
 @import "prodItem";
 @import "pagination";
-@import "selectDrop";
-
+@import "select";
+@import "product";
 @import "mobileFilters";
 
+
+@import "../plugins/owl/scss/owl.carousel";
+@import "../plugins/owl/scss/owl.theme.default";
+
+@import "owlNav";
+@import "input";
 
 
 

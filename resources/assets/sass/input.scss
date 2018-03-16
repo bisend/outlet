@@ -1,0 +1,56 @@
+.input-group-default{
+  margin-bottom: 15px;
+  .input-default{
+    width: 100%;
+    border-radius: 23px;
+    padding: 6px 0 6px 15px;
+    border: 2px solid #ccc;
+    outline: none;
+    &:focus{
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out,
+      -webkit-box-shadow 0.15s ease-in-out;
+      border: 2px solid #999999;
+    }
+  }
+  label{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+  }
+
+  textarea{
+    height: 100px;
+    min-height: 100px;
+    min-width: 100%;
+    width: 100%;
+    border-radius: 23px;
+    padding: 10px 0 6px 15px;
+    border: 2px solid #ccc;
+    outline: none;
+    &:focus{
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out,
+      -webkit-box-shadow 0.15s ease-in-out;
+      border: 2px solid #999999;
+    }
+  }
+}
+
+.incorect-input{
+  .input-default{
+    border: 2px solid #e65540;
+    &:focus{
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out,
+      -webkit-box-shadow 0.15s ease-in-out;
+      border: 2px solid #ccc;
+    }
+  }
+  label{
+    color: #e65540;
+  }
+}
