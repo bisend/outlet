@@ -6,6 +6,7 @@
     padding: 6px 0 6px 15px;
     border: 2px solid #ccc;
     outline: none;
+    font-size: 14px;
     &:focus{
       transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
       border-color 0.15s ease-in-out,
@@ -17,7 +18,8 @@
   label{
     margin-bottom: 0;
     padding-bottom: 0;
-    font-size: 14px;
+    font-size: 12px;
+    min-height: 30px;
   }
 
   textarea{

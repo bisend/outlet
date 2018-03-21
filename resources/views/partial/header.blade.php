@@ -199,7 +199,7 @@
                                     <div class="product-img">
                                         <div class="label top">Top</div>
                                         <a href="">
-                                            <img src="/image/products/item-06.jpg" alt="">
+                                            <img src="/image/products/item-1.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="product-info">
@@ -214,7 +214,7 @@
                                     <div class="product-img">
                                         <div class="label new">New</div>
                                         <a href="">
-                                            <img src="/image/products/item-06.jpg" alt="">
+                                            <img src="/image/products/item-6.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="product-info">
@@ -276,7 +276,7 @@
                                         <div class="smoll-cart-img">
                                             <div class="label new">New</div>
                                             <a href="">
-                                                <img src="/image/products/item-06.jpg" alt="">
+                                                <img src="/image/products/item-4.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="smoll-cart-info">
@@ -298,7 +298,7 @@
                                         <div class="smoll-cart-img">
                                             <div class="label top">Top</div>
                                             <a href="">
-                                                <img src="/image/products/item-06.jpg" alt="">
+                                                <img src="/image/products/item-5.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="smoll-cart-info">

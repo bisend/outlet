@@ -1,0 +1,103 @@
+.profile-section{
+  .profile-nav ul{
+    margin-bottom: 20px;
+  background-color: #fbfbfb;
+  border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 23px;
+    li{
+      border-bottom: 1px solid #eee;
+      a{
+        display: block;
+        font-size: 14px;
+        width: 100%;
+        color: #999999;
+        padding: 10px;
+        text-align: left;
+
+
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+
+        outline: none;
+        &:hover{
+          margin-left: 10px;
+          color: #999999;
+          -webkit-transition: all 0.4s;
+          -o-transition: all 0.4s;
+          -moz-transition: all 0.4s;
+          transition: all 0.4s;
+
+          outline: none;
+        }
+      }
+      .active{
+        border-bottom: 1px solid #999999;
+        color: #222222;
+        &:hover{
+          margin-left: 0;
+          color: #999999;
+        }
+      }
+    }
+  }
+
+  .profile-item{
+    padding: 20px;
+    border-radius: 23px;
+    background-color: #fbfbfb;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+
+    .profile-header{
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #eee;
+      color: #222222;
+      font-size: 18px;
+    }
+
+    .profile-body{
+      .pagination-default{
+        padding: 10px 0 10px 0;
+        margin-left: 15px;
+      }
+      .profile-btn-submit{
+        width: 241px;
+        margin-top: 10px;
+        .btn{
+          padding: 9px 0;
+          font-size: 14px;
+        }
+      }
+      .table-responsive{
+        .order-list-header{
+          th{
+            border-top: none;
+            font-size: 14px;
+            color: #999999;
+            /* margin-bottom: 4px; */
+            padding-bottom: 2px;
+          }
+        }
+        .order-number a{
+          color: #222222;
+          text-decoration: underline;
+          &:hover{
+            color: rgb(230, 85, 64);
+          }
+        }
+
+        .view-order-details{
+          a{
+            color: rgb(230, 85, 64);
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+}

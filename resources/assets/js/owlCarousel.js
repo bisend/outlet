@@ -39,4 +39,53 @@ $(document).ready(function(){
         }
     });
 
+    $(".owl-products").owlCarousel({
+        loop:false,
+        margin:15,
+        dots: false,
+        nav: true,
+        mouseDrag: false,
+        // navContainer:true,
+        // dotsContainer: true,
+        responsive:{
+            0:{
+                items:1
+            },
+            400:{
+                items:1
+            },
+            500:{
+                items:1
+            },
+            700:{
+                items:2
+            },
+            1023:{
+                items:3,
+                mouseDrag: false
+            },
+            1200:{
+                items:4,
+                mouseDrag: true
+            }
+           
+        }
+    });
+
+    $(".owl-homeSlider").owlCarousel({
+        loop:true,
+        items:1,
+        nav: false,
+        dots: false,
+        autoplay: true,
+        mouseDrag: false,
+        autoplayTimeout: 8000,
+        responsive: {
+            991: {
+                nav: true
+            }
+        }
+    });
+
 });
+

@@ -16,17 +16,17 @@
                         </div>
                         <div>
                             <div class="prod-big-img">
-                                <img src="/image/products/item-06.jpg" alt="">
+                                <img src="/image/products/item-1.jpg" alt="">
                             </div>
                         </div>
                         <div>
                             <div class="prod-big-img">
-                                <img src="/image/products/item-06.jpg" alt="">
+                                <img src="/image/products/item-3.jpg" alt="">
                             </div>
                         </div>
                         <div>
                             <div class="prod-big-img">
-                                <img src="/image/products/item-06.jpg" alt="">
+                                <img src="/image/products/item-4.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                             <div class="item">
                                 <div class="photo-dots">
                                     <a href="">
-                                        <img src="/image/products/item-06.jpg" alt="">
+                                        <img src="/image/products/item-4.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -224,6 +224,8 @@
 
                 </div>
             </div>
+
+            @include('partial.owlSliderProducts')
 
         </div>
     </div>

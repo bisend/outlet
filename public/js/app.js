@@ -47076,8 +47076,10 @@ __webpack_require__("./resources/assets/js/category/SortSelect.js");
 
 __webpack_require__("./resources/assets/plugins/owl/js/owl.carousel.js");
 __webpack_require__("./resources/assets/plugins/owl/js/owl.navigation.js");
+__webpack_require__("./resources/assets/plugins/owl/js/owl.autoplay.js");
 
 __webpack_require__("./resources/assets/js/owlCarousel.js");
+__webpack_require__("./resources/assets/js/order/order.js");
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47362,6 +47364,21 @@ $(document).ready(function () {
 
 /***/ }),
 
+/***/ "./resources/assets/js/order/order.js":
+/***/ (function(module, exports) {
+
+if ($('[data-order-form]').length > 0) {
+    new Vue({
+        el: '[data-order-form]',
+        data: {
+            delivery: null,
+            pay: null
+        }
+    });
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/owlCarousel.js":
 /***/ (function(module, exports) {
 
@@ -47405,7 +47422,290 @@ $(document).ready(function () {
             }
         }
     });
+
+    $(".owl-products").owlCarousel({
+        loop: false,
+        margin: 15,
+        dots: false,
+        nav: true,
+        mouseDrag: false,
+        // navContainer:true,
+        // dotsContainer: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            400: {
+                items: 1
+            },
+            500: {
+                items: 1
+            },
+            700: {
+                items: 2
+            },
+            1023: {
+                items: 3,
+                mouseDrag: false
+            },
+            1200: {
+                items: 4,
+                mouseDrag: true
+            }
+
+        }
+    });
+
+    $(".owl-homeSlider").owlCarousel({
+        loop: true,
+        items: 1,
+        nav: false,
+        dots: false,
+        autoplay: true,
+        mouseDrag: false,
+        autoplayTimeout: 8000,
+        responsive: {
+            991: {
+                nav: true
+            }
+        }
+    });
 });
+
+/***/ }),
+
+/***/ "./resources/assets/plugins/owl/js/owl.autoplay.js":
+/***/ (function(module, exports) {
+
+/**
+ * Autoplay Plugin
+ * @version 2.3.2
+ * @author Bartosz Wojciechowski
+ * @author Artus Kolanowski
+ * @author David Deutsch
+ * @author Tom De Caluwé
+ * @license The MIT License (MIT)
+ */
+;(function ($, window, document, undefined) {
+
+	/**
+  * Creates the autoplay plugin.
+  * @class The Autoplay Plugin
+  * @param {Owl} scope - The Owl Carousel
+  */
+	var Autoplay = function Autoplay(carousel) {
+		/**
+   * Reference to the core.
+   * @protected
+   * @type {Owl}
+   */
+		this._core = carousel;
+
+		/**
+   * The autoplay timeout id.
+   * @type {Number}
+   */
+		this._call = null;
+
+		/**
+   * Depending on the state of the plugin, this variable contains either
+   * the start time of the timer or the current timer value if it's
+   * paused. Since we start in a paused state we initialize the timer
+   * value.
+   * @type {Number}
+   */
+		this._time = 0;
+
+		/**
+   * Stores the timeout currently used.
+   * @type {Number}
+   */
+		this._timeout = 0;
+
+		/**
+   * Indicates whenever the autoplay is paused.
+   * @type {Boolean}
+   */
+		this._paused = true;
+
+		/**
+   * All event handlers.
+   * @protected
+   * @type {Object}
+   */
+		this._handlers = {
+			'changed.owl.carousel': $.proxy(function (e) {
+				if (e.namespace && e.property.name === 'settings') {
+					if (this._core.settings.autoplay) {
+						this.play();
+					} else {
+						this.stop();
+					}
+				} else if (e.namespace && e.property.name === 'position' && this._paused) {
+					// Reset the timer. This code is triggered when the position
+					// of the carousel was changed through user interaction.
+					this._time = 0;
+				}
+			}, this),
+			'initialized.owl.carousel': $.proxy(function (e) {
+				if (e.namespace && this._core.settings.autoplay) {
+					this.play();
+				}
+			}, this),
+			'play.owl.autoplay': $.proxy(function (e, t, s) {
+				if (e.namespace) {
+					this.play(t, s);
+				}
+			}, this),
+			'stop.owl.autoplay': $.proxy(function (e) {
+				if (e.namespace) {
+					this.stop();
+				}
+			}, this),
+			'mouseover.owl.autoplay': $.proxy(function () {
+				if (this._core.settings.autoplayHoverPause && this._core.is('rotating')) {
+					this.pause();
+				}
+			}, this),
+			'mouseleave.owl.autoplay': $.proxy(function () {
+				if (this._core.settings.autoplayHoverPause && this._core.is('rotating')) {
+					this.play();
+				}
+			}, this),
+			'touchstart.owl.core': $.proxy(function () {
+				if (this._core.settings.autoplayHoverPause && this._core.is('rotating')) {
+					this.pause();
+				}
+			}, this),
+			'touchend.owl.core': $.proxy(function () {
+				if (this._core.settings.autoplayHoverPause) {
+					this.play();
+				}
+			}, this)
+		};
+
+		// register event handlers
+		this._core.$element.on(this._handlers);
+
+		// set default options
+		this._core.options = $.extend({}, Autoplay.Defaults, this._core.options);
+	};
+
+	/**
+  * Default options.
+  * @public
+  */
+	Autoplay.Defaults = {
+		autoplay: false,
+		autoplayTimeout: 5000,
+		autoplayHoverPause: false,
+		autoplaySpeed: false
+	};
+
+	/**
+  * Transition to the next slide and set a timeout for the next transition.
+  * @private
+  * @param {Number} [speed] - The animation speed for the animations.
+  */
+	Autoplay.prototype._next = function (speed) {
+		this._call = window.setTimeout($.proxy(this._next, this, speed), this._timeout * (Math.round(this.read() / this._timeout) + 1) - this.read());
+
+		if (this._core.is('busy') || this._core.is('interacting') || document.hidden) {
+			return;
+		}
+		this._core.next(speed || this._core.settings.autoplaySpeed);
+	};
+
+	/**
+  * Reads the current timer value when the timer is playing.
+  * @public
+  */
+	Autoplay.prototype.read = function () {
+		return new Date().getTime() - this._time;
+	};
+
+	/**
+  * Starts the autoplay.
+  * @public
+  * @param {Number} [timeout] - The interval before the next animation starts.
+  * @param {Number} [speed] - The animation speed for the animations.
+  */
+	Autoplay.prototype.play = function (timeout, speed) {
+		var elapsed;
+
+		if (!this._core.is('rotating')) {
+			this._core.enter('rotating');
+		}
+
+		timeout = timeout || this._core.settings.autoplayTimeout;
+
+		// Calculate the elapsed time since the last transition. If the carousel
+		// wasn't playing this calculation will yield zero.
+		elapsed = Math.min(this._time % (this._timeout || timeout), timeout);
+
+		if (this._paused) {
+			// Start the clock.
+			this._time = this.read();
+			this._paused = false;
+		} else {
+			// Clear the active timeout to allow replacement.
+			window.clearTimeout(this._call);
+		}
+
+		// Adjust the origin of the timer to match the new timeout value.
+		this._time += this.read() % timeout - elapsed;
+
+		this._timeout = timeout;
+		this._call = window.setTimeout($.proxy(this._next, this, speed), timeout - elapsed);
+	};
+
+	/**
+  * Stops the autoplay.
+  * @public
+  */
+	Autoplay.prototype.stop = function () {
+		if (this._core.is('rotating')) {
+			// Reset the clock.
+			this._time = 0;
+			this._paused = true;
+
+			window.clearTimeout(this._call);
+			this._core.leave('rotating');
+		}
+	};
+
+	/**
+  * Pauses the autoplay.
+  * @public
+  */
+	Autoplay.prototype.pause = function () {
+		if (this._core.is('rotating') && !this._paused) {
+			// Pause the clock.
+			this._time = this.read();
+			this._paused = true;
+
+			window.clearTimeout(this._call);
+		}
+	};
+
+	/**
+  * Destroys the plugin.
+  */
+	Autoplay.prototype.destroy = function () {
+		var handler, property;
+
+		this.stop();
+
+		for (handler in this._handlers) {
+			this._core.$element.off(handler, this._handlers[handler]);
+		}
+		for (property in Object.getOwnPropertyNames(this)) {
+			typeof this[property] != 'function' && (this[property] = null);
+		}
+	};
+
+	$.fn.owlCarousel.Constructor.Plugins.autoplay = Autoplay;
+})(window.Zepto || window.jQuery, window, document);
 
 /***/ }),
 

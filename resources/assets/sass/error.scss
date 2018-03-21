@@ -1,0 +1,22 @@
+.error-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  flex-direction: column;
+  h2{
+    font-size: 150px;
+  }
+  .error-dtn{
+    a{
+      color: #999999;
+      padding: 10px;
+      svg{
+        margin-right: 5px;
+      }
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+}

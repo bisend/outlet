@@ -20,8 +20,10 @@ require('./category/SortSelect');
 
 require('../plugins/owl/js/owl.carousel');
 require('../plugins/owl/js/owl.navigation');
+require('../plugins/owl/js/owl.autoplay');
 
 require('./owlCarousel');
+require('./order/order');
 
 
 /**
