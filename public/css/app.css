@@ -12296,6 +12296,18 @@ input[type="checkbox"]:checked + label:hover span:before {
 }
 
 @media (max-width: 600px) {
+  .product-page .product-big-photo .prod-big-img {
+    width: 100%;
+    height: 300px;
+  }
+
+  .product-page .product-big-photo .prod-big-img img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+
   .product-page .product-big-photo-dots .owl-nav .owl-prev {
     left: -33px;
     top: 22px;

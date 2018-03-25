@@ -47389,7 +47389,31 @@ $(document).ready(function () {
         margin: 10,
         items: 1,
         nav: false,
-        dots: false
+        dots: false,
+        mouseDrag: false,
+        responsive: {
+            0: {
+                items: 1
+            },
+            400: {
+                items: 1
+            },
+            500: {
+                items: 1
+            },
+            700: {
+                items: 1
+            },
+            1023: {
+                items: 1,
+                mouseDrag: false
+            },
+            1200: {
+                items: 1,
+                mouseDrag: true
+            }
+
+        }
     });
 
     $(".product-big-photo-dots").owlCarousel({
