@@ -13676,6 +13676,9 @@ input[type="checkbox"]:checked + label:hover span:before {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 
   .wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-img {
@@ -13692,6 +13695,9 @@ input[type="checkbox"]:checked + label:hover span:before {
 
   .wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-info {
     margin-left: 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 
   .wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-info .stars {

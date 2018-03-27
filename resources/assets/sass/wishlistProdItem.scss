@@ -60,6 +60,7 @@
     align-items: center;
     .wishlist-prod-img-info{
       flex-direction: column;
+      align-items: center;
       .wishlist-prod-img{
         width: 110px;
         height: 100px;
@@ -71,6 +72,7 @@
       }
       .wishlist-prod-info{
         margin-left: 0;
+        align-items: center;
         .stars{
           margin-top: 15px;
         }
