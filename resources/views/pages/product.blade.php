@@ -83,6 +83,7 @@
                                 <span>38</span>
                                 <span>39</span>
                             </div>
+                            <a href="">Таблиця розмірів</a>
                         </div>
                         <div class="quantity">
                             <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
@@ -128,6 +129,9 @@
                         намеренно (например, юмористические варианты).
                     </div>
                     <div class="tab-pane fade tab-comments" id="nav-comments" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="add-comment-link2">
+                            <a href="" >Додати відгук</a>
+                        </div>
                         <p>Всього відгуків (<span>2</span>) або "Відгуки відсутні"</p>
                         <div class="comment-item">
                             <div class="comment-item_header">

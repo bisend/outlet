@@ -51,21 +51,21 @@ a{
 .smoll-cart-products-block::-webkit-scrollbar-thumb {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background-color:#6dc0c8;
+  background-color:#ddd;
 }
 
 .smoll-cart-products-block::-webkit-scrollbar-thumb:hover{
-  background-color:#56999f;
+  background-color:#ccc;
 }
 
 .smoll-cart-products-block::-webkit-resizer{
   background-image:url('');
   background-repeat:no-repeat;
-  width:4px;
+  width: 6px;
   height:0px
 }
 .smoll-cart-products-block::-webkit-scrollbar{
-  width: 4px;
+  width: 6px;
   border-radius: 2px;
 }
 

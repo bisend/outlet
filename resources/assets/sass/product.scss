@@ -52,6 +52,14 @@
         font-weight: 500;
         margin-bottom: 5px;
       }
+      a{
+        color: #222222;
+        border-bottom: 1px dotted #222222;
+        &:hover{
+          color: rgb(230, 85, 64);
+          border-bottom: 1px dotted rgb(230, 85, 64);
+        }
+      }
       .size{
         margin-bottom: 10px;
         span{
@@ -287,6 +295,18 @@
           font-weight: 500;
           padding-bottom: 20px;
           margin-bottom: 0;
+        }
+        .add-comment-link2{
+          float: right;
+          a{
+            font-weight: 500;
+            color: #999999;
+            border-bottom: 1px dotted #999999;
+            &:hover{
+              color: #e65540;
+              border-bottom: 1px dotted #e65540;
+            }
+          }
         }
         .comment-item{
           padding: 20px;
