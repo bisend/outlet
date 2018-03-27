@@ -19,6 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->integer('priority')->default(1000);
+            $table->string('code_1c', 36)->nullable();
+            $table->boolean('active')->default(false);
+            $table->string('confirmation_token')->nullable();
+            $table->string('new_email')->unique()->nullable();
             $table->timestamps();
         });
     }
