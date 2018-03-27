@@ -11923,7 +11923,11 @@ input[type="checkbox"]:checked + label:hover span:before {
   font-weight: 500;
 }
 
-.product-page .product-info .product-characteristics ul li .instok {
+.product-page .product-info .product-characteristics ul li .green {
+  color: #d4bf2f;
+}
+
+.product-page .product-info .product-characteristics ul li .red {
   color: #e65540;
 }
 
@@ -13213,6 +13217,10 @@ input[type="checkbox"]:checked + label:hover span:before {
   border-bottom: 1px solid #eee;
 }
 
+.profile-section .profile-nav ul li:last-child {
+  border: none;
+}
+
 .profile-section .profile-nav ul li a {
   display: block;
   font-size: 14px;
@@ -13568,5 +13576,139 @@ input[type="checkbox"]:checked + label:hover span:before {
 
 .home-prod-slider {
   margin-top: 40px;
+}
+
+.wishlist-prod-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 25px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.wishlist-prod-item .wishlist-prod-img-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-img {
+  position: relative;
+  width: 110px;
+  height: 100px;
+}
+
+.wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-img img {
+  width: 110px;
+  height: 110px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-info {
+  margin-left: 15px;
+}
+
+.wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-info .stars span {
+  font-size: 13px;
+}
+
+.wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-info .prod-title a {
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.5;
+  padding-bottom: 5px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+}
+
+.wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-info .prod-title a:hover {
+  color: #e65540;
+}
+
+.wishlist-prod-item .wishlist-delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wishlist-prod-item .wishlist-delete a {
+  font-size: 20px;
+  color: #e65540;
+}
+
+.wishlist-prod-item .wishlist-delete a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 500px) {
+  .wishlist-prod-item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .wishlist-prod-item .wishlist-prod-img-info {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-img {
+    width: 110px;
+    height: 100px;
+  }
+
+  .wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-img img {
+    width: 110px;
+    height: 110px;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+
+  .wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-info {
+    margin-left: 0;
+  }
+
+  .wishlist-prod-item .wishlist-prod-img-info .wishlist-prod-info .stars {
+    margin-top: 15px;
+  }
+
+  .wishlist-prod-item .wishlist-delete {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
 }
 

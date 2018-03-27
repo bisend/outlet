@@ -66,7 +66,7 @@
                         </div>
                         <div class="product-characteristics">
                             <ul>
-                                <li>Наявність: <span class="instok">В наявності</span></li>
+                                <li>Наявність: <span class="instok green">В наявності</span></li>
                                 <li>Матеріал: <span>Шкіра</span></li>
                                 <li>Виробник: <span>Україна</span></li>
                                 <li>Колір: <span>Чоний</span></li>
