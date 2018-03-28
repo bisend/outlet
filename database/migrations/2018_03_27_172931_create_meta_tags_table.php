@@ -16,14 +16,14 @@ class CreateMetaTagsTable extends Migration
         Schema::create('meta_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('page_name');
-            $table->string('title_ru');
-            $table->string('title_uk');
-            $table->string('description_ru');
-            $table->string('description_uk');
-            $table->string('keywords_ru');
-            $table->string('keywords_uk');
-            $table->string('h1_ru');
-            $table->string('h1_uk');
+            $table->string('meta_title_ru');
+            $table->string('meta_title_uk');
+            $table->string('meta_description_ru');
+            $table->string('meta_description_uk');
+            $table->string('meta_keywords_ru');
+            $table->string('meta_keywords_uk');
+            $table->string('meta_h1_ru');
+            $table->string('meta_h1_uk');
             $table->string('code_1c', 36)->nullable();
             $table->timestamps();
         });
