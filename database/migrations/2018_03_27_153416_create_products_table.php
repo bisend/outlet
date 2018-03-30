@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->boolean('is_visible')->default(true);
             $table->boolean('in_stock')->default(true);
             $table->decimal('price', 8, 2);
+            $table->decimal('old_price', 8, 2)->nullable();
             $table->text('description_ru')->nullable();
             $table->text('description_uk')->nullable();
             $table->integer('priority')->default(1000);

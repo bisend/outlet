@@ -15,27 +15,43 @@
                     <li>
                         <a href="">Обмін та повернення</a>
                     </li>
-                    <li>
-                        <a href="">Гарантії</a>
-                    </li>
                 </ul>
                 <div class="lang_login">
                     <ul>
-                        <li>
-                            <span class="lang">
-                                Укр <i class="fas fa-chevron-down"></i>
-                                <span class="lang-second">
-                                    <div class="lang-padding"></div>
-                                    <a href="">Рус</a>
+                        @if($model->language == 'ru')
+                            <li>
+                                <span class="lang">
+                                    Рус <i class="fas fa-chevron-down"></i>
+                                    <span class="lang-second">
+                                        <div class="lang-padding"></div>
+                                        <a href="{{ url_current('uk') }}">Укр</a>
+                                    </span>
                                 </span>
-                            </span>
-                        </li>
-                        <li>
-                            <a href="">Вхід</a>
-                        </li>
-                        <li>
-                            <a href="">Реєстрація</a>
-                        </li>
+                            </li>
+                        @else
+                            <li>
+                                <span class="lang">
+                                    Укр <i class="fas fa-chevron-down"></i>
+                                    <span class="lang-second">
+                                        <div class="lang-padding"></div>
+                                        <a href="{{ url_current('ru') }}">Рус</a>
+                                    </span>
+                                </span>
+                            </li>
+                        @endif
+
+                        @if(auth()->check())
+                            <li>
+                                <a href="#">John Doe</a>
+                            </li>
+                        @else
+                            <li>
+                                <a href="#">{{ trans('header.login') }}</a>
+                            </li>
+                            <li>
+                                <a href="#">{{ trans('header.register') }}</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -60,60 +76,37 @@
                         </div>
                         <div class="nav-slide-body">
                             <ul>
-                                <li>
-                                    <div class="dropdown-div">
-                                        <div class="dropdown-div-btn">
-                                            <a href="">Чоловіче взуття</a>
-                                            <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                        </div>
-                                        <div class="dropdown-div-content dropdown-div-content-none">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Верхній одяг</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Нижній одяг</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Взуття</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Аксесуари</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="dropdown-div">
-                                        <div class="dropdown-div-btn">
-                                            <a href="">Жіноче взуття</a>
-                                            <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                        </div>
-                                        <div class="dropdown-div-content dropdown-div-content-none">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Верхній одяг</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Нижній одяг</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Взуття</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">Аксесуари</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="default-link" href="">Взуття для хлопчиків</a>
-                                </li>
-                                <li>
-                                    <a class="default-link" href="">Взуття для дівчаток</a>
-                                </li>
+                                @foreach($model->categories as $category)
+                                    @if($category->childs->count() > 0)
+                                        <li>
+                                            <div class="dropdown-div">
+                                                <div class="dropdown-div-btn">
+                                                    <a href="{{ url_category($category->slug, $model->language) }}">
+                                                        {{ $category->name }}
+                                                    </a>
+                                                    <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                                </div>
+                                                <div class="dropdown-div-content dropdown-div-content-none">
+                                                    <ul>
+                                                        @foreach($category->childs as $child)
+                                                            <li>
+                                                                <a href="{{ url_category($child->slug, $model->language) }}">
+                                                                    {{ $child->name }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a class="default-link" href="{{ url_category($category->slug, $model->language) }}">
+                                                {{ $category->name }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
                                 <li>
                                     <a class="default-link" href="">Розпродаж</a>
                                 </li>
@@ -129,29 +122,48 @@
                                 <li>
                                     <a class="default-link" href="">Обмін та повернення</a>
                                 </li>
+                                @if(auth()->check())
+                                    <li>
+                                        <a href="#">John Doe</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a class="default-link" href="#">{{ trans('header.login') }}</a>
+                                    </li>
+                                    <li>
+                                        <a class="default-link" href="#">{{ trans('header.register') }}</a>
+                                    </li>
+                                @endif
                                 <li>
-                                    <a class="default-link" href="">Гарантії</a>
-                                </li>
-                                <li>
-                                    <a class="default-link" href="">Вхід</a>
-                                </li>
-                                <li>
-                                    <a class="default-link" href="">Реєстрація</a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-div">
-                                        <div class="dropdown-div-btn">
-                                            <a href="">Укр</a>
-                                            <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                    @if($model->language == 'ru')
+                                        <div class="dropdown-div">
+                                            <div class="dropdown-div-btn">
+                                                <a href="{{ url_current('ru') }}">Рус</a>
+                                                <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                            </div>
+                                            <div class="dropdown-div-content dropdown-div-content-none">
+                                                <ul>
+                                                    <li>
+                                                        <a href="{{ url_current('uk') }}">Укр</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="dropdown-div-content dropdown-div-content-none">
-                                            <ul>
-                                                <li>
-                                                    <a href="">Рус</a>
-                                                </li>
-                                            </ul>
+                                    @else
+                                        <div class="dropdown-div">
+                                            <div class="dropdown-div-btn">
+                                                <a href="{{ url_current('uk') }}">Укр</a>
+                                                <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                            </div>
+                                            <div class="dropdown-div-content dropdown-div-content-none">
+                                                <ul>
+                                                    <li>
+                                                        <a href="{{ url_current('ru') }}">Рус</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </li>
                             </ul>
 
@@ -159,14 +171,14 @@
                     </div>
                 </div>
                 <div class="logo">
-                    <a href="">
-                        <img src="/image/logo.png" alt="outlet-logo">
+                    <a href="{{ url_home($model->language) }}">
+                        <img src="/img/logo.png" alt="outlet-logo">
                     </a>
                 </div>
 
                 <div class="search_phone">
                     <div class="phone">
-                        <img src="/image/customer-service.png" alt="">
+                        <img src="/img/customer-service.png" alt="">
                         <ul>
                             <li><span>+38(096)-52-30-540</span></li>
                             <li><span>+38(096)-52-30-540</span></li>
@@ -184,7 +196,7 @@
                                     <div class="product-img">
                                         <div class="label sale">Sale</div>
                                         <a href="">
-                                            <img src="/image/products/item-06.jpg" alt="">
+                                            <img src="/img/products/small/item-7.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="product-info">
@@ -199,7 +211,7 @@
                                     <div class="product-img">
                                         <div class="label top">Top</div>
                                         <a href="">
-                                            <img src="/image/products/item-1.jpg" alt="">
+                                            <img src="/img/products/small/item-1.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="product-info">
@@ -214,7 +226,7 @@
                                     <div class="product-img">
                                         <div class="label new">New</div>
                                         <a href="">
-                                            <img src="/image/products/item-6.jpg" alt="">
+                                            <img src="/img/products/small/item-6.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="product-info">
@@ -227,7 +239,7 @@
                                 </div>
                                 <div class="show-all-result">
                                     <a href="" class="btn">
-                                        Усі результати
+                                        {{ trans('header.search_all_results') }}
                                     </a>
                                 </div>
                             </div>
@@ -241,7 +253,7 @@
                             <a href=""><i class="fas fa-heart"></i> </a>
                         </li>
                         <li class="smoll-cart">
-                            <span class="badge-count">13</span>
+                            <span class="badge-count">3</span>
                             <span><i class="fas fa-shopping-bag"></i></span>
                             <div class="smoll-cart-products">
                                 <div class="smoll-cart-padding"></div>
@@ -254,7 +266,7 @@
                                         <div class="smoll-cart-img">
                                             <div class="label sale">Sale</div>
                                             <a href="">
-                                                <img src="/image/products/item-06.jpg" alt="">
+                                                <img src="/img/products/small/item-7.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="smoll-cart-info">
@@ -265,7 +277,7 @@
                                                 <span class="count">3</span> x <span class="price">1900 грн</span>
                                             </div>
                                             <div class="total_price">
-                                                Сумма: <span>1900 грн</span>
+                                                {{ trans('header.sum') }}: <span>1900 грн</span>
                                             </div>
                                         </div>
                                     </div>
@@ -276,7 +288,7 @@
                                         <div class="smoll-cart-img">
                                             <div class="label new">New</div>
                                             <a href="">
-                                                <img src="/image/products/item-4.jpg" alt="">
+                                                <img src="/img/products/small/item-4.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="smoll-cart-info">
@@ -287,7 +299,7 @@
                                                 <span class="count">3</span> x <span class="price">1900 грн</span>
                                             </div>
                                             <div class="total_price">
-                                                Сумма: <span>1900 грн</span>
+                                                {{ trans('header.sum') }}: <span>1900 грн</span>
                                             </div>
                                         </div>
                                     </div>
@@ -298,7 +310,7 @@
                                         <div class="smoll-cart-img">
                                             <div class="label top">Top</div>
                                             <a href="">
-                                                <img src="/image/products/item-5.jpg" alt="">
+                                                <img src="/img/products/small/item-5.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="smoll-cart-info">
@@ -309,18 +321,18 @@
                                                 <span class="count">3</span> x <span class="price">1900 грн</span>
                                             </div>
                                             <div class="total_price">
-                                                Сумма: <span>1900 грн</span>
+                                                {{ trans('header.sum') }}: <span>1900 грн</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="smoll-cart-footer">
                                     <div class="all-count-price">
-                                        Сумма: 52034 грн
+                                        {{ trans('header.sum') }}: 52034 грн
                                     </div>
                                     <div class="smoll-cart-footer-btn">
-                                        <a href="" class="btn">Оформити замовлення</a>
-                                        <a href="" class="btn">Відкрити корзину</a>
+                                        <a href="#" class="btn">{{ trans('header.to_order') }}</a>
+                                        <a href="#" class="btn">{{ trans('header.open_cart') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -334,51 +346,34 @@
         <div class="container">
             <div class="flex-container">
                 <ul class="category-list">
-                    <li class="show-dropdown-category">
-                        <a href="">Жіноче взуття <i class="fas fa-angle-down"></i></a>
-                        <ul class="dropdown-category">
-                            <div class="categ-drop-padding"></div>
-                            <li>
-                                <a href="">Пункт 1</a>
+                    @foreach($model->categories as $category)
+                        @if($category->childs->count() > 0)
+                            <li class="show-dropdown-category">
+                                <a href="{{ url_category($category->slug, $model->language) }}">
+                                    {{ $category->name }}<i class="fas fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-category">
+                                    <div class="categ-drop-padding"></div>
+                                    @foreach($category->childs as $child)
+                                        <li>
+                                            <a href="{{ url_category($child->slug, $model->language) }}">
+                                                {{ $child->name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </li>
+                        @else
                             <li>
-                                <a href="">Пункт 2</a>
+                                <a href="{{ url_category($category->slug, $model->language) }}">
+                                    {{ $category->name }}
+                                </a>
                             </li>
-                            <li>
-                                <a href="">Пункт 3</a>
-                            </li>
-                            <li>
-                                <a href="">Пункт 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="show-dropdown-category">
-                        <a href="">Чоловіче взуття <i class="fas fa-angle-down"></i></a>
-                        <ul class="dropdown-category">
-                            <div class="categ-drop-padding"></div>
-                            <li>
-                                <a href="">Пункт 1</a>
-                            </li>
-                            <li>
-                                <a href="">Пункт 2</a>
-                            </li>
-                            <li>
-                                <a href="">Пункт 3</a>
-                            </li>
-                            <li>
-                                <a href="">Пункт 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="">Взуття для дівчаток</a>
-                    </li>
-                    <li>
-                        <a href="">Взуття для хлопчиків</a>
-                    </li>
+                        @endif
+                    @endforeach
                 </ul>
                 <div class="nav-sale-btn">
-                    <a href="">Розпродаж</a>
+                    <a href="">{{ trans('header.sale') }}</a>
                 </div>
             </div>
         </div>

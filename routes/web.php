@@ -11,13 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-//    JavaScript::put([
-//        'foo' => 'bar',
-//        'age' => 29
-//    ]);
-    return view('pages.home');
-})->name('home');
+Route::get('/{language?}', 'HomeController@index')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ])->name('home');
 
 Route::get('/category', function () {
     return view('pages.category');

@@ -62,9 +62,40 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\Product whereMetaKeywordsUk($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\Product whereMetaTitleRu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\Product whereMetaTitleUk($value)
+ * @property float|null $old_price
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\DatabaseModels\Image[] $images
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\DatabaseModels\ProductSize[] $product_sizes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\DatabaseModels\Promotion[] $promotions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\DatabaseModels\Property[] $properties
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\DatabaseModels\Size[] $sizes
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\Product whereOldPrice($value)
  */
 class Product extends Model
 {
     protected $table = 'products';
 
+    public function images()
+    {
+        return $this->belongsToMany(Image::class, 'product_images');
+    }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'product_sizes');
+    }
+
+    public function product_sizes()
+    {
+        return $this->hasMany(ProductSize::class, 'product_id', 'id');
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class, 'product_id', 'id');
+    }
+
+    public function promotions()
+    {
+        return $this->belongsToMany(Promotion::class, 'products_promotions');
+    }
 }

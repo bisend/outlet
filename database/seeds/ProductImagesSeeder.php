@@ -24,7 +24,7 @@ class ProductImagesSeeder extends Seeder
                 {
                     $product_image = new ProductImage();
                     $product_image->product_id = $i;
-                    $product_image->image_id = $j;
+                    $product_image->image_id = rand(1, 7);
                     $product_image->save();
                 }
             }
