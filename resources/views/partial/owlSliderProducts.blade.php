@@ -2,7 +2,7 @@
     <div class="slider-products-header">
         Схожі товари
     </div>
-    <div class="owl-carousel owl-theme owl-products owl-similar-products">
+    <div class="owl-carousel owl-theme owl-products owl-similar-products" id="same-products">
         <div>
             <div class="prod-item">
                 <div class="prod-img">

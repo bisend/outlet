@@ -11793,6 +11793,12 @@ input[type="checkbox"]:checked + label:hover span:before {
   font-size: 20px;
 }
 
+.pagination-default .pagination .active a {
+  background-color: #222222;
+  color: white;
+  border: 1px solid #222222;
+}
+
 .select-default {
   border-radius: 0;
   width: 100%;
@@ -13576,6 +13582,32 @@ input[type="checkbox"]:checked + label:hover span:before {
 
 .home-prod-slider {
   margin-top: 40px;
+}
+
+.home-prod-slider .show-all-products {
+  width: 100%;
+  text-align: right;
+}
+
+.home-prod-slider .show-all-products a {
+  font-size: 17px;
+  color: #111111;
+  border-bottom: 1px dotted #111111;
+  font-weight: 500;
+}
+
+.home-prod-slider .show-all-products a:hover {
+  color: #e65540;
+  border-bottom: 1px dotted #e65540;
+}
+
+.home-prod-slider .show-all-products .btn {
+  font-size: 14px;
+  width: 220px;
+}
+
+.home-prod-slider .slider-products-section .owl-products .prod-item {
+  padding-bottom: 30px;
 }
 
 .wishlist-prod-item {

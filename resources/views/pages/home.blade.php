@@ -46,7 +46,7 @@
                 <div class="slider-products-header">
                     Новинки
                 </div>
-                <div class="owl-carousel owl-theme owl-products owl-similar-products">
+                <div class="owl-carousel owl-theme owl-products" id="new-products">
                     <div>
                         <div class="prod-item">
                             <div class="prod-img">
@@ -327,6 +327,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="show-all-products">
+                <a href="">Переглянути усі</a>
             </div>
         </div>
     </div>
@@ -433,7 +436,7 @@
                 <div class="slider-products-header">
                     Розпродаж
                 </div>
-                <div class="owl-carousel owl-theme owl-products owl-similar-products">
+                <div class="owl-carousel owl-theme owl-products" id="sale-products">
                     <div>
                         <div class="prod-item">
                             <div class="prod-img">
@@ -715,6 +718,9 @@
                     </div>
                 </div>
             </div>
+            <div class="show-all-products">
+                <a href="">Переглянути усі</a>
+            </div>
         </div>
     </div>
 
@@ -724,7 +730,7 @@
                 <div class="slider-products-header">
                     Топ продаж
                 </div>
-                <div class="owl-carousel owl-theme owl-products owl-similar-products">
+                <div class="owl-carousel owl-theme owl-products" id="top-products">
                     <div>
                         <div class="prod-item">
                             <div class="prod-img">
@@ -1005,6 +1011,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="show-all-products">
+                <a href="">Переглянути усі</a>
             </div>
         </div>
     </div>

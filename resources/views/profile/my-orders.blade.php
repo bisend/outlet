@@ -50,23 +50,17 @@
                                         </td>
                                         <td>
                                             <div class="order-status">
-                                                <p>
                                                     <span>Новый</span>
-                                                </p>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-count">
-                                                <p>
                                                     <span>1</span>
-                                                </p>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-summ">
-                                                <p>
                                                     <span>1220.00 грн</span>
-                                                </p>
                                             </div>
                                         </td>
                                         <td class="view-order-details">
@@ -83,23 +77,17 @@
                                         </td>
                                         <td>
                                             <div class="order-status">
-                                                <p>
-                                                    <span>Новый</span>
-                                                </p>
+                                                <span>Новый</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-count">
-                                                <p>
-                                                    <span>1</span>
-                                                </p>
+                                                <span>1</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-summ">
-                                                <p>
-                                                    <span>1220.00 грн</span>
-                                                </p>
+                                                <span>1220.00 грн</span>
                                             </div>
                                         </td>
                                         <td class="view-order-details">
@@ -116,23 +104,17 @@
                                         </td>
                                         <td>
                                             <div class="order-status">
-                                                <p>
-                                                    <span>Новый</span>
-                                                </p>
+                                                <span>Новый</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-count">
-                                                <p>
-                                                    <span>1</span>
-                                                </p>
+                                                <span>1</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-summ">
-                                                <p>
-                                                    <span>1220.00 грн</span>
-                                                </p>
+                                                <span>1220.00 грн</span>
                                             </div>
                                         </td>
                                         <td class="view-order-details">
@@ -149,23 +131,17 @@
                                         </td>
                                         <td>
                                             <div class="order-status">
-                                                <p>
-                                                    <span>Новый</span>
-                                                </p>
+                                                <span>Новый</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-count">
-                                                <p>
-                                                    <span>1</span>
-                                                </p>
+                                                <span>1</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-summ">
-                                                <p>
-                                                    <span>1220.00 грн</span>
-                                                </p>
+                                                <span>1220.00 грн</span>
                                             </div>
                                         </td>
                                         <td class="view-order-details">
@@ -182,23 +158,17 @@
                                         </td>
                                         <td>
                                             <div class="order-status">
-                                                <p>
-                                                    <span>Новый</span>
-                                                </p>
+                                                <span>Новый</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-count">
-                                                <p>
-                                                    <span>1</span>
-                                                </p>
+                                                <span>1</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="order-total-summ">
-                                                <p>
-                                                    <span>1220.00 грн</span>
-                                                </p>
+                                                <span>1220.00 грн</span>
                                             </div>
                                         </td>
                                         <td class="view-order-details">

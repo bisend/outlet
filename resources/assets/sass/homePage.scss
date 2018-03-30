@@ -1,3 +1,29 @@
 .home-prod-slider{
   margin-top: 40px;
+  .show-all-products{
+    width: 100%;
+    //margin-top: 10px;
+    text-align: right;
+    a{
+      font-size: 17px;
+      color: #111111;
+      border-bottom: 1px dotted #111111;
+      font-weight: 500;
+      &:hover{
+        color: #e65540;
+        border-bottom: 1px dotted #e65540;
+      }
+    }
+    .btn{
+      font-size: 14px;
+      width: 220px;
+    }
+  }
+  .slider-products-section{
+    .owl-products{
+      .prod-item{
+        padding-bottom: 30px;
+      }
+    }
+  }
 }
