@@ -18,6 +18,12 @@ class CreateMainSliderTable extends Migration
             $table->string('image')->unique();
             $table->string('url_ru')->nullable();
             $table->string('url_uk')->nullable();
+            $table->string('big_text_ru')->nullable();
+            $table->string('big_text_uk')->nullable();
+            $table->string('small_text_ru')->nullable();
+            $table->string('small_text_uk')->nullable();
+            $table->string('btn_text_ru')->nullable();
+            $table->string('btn_text_uk')->nullable();
             $table->boolean('is_visible')->default(true);
             $table->integer('priority')->default(1000);
             $table->string('code_1c', 36)->nullable();

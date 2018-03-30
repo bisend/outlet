@@ -26,6 +26,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\MainSlider whereUrlRu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\MainSlider whereUrlUk($value)
  * @mixin \Eloquent
+ * @property string|null $big_text_ru
+ * @property string|null $big_text_uk
+ * @property string|null $small_text_ru
+ * @property string|null $small_text_uk
+ * @property string|null $btn_text_ru
+ * @property string|null $btn_text_uk
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\MainSlider whereBigTextRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\MainSlider whereBigTextUk($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\MainSlider whereBtnTextRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\MainSlider whereBtnTextUk($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\MainSlider whereSmallTextRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatabaseModels\MainSlider whereSmallTextUk($value)
  */
 class MainSlider extends Model
 {
