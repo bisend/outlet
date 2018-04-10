@@ -8,11 +8,19 @@
 
 namespace App\Repositories;
 
-
 use App\DatabaseModels\Category;
 
+/**
+ * Class CategoryRepository
+ * @package App\Repositories
+ */
 class CategoryRepository
 {
+    /**
+     * get all categories for menu
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
     public function getCategories($model)
     {
         return Category::whereIsVisible(true)

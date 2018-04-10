@@ -8,11 +8,19 @@
 
 namespace App\Repositories;
 
-
 use App\DatabaseModels\Banner;
 
+/**
+ * Class BannerRepository
+ * @package App\Repositories
+ */
 class BannerRepository
 {
+    /**
+     * get banners
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
     public function get_banners($model)
     {
         return Banner::whereIsVisible(true)

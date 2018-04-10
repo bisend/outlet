@@ -8,11 +8,19 @@
 
 namespace App\Repositories;
 
-
 use App\DatabaseModels\MainSlider;
 
+/**
+ * Class MainSliderRepository
+ * @package App\Repositories
+ */
 class MainSliderRepository
 {
+    /**
+     * get sliders for main_slider
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
     public function get_main_slider($model)
     {
         return MainSlider::whereIsVisible(true)
