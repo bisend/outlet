@@ -11,6 +11,7 @@ namespace App\Services;
 use App\Repositories\BannerRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\MainSliderRepository;
+use App\Repositories\MetaTagRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\PromotionRepository;
 
@@ -41,18 +42,25 @@ class HomeService extends LayoutService
     protected $promotion_repository;
 
     /**
+     * @var MetaTagRepository
+     */
+    protected $meta_tag_repository;
+
+    /**
      * HomeService constructor.
      * @param CategoryRepository $categoryRepository
      * @param MainSliderRepository $mainSliderRepository
      * @param ProductRepository $productRepository
      * @param BannerRepository $bannerRepository
      * @param PromotionRepository $promotionRepository
+     * @param MetaTagRepository $metaTagRepository
      */
     public function __construct(CategoryRepository $categoryRepository,
                                 MainSliderRepository $mainSliderRepository,
                                 ProductRepository $productRepository,
                                 BannerRepository $bannerRepository,
-                                PromotionRepository $promotionRepository)
+                                PromotionRepository $promotionRepository,
+                                MetaTagRepository $metaTagRepository)
     {
         parent::__construct($categoryRepository);
 
@@ -63,6 +71,8 @@ class HomeService extends LayoutService
         $this->banner_repository = $bannerRepository;
 
         $this->promotion_repository = $promotionRepository;
+
+        $this->meta_tag_repository = $metaTagRepository;
     }
 
     /**
@@ -88,6 +98,8 @@ class HomeService extends LayoutService
         $this->fill_sales_slider_products($model);
 
         $this->fill_top_slider_products($model);
+
+        $this->fill_meta_tags($model);
     }
 
     /**
@@ -145,7 +157,7 @@ class HomeService extends LayoutService
     }
 
     /**
-     * fill sales_slider
+     * filling sales_slider
      * @param $model
      */
     private function fill_sales_slider_products($model)
@@ -154,11 +166,24 @@ class HomeService extends LayoutService
     }
 
     /**
-     * fill top_slider
+     * filling top_slider
      * @param $model
      */
     private function fill_top_slider_products($model)
     {
         $model->top_slider_products = $this->product_repository->get_top_slider_products($model);
+    }
+
+    /**
+     * filling meta tags
+     * @param $model
+     */
+    private function fill_meta_tags($model)
+    {
+        $meta_tag = $this->meta_tag_repository->getMetaTagByPageName($model);
+        $model->title = $meta_tag->meta_title;
+        $model->description = $meta_tag->meta_description;
+        $model->keywords = $meta_tag->meta_keywords;
+        $model->h1 = $meta_tag->meta_h1;
     }
 }

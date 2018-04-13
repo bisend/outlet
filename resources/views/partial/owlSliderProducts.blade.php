@@ -1,279 +1,60 @@
 <div class="slider-products-section">
     <div class="slider-products-header">
-        Схожі товари
+        {{ trans('product.similar_products') }}
     </div>
     <div class="owl-carousel owl-theme owl-products owl-similar-products" id="same-products">
-        <div>
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="/image/products/item-06.jpg" alt="">
-                    <div class="item-overlay">
-                        <a class="add-to-wishlist" href="">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <div class="size-addToCart">
-                            <div class="size">
-                                <span>40</span>
-                                <span>35</span>
-                                <span class="active">36</span>
-                                <span>37</span>
-                                <span>38</span>
-                                <span>39</span>
+        @foreach($model->similar_products as $similar_product)
+            <div>
+                <div class="prod-item">
+                    <div class="prod-img">
+                        <img src="{{ $similar_product->images[0]->medium }}" alt="{{ $similar_product->name }}">
+                        <div class="item-overlay">
+                            <a class="add-to-wishlist" href="">
+                                <i class="fas fa-heart"></i>
+                            </a>
+                            <div class="size-addToCart">
+                                <div class="size">
+                                    @php($counter = 0)
+                                    @foreach($model->product->sizes as $size)
+                                        @if($counter == 0)
+                                            <span class="active">{{ $size->name }}</span>
+                                        @else
+                                            <span>{{ $size->name }}</span>
+                                        @endif
+                                        @php($counter++)
+                                    @endforeach
+                                </div>
+                                <a href="" class="btn">{{ trans('layout.add_to_cart') }}</a>
                             </div>
-                            <a href="" class="btn">В кошик</a>
-                        </div>
 
+                        </div>
+                    </div>
+                    <div class="stars">
+                        @for($i = 1; $i <= 5; $i++)
+                            @if(!is_null($similar_product->rating))
+                                @if($i <= $similar_product->rating)
+                                    <span class="active"><i class="fas fa-star"></i></span>
+                                @else
+                                    <span><i class="fas fa-star"></i></span>
+                                @endif
+                            @else
+                                <span><i class="fas fa-star"></i></span>
+                            @endif
+                        @endfor
+                    </div>
+                    <div class="prod-title">
+                        <a href="{{ url_product($similar_product->slug, $model->language) }}">
+                            {{ $similar_product->name }}
+                        </a>
+                    </div>
+                    <div class="prod-price">
+                        @if(!is_null($similar_product->old_price))
+                            <span class="old-price"> {{ $similar_product->old_price }} грн </span>
+                        @endif
+                        <span> {{ $similar_product->price }} грн </span>
                     </div>
                 </div>
-                <div class="stars">
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                </div>
-                <div class="prod-title">
-                    <a href="">Reabook Classic</a>
-                </div>
-                <div class="prod-price">
-                    <span class="old-price"> 2000 грн </span>
-                    <span> 1800 грн </span>
-                </div>
             </div>
-        </div>
-
-        <div>
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="/image/products/item-1.jpg" alt="">
-                    <div class="item-overlay">
-                        <a class="add-to-wishlist" href="">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <div class="size-addToCart">
-                            <div class="size">
-                                <span>40</span>
-                                <span>35</span>
-                                <span class="active">36</span>
-                                <span>37</span>
-                                <span>38</span>
-                                <span>39</span>
-                            </div>
-                            <a href="" class="btn">В кошик</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="stars">
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                </div>
-                <div class="prod-title">
-                    <a href="">Reabook Classic</a>
-                </div>
-                <div class="prod-price">
-                    <span class="old-price"> 2000 грн </span>
-                    <span> 1800 грн </span>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="/image/products/item-2.jpg" alt="">
-                    <div class="item-overlay">
-                        <a class="add-to-wishlist" href="">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <div class="size-addToCart">
-                            <div class="size">
-                                <span>40</span>
-                                <span>35</span>
-                                <span class="active">36</span>
-                                <span>37</span>
-                                <span>38</span>
-                                <span>39</span>
-                            </div>
-                            <a href="" class="btn">В кошик</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="stars">
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                </div>
-                <div class="prod-title">
-                    <a href="">Reabook Classic</a>
-                </div>
-                <div class="prod-price">
-                    <span class="old-price"> 2000 грн </span>
-                    <span> 1800 грн </span>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="/image/products/item-3.jpg" alt="">
-                    <div class="item-overlay">
-                        <a class="add-to-wishlist" href="">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <div class="size-addToCart">
-                            <div class="size">
-                                <span>40</span>
-                                <span>35</span>
-                                <span class="active">36</span>
-                                <span>37</span>
-                                <span>38</span>
-                                <span>39</span>
-                            </div>
-                            <a href="" class="btn">В кошик</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="stars">
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                </div>
-                <div class="prod-title">
-                    <a href="">Reabook Classic</a>
-                </div>
-                <div class="prod-price">
-                    <span class="old-price"> 2000 грн </span>
-                    <span> 1800 грн </span>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="/image/products/item-4.jpg" alt="">
-                    <div class="item-overlay">
-                        <a class="add-to-wishlist" href="">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <div class="size-addToCart">
-                            <div class="size">
-                                <span>40</span>
-                                <span>35</span>
-                                <span class="active">36</span>
-                                <span>37</span>
-                                <span>38</span>
-                                <span>39</span>
-                            </div>
-                            <a href="" class="btn">В кошик</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="stars">
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                </div>
-                <div class="prod-title">
-                    <a href="">Reabook Classic</a>
-                </div>
-                <div class="prod-price">
-                    <span class="old-price"> 2000 грн </span>
-                    <span> 1800 грн </span>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="/image/products/item-5.jpg" alt="">
-                    <div class="item-overlay">
-                        <a class="add-to-wishlist" href="">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <div class="size-addToCart">
-                            <div class="size">
-                                <span>40</span>
-                                <span>35</span>
-                                <span class="active">36</span>
-                                <span>37</span>
-                                <span>38</span>
-                                <span>39</span>
-                            </div>
-                            <a href="" class="btn">В кошик</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="stars">
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                </div>
-                <div class="prod-title">
-                    <a href="">Reabook Classic</a>
-                </div>
-                <div class="prod-price">
-                    <span class="old-price"> 2000 грн </span>
-                    <span> 1800 грн </span>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div class="prod-item">
-                <div class="prod-img">
-                    <img src="/image/products/item-6.jpg" alt="">
-                    <div class="item-overlay">
-                        <a class="add-to-wishlist" href="">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <div class="size-addToCart">
-                            <div class="size">
-                                <span>40</span>
-                                <span>35</span>
-                                <span class="active">36</span>
-                                <span>37</span>
-                                <span>38</span>
-                                <span>39</span>
-                            </div>
-                            <a href="" class="btn">В кошик</a>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="stars">
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span class="active"><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                    <span><i class="fas fa-star"></i></span>
-                </div>
-                <div class="prod-title">
-                    <a href="">Reabook Classic</a>
-                </div>
-                <div class="prod-price">
-                    <span class="old-price"> 2000 грн </span>
-                    <span> 1800 грн </span>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>

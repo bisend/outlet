@@ -38,6 +38,7 @@ class HomeController extends LayoutController
         $this->home_service->fill($model);
 
         \Debugbar::info($model);
+
         return view('pages.home', compact('model'));
     }
 }

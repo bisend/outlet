@@ -16,13 +16,14 @@ Route::get('/{language?}', 'HomeController@index')
         'language' => '^(uk|ru)?$'
     ])->name('home');
 
+Route::get('/product/{slug}/{language?}', 'ProductController@index')->where([
+    'slug' => '^[a-z0-9-]+$',
+    'language' => '^(uk|ru)?$'
+])->name('product');
+
 Route::get('/category', function () {
     return view('pages.category');
 })->name('category');
-
-Route::get('/product', function () {
-    return view('pages.product');
-})->name('product');
 
 Route::get('/search', function () {
     return view('pages.search');
@@ -55,6 +56,19 @@ Route::get('/profile/my-orders', function () {
 })->name('my-orders');
 
 
+/**
+ * ajax routes
+ */
+Route::post('/get-reviews', 'ProductController@get_reviews');
+Route::post('/add-review', 'ProductController@add_review');
+
+Route::group(['prefix' => 'cart'], function ()
+{
+    Route::post('/init-cart', 'CartController@initCart');
+    Route::post('/add-to-cart', 'CartController@addToCart');
+    Route::post('/update-cart', 'CartController@updateCart');
+    Route::post('/delete-from-cart', 'CartController@deleteFromCart');
+});
 
 
 /**

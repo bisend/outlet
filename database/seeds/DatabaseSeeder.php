@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
 //        $this->call(ReviewsSeeder::class);
 //        $this->call(MainSliderSeeder::class);
 //        $this->call(BannersSeeder::class);
+//        $this->call(MetaTagsSeeder::class);
     }
 }

@@ -225,4 +225,200 @@ class ProductRepository
                 'products.created_at'
             ]);
     }
+
+    /**
+     * get single product for product page
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Model|null|object|static
+     */
+    public function get_product_by_slug($model)
+    {
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->whereSlug($model->slug)
+            ->whereIsVisible(true)
+            ->first([
+                'products.id',
+                'category_id',
+                'breadcrumb_category_id',
+                "name_$model->language as name",
+                "slug",
+                "is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$model->language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$model->language as meta_title",
+                "meta_description_$model->language as meta_description",
+                "meta_keywords_$model->language as meta_keywords",
+                "meta_h1_$model->language as meta_h1",
+            ]);
+    }
+
+    /**
+     * get similar products to current product
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
+    public function get_similar_products($model)
+    {
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->whereCategoryId($model->product_category->id)
+            ->whereIsVisible(true)
+            ->whereNotIn('id', [$model->product->id])
+            ->orderByRaw('priority desc', 'name')
+            ->limit(8)
+            ->get([
+                'products.id',
+                'category_id',
+                'breadcrumb_category_id',
+                "name_$model->language as name",
+                "slug",
+                "is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$model->language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$model->language as meta_title",
+                "meta_description_$model->language as meta_description",
+                "meta_keywords_$model->language as meta_keywords",
+                "meta_h1_$model->language as meta_h1",
+            ]);
+    }
+
+    /**
+     * get products for Cart
+     * @param $productIds
+     * @param $language
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getCartProducts($productIds, $language)
+    {
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($language) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($language) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$language as property_name",
+                    "property_values.name_$language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->whereIn('id', $productIds)
+            ->whereIsVisible(true)
+            ->get([
+                'products.id',
+                'category_id',
+                'breadcrumb_category_id',
+                "name_$language as name",
+                "slug",
+                "is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$language as meta_title",
+                "meta_description_$language as meta_description",
+                "meta_keywords_$language as meta_keywords",
+                "meta_h1_$language as meta_h1",
+            ]);
+    }
 }

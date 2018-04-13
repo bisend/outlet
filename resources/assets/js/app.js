@@ -11,9 +11,17 @@ require('./header');
 require('./dropdownBlock');
 require('./mobileNav');
 require('./mobileFilters');
-window.Vue = require('vue');
 
+$.ajaxSetup({
+    beforeSend: function (request) {
+        request.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+    }
+});
+
+window.Vue = require('vue');
 import vSelect from 'vue-select';
+import _ from 'lodash';
+
 Vue.component('v-select', vSelect);
 
 require('./category/SortSelect');
@@ -32,10 +40,3 @@ require('./order/order');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// console.log(OUTLET);
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
-//
-// const app = new Vue({
-//     el: '#app'
-// });

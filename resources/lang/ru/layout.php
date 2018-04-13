@@ -2,5 +2,6 @@
 
 return [
     'add_to_cart' => 'В корзину',
-    'in_cart' => 'В корзине'
+    'in_cart' => 'В корзине',
+    'home_page' => 'Главная'
 ];

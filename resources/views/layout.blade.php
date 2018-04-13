@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Outlet Shoes</title>
+    <meta name="description" content="{{ $model->description }}">
+    <meta name="keywords" content="{{ $model->keywords }}">
+    <title>{{ $model->title }}</title>
 
 
     {{--CSS--}}
@@ -33,7 +35,11 @@
 
 
 {{--JS--}}
+<script defer src="/js/global.js"></script>
 <script defer src="{{ mix('/js/app.js') }}"></script>
+<script defer src="{{ mix('/js/all.js') }}"></script>
+<script defer src="{{ mix('/js/review.js') }}"></script>
+<script defer src="{{ mix('/js/product.js') }}"></script>
 
 
 </body>

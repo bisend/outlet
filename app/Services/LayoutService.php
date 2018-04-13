@@ -21,7 +21,7 @@ class LayoutService
     /**
      * @var CategoryRepository
      */
-    protected $categoryRepository;
+    protected $category_repository;
 
     /**
      * LayoutService constructor.
@@ -29,7 +29,7 @@ class LayoutService
      */
     public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->categoryRepository = $categoryRepository;
+        $this->category_repository = $categoryRepository;
     }
 
     /**
@@ -38,15 +38,15 @@ class LayoutService
      */
     public function fill($model)
     {
-        $this->localizeApplication($model);
-        $this->fillCategories($model);
+        $this->localize_application($model);
+        $this->fill_categories($model);
     }
 
     /**
      * set application locale (ru|uk)
      * @param $model
      */
-    private function localizeApplication($model)
+    private function localize_application($model)
     {
         Languages::localizeApp($model->language);
     }
@@ -55,8 +55,8 @@ class LayoutService
      * filling categories
      * @param $model
      */
-    private function fillCategories($model)
+    private function fill_categories($model)
     {
-        $model->categories = $this->categoryRepository->getCategories($model);
+        $model->categories = $this->category_repository->get_categories($model);
     }
 }
