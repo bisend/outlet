@@ -180,7 +180,7 @@ if (document.getElementById('single-product-reviews-description'))
             getReviews: _.debounce(function() {
                 let _this = this;
 
-                // showLoader();
+                GD.LOADING = true;
 
                 $.ajax({
                     type: 'post',
@@ -193,10 +193,10 @@ if (document.getElementById('single-product-reviews-description'))
                     success: function (data) {
                         GD.singleProductPage.reviews = data.reviews;
                         GD.singleProductPage.reviews_total_count = data.reviews_count;
-                        // hideLoader();
+                        GD.LOADING = false;
                     },
                     error: function (error) {
-                        // hideLoader();
+                        GD.LOADING = false;
                         console.log(error);
                         // showPopup(SERVER_ERROR);
                     }
@@ -239,7 +239,7 @@ if (document.getElementById('single-product-reviews-description'))
             saveReview: function() {
                 let _this = this;
 
-                // showLoader();
+                GD.LOADING = true;
 
                 $.ajax({
                     type: 'post',
@@ -253,7 +253,7 @@ if (document.getElementById('single-product-reviews-description'))
                         language: GD.LANGUAGE
                     },
                     success: function (data) {
-                        // hideLoader();
+                        GD.LOADING = false;
 
                         if (data.status == 'success')
                         {
@@ -270,7 +270,7 @@ if (document.getElementById('single-product-reviews-description'))
                         }
                     },
                     error: function (error) {
-                        // hideLoader();
+                        GD.LOADING = false;
                         console.log(error);
                         // showPopup(SERVER_ERROR);
                     }

@@ -46,6 +46,7 @@ class ProductController extends LayoutController
         $reviews_total_count = $this->product_service->fill_reviews_count($model->product->id);
 
         \Debugbar::info($model);
+        \Debugbar::info($model->product->promotions);
 
         JavaScript::put([
             'product' => $model->product,

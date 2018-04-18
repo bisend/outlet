@@ -1,7 +1,15 @@
 {
-    "/js/app.js": "/js/app.js?id=f725a9952240b0ad8341",
-    "/css/app.css": "/css/app.css?id=73b73cb8c5943f240523",
-    "/js/review.js": "/js/review.js?id=15f427c74fba4225637a",
-    "/js/product.js": "/js/product.js?id=f69cbe0462a586a0f6ef",
+    "/js/app.js": "/js/app.js?id=2c2bfb8dc95b5c30cfd5",
+    "/css/app.css": "/css/app.css?id=e4268d5562a0b2dd4362",
+    "/js/search.js": "/js/search.js?id=7398f7fd6b6585804d62",
+    "/js/similar-products.js": "/js/similar-products.js?id=67c448ecec590f2d726f",
+    "/js/review.js": "/js/review.js?id=0f1b61bc10cd506e36d3",
+    "/js/product.js": "/js/product.js?id=ee0e481cf9cc82972c87",
+    "/js/product-grid.js": "/js/product-grid.js?id=f66fc657ad720b4d899a",
+    "/js/loader.js": "/js/loader.js?id=96842b7a088cffc9abc9",
+    "/js/top-slider.js": "/js/top-slider.js?id=301df1013da0b3f7c778",
+    "/js/sales-slider.js": "/js/sales-slider.js?id=43ff7c93d5b0aa4efe84",
+    "/js/new-slider.js": "/js/new-slider.js?id=da987e0db4aed65aa59a",
+    "/js/small-cart.js": "/js/small-cart.js?id=59d8add96f54aa2b2414",
     "/js/all.js": "/js/all.js?id=dd268454cac73f4130d5"
 }

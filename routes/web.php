@@ -25,10 +25,6 @@ Route::get('/category', function () {
     return view('pages.category');
 })->name('category');
 
-Route::get('/search', function () {
-    return view('pages.search');
-})->name('search');
-
 Route::get('/order', function () {
     return view('pages.order');
 })->name('order');
@@ -54,6 +50,81 @@ Route::get('/profile/wishlist', function () {
 Route::get('/profile/my-orders', function () {
     return view('profile.my-orders');
 })->name('my-orders');
+
+
+Route::group(['prefix' => 'search'], function () {
+
+    Route::get('{series}/{language?}', 'SearchController@index')
+        ->where([
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    /**
+     * Search results page sorted
+     */
+    Route::get('/{series}/{sort}/{language?}', 'SearchController@indexSort')
+        ->where([
+            'sort' => '^(popularity|new|price-asc|price-desc)$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    /**
+     * Search results page pagination
+     */
+    Route::get('/{series}/{page}/{language?}', 'SearchController@indexPagination')
+        ->where([
+            'page' => '^[2-9]{1}|[1-9]{1}[0-9]+$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    /**
+     * Search results page sorted pagination
+     */
+    Route::get('/{series}/{sort}/{page}/{language?}', 'SearchController@indexPaginationSort')
+        ->where([
+            'sort' => '^(popularity|new|price-asc|price-desc)$',
+            'page' => '^[2-9]{1}|[1-9]{1}[0-9]+$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    /**
+     * Ajax search results handler
+     */
+    Route::get('/async/{series}/{language?}', 'SearchController@indexAjax')
+        ->where([
+            'language' => '^(uk|ru)?$'
+        ]);
+});
+
+
+Route::group(['prefix' => 'sale'], function () {
+    Route::get('{language?}', 'SaleController@index')
+        ->where([
+            'language' => '^(uk|ru)?$'
+        ])->name('saleIndex');
+
+    Route::get('{sort}/{language?}', 'SaleController@indexSort')
+        ->where([
+            'sort' => '^(popularity|new|price-asc|price-desc)$',
+            'language' => '^(uk|ru)?$'
+        ])->name('saleIndexSort');
+
+    Route::get('{page}/{language?}', 'SaleController@indexPagination')
+        ->where([
+            'page' => '^[2-9]{1}|[1-9]{1}[0-9]+$',
+            'language' => '^(uk|ru)?$'
+        ])->name('saleIndexPagination');
+
+    Route::get('{sort}/{page}/{language?}', 'SaleController@indexPaginationSort')
+        ->where([
+            'sort' => '^(popularity|new|price-asc|price-desc)$',
+            'page' => '^[2-9]{1}|[1-9]{1}[0-9]+$',
+            'language' => '^(uk|ru)?$'
+        ])->name('saleIndexPaginationSort');
+});
+
+
+
 
 
 /**

@@ -7,6 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @if(isset($model->metaLinkPrev) && !is_null($model->metaLinkPrev))
+        <link rel="prev" href="{{ $model->metaLinkPrev }}">
+    @endif
+    @if(isset($model->metaLinkNext) && !is_null($model->metaLinkNext))
+        <link rel="next" href="{{ $model->metaLinkNext }}">
+    @endif
+    @if(isset($model->setNoIndex) && $model->setNoIndex)
+        <meta name="robots" content="noindex, follow">
+    @endif
+
     <meta name="description" content="{{ $model->description }}">
     <meta name="keywords" content="{{ $model->keywords }}">
     <title>{{ $model->title }}</title>
@@ -38,9 +48,17 @@
 <script defer src="/js/global.js"></script>
 <script defer src="{{ mix('/js/app.js') }}"></script>
 <script defer src="{{ mix('/js/all.js') }}"></script>
+<script defer src="{{ mix('/js/loader.js') }}"></script>
 <script defer src="{{ mix('/js/review.js') }}"></script>
 <script defer src="{{ mix('/js/product.js') }}"></script>
+<script defer src="{{ mix('/js/similar-products.js') }}"></script>
+<script defer src="{{ mix('/js/small-cart.js') }}"></script>
+<script defer src="{{ mix('/js/new-slider.js') }}"></script>
+<script defer src="{{ mix('/js/sales-slider.js') }}"></script>
+<script defer src="{{ mix('/js/top-slider.js') }}"></script>
+<script defer src="{{ mix('/js/search.js') }}"></script>
+<script defer src="{{ mix('/js/product-grid.js') }}"></script>
 
-
+@include('modals.loader')
 </body>
 </html>

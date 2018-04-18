@@ -184,62 +184,52 @@
                             <li><span>+38(096)-52-30-540</span></li>
                         </ul>
                     </div>
-                    <div class="search">
-                        <form action="">
-                            <input type="text" placeholder="Пошук по сайту...">
-                            <button>
+                    <div id="search" class="search">
+                        <form v-bind:action="url" method="get">
+                            <input
+                                   v-model="series"
+                                   @keyup.esc="onEsc"
+                                   @blur.prevent="onBlur"
+                                   @keyup="searchAjax()"
+                                   type="search"
+                                   autocomplete="false"
+                                   placeholder="{{ trans('header.search')}}">
+                            <button v-if="!loading" @click.prevent="search()" class="search-btn">
                                 <i class="fas fa-search"></i>
                             </button>
+                            <button v-else>
+                                <half-circle-spinner
+                                        style="margin: 0 auto;"
+                                        :animation-duration="1000"
+                                        :size="30"
+                                        color="#000">
+                                </half-circle-spinner>
+                            </button>
 
-                            <div class="search-result">
-                                <div class="result-item">
+                            <div v-cloak v-if="countSearchProducts == 0 && series != '' && showNoResult" class="search-result">
+                                <span>{{ trans('header.not_found') }}</span>
+                            </div>
+                            <div v-cloak v-if="countSearchProducts > 0 && series != '' && showResult" class="search-result">
+                                <div v-for="searchProduct in searchProducts" class="result-item">
                                     <div class="product-img">
                                         <div class="label sale">Sale</div>
-                                        <a href="">
-                                            <img src="/img/products/small/item-7.jpg" alt="">
+                                        <a :href="'/product/' + searchProduct.slug + '/{{ $model->language == 'ru' ? '' : $model->language }}'" class="result-item-link">
+                                            <img :src="searchProduct.images[0].small" :alt="searchProduct.name">
                                         </a>
                                     </div>
                                     <div class="product-info">
-                                        <a href="">
-                                            <span class="title">Reebok classic</span>
-                                            <span class="old-price">2000 грн</span>
-                                            <span class="price">1950 грн</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="result-item">
-                                    <div class="product-img">
-                                        <div class="label top">Top</div>
-                                        <a href="">
-                                            <img src="/img/products/small/item-1.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="">
-                                            <span class="title">Reebok classic</span>
-                                            <span class="old-price">2000 грн</span>
-                                            <span class="price">1950 грн</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="result-item">
-                                    <div class="product-img">
-                                        <div class="label new">New</div>
-                                        <a href="">
-                                            <img src="/img/products/small/item-6.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <a href="">
-                                            <span class="title">Reebok classic</span>
-                                            <span class="old-price">2000 грн</span>
-                                            <span class="price">1950 грн</span>
+                                        <a :href="'/product/' + searchProduct.slug + '/{{ $model->language == 'ru' ? '' : $model->language }}'" class="result-item-link">
+                                            <span class="title">@{{ searchProduct.name }}</span>
+                                            <span v-if="searchProduct.old_price" class="old-price">
+                                                @{{ searchProduct.old_price }} грн
+                                            </span>
+                                            <span class="price">@{{ searchProduct.price }} грн</span>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="show-all-result">
-                                    <a href="" class="btn">
-                                        {{ trans('header.search_all_results') }}
+                                    <a :href="url" class="btn all-search-results-btn">
+                                        {{ trans('header.search_all_results') }} (@{{ countSearchProducts }})
                                     </a>
                                 </div>
                             </div>
@@ -252,83 +242,64 @@
                         <li class="wishlist-btn">
                             <a href=""><i class="fas fa-heart"></i> </a>
                         </li>
-                        <li class="smoll-cart">
-                            <span class="badge-count">3</span>
+                        <li id="small-cart" class="smoll-cart" :class="{'show-prods': cart.totalCount > 0}">
+                            <span v-cloak class="badge-count">@{{ cart.totalCount }}</span>
                             <span><i class="fas fa-shopping-bag"></i></span>
                             <div class="smoll-cart-products">
                                 <div class="smoll-cart-padding"></div>
 
                                 <div class="smoll-cart-products-block">
-                                    <div class="smoll-cart-item">
+                                    <div v-for="cartItem in cart.cartItems" class="smoll-cart-item">
                                         <div class="delete-smoll-prod">
-                                            <a href=""><i class="far fa-trash-alt"></i></a>
+                                            <a href="#"
+                                               @click.prevent="deleteFromCart(cartItem.productId, cartItem.sizeId)">
+                                                <i class="far fa-trash-alt"></i>
+                                            </a>
                                         </div>
                                         <div class="smoll-cart-img">
-                                            <div class="label sale">Sale</div>
-                                            <a href="">
-                                                <img src="/img/products/small/item-7.jpg" alt="">
+
+                                            <div v-if="cartItem.product.promotions != null &&
+                                                    cartItem.product.promotions.length > 0 &&
+                                                    cartItem.product.promotions[0].priority == 3"
+                                                 class="label sale">
+                                                Sale
+                                            </div>
+                                            <div v-else-if="cartItem.product.promotions != null &&
+                                                    cartItem.product.promotions.length > 0 &&
+                                                    cartItem.product.promotions[0].priority == 1"
+                                                 class="label new">
+                                                New
+                                            </div>
+
+                                            <div v-else-if="cartItem.product.promotions != null &&
+                                                    cartItem.product.promotions.length > 0 &&
+                                                    cartItem.product.promotions[0].priority == 2"
+                                                 class="label top">
+                                                Top
+                                            </div>
+
+                                            <a :href="'/product/' + cartItem.product.slug + '/{{ $model->language == 'ru' ? '' : $model->language }}'">
+                                                <img :src="cartItem.product.images[0].small" :alt="cartItem.product.name">
                                             </a>
                                         </div>
                                         <div class="smoll-cart-info">
                                             <div class="title">
-                                                <a href="">Reebok classic</a>
+                                                <a :href="'/product/' + cartItem.product.slug + '/{{ $model->language == 'ru' ? '' : $model->language }}'">
+                                                    @{{ cartItem.product.name }}
+                                                </a>
                                             </div>
                                             <div class="count_price">
-                                                <span class="count">3</span> x <span class="price">1900 грн</span>
+                                                <span class="count">@{{ cartItem.count }}</span> x <span class="price">@{{ cartItem.product.price }} грн</span>
                                             </div>
                                             <div class="total_price">
-                                                {{ trans('header.sum') }}: <span>1900 грн</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="smoll-cart-item">
-                                        <div class="delete-smoll-prod">
-                                            <a href=""><i class="far fa-trash-alt"></i></a>
-                                        </div>
-                                        <div class="smoll-cart-img">
-                                            <div class="label new">New</div>
-                                            <a href="">
-                                                <img src="/img/products/small/item-4.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="smoll-cart-info">
-                                            <div class="title">
-                                                <a href="">Reebok classic</a>
-                                            </div>
-                                            <div class="count_price">
-                                                <span class="count">3</span> x <span class="price">1900 грн</span>
-                                            </div>
-                                            <div class="total_price">
-                                                {{ trans('header.sum') }}: <span>1900 грн</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="smoll-cart-item">
-                                        <div class="delete-smoll-prod">
-                                            <a href=""><i class="far fa-trash-alt"></i></a>
-                                        </div>
-                                        <div class="smoll-cart-img">
-                                            <div class="label top">Top</div>
-                                            <a href="">
-                                                <img src="/img/products/small/item-5.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="smoll-cart-info">
-                                            <div class="title">
-                                                <a href="">Reebok classic</a>
-                                            </div>
-                                            <div class="count_price">
-                                                <span class="count">3</span> x <span class="price">1900 грн</span>
-                                            </div>
-                                            <div class="total_price">
-                                                {{ trans('header.sum') }}: <span>1900 грн</span>
+                                                {{ trans('header.sum') }}: <span>@{{ (cartItem.product.price * cartItem.count).toFixed(2) }} грн</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="smoll-cart-footer">
                                     <div class="all-count-price">
-                                        {{ trans('header.sum') }}: 52034 грн
+                                        {{ trans('header.sum') }}: @{{ cart.totalAmount.toFixed(2) }} грн
                                     </div>
                                     <div class="smoll-cart-footer-btn">
                                         <a href="#" class="btn">{{ trans('header.to_order') }}</a>
@@ -373,7 +344,7 @@
                     @endforeach
                 </ul>
                 <div class="nav-sale-btn">
-                    <a href="">{{ trans('header.sale') }}</a>
+                    <a href="{{ url_sale($model->language) }}">{{ trans('header.sale') }}</a>
                 </div>
             </div>
         </div>

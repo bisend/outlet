@@ -20,6 +20,7 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
+    "epic-spinners": "^1.0.3",
     "vue-select": "^2.4.0"
   }
 }

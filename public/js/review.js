@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -241,7 +241,7 @@ if (document.getElementById('single-product-reviews-description')) {
             getReviews: _.debounce(function () {
                 var _this = this;
 
-                // showLoader();
+                GD.LOADING = true;
 
                 $.ajax({
                     type: 'post',
@@ -254,10 +254,10 @@ if (document.getElementById('single-product-reviews-description')) {
                     success: function success(data) {
                         GD.singleProductPage.reviews = data.reviews;
                         GD.singleProductPage.reviews_total_count = data.reviews_count;
-                        // hideLoader();
+                        GD.LOADING = false;
                     },
                     error: function error(_error) {
-                        // hideLoader();
+                        GD.LOADING = false;
                         console.log(_error);
                         // showPopup(SERVER_ERROR);
                     }
@@ -295,7 +295,7 @@ if (document.getElementById('single-product-reviews-description')) {
             saveReview: function saveReview() {
                 var _this = this;
 
-                // showLoader();
+                GD.LOADING = true;
 
                 $.ajax({
                     type: 'post',
@@ -309,7 +309,7 @@ if (document.getElementById('single-product-reviews-description')) {
                         language: GD.LANGUAGE
                     },
                     success: function success(data) {
-                        // hideLoader();
+                        GD.LOADING = false;
 
                         if (data.status == 'success') {
                             GD.singleProductPage.text = '';
@@ -324,7 +324,7 @@ if (document.getElementById('single-product-reviews-description')) {
                         }
                     },
                     error: function error(_error2) {
-                        // hideLoader();
+                        GD.LOADING = false;
                         console.log(_error2);
                         // showPopup(SERVER_ERROR);
                     }
@@ -356,7 +356,7 @@ if (document.getElementById('single-product-reviews-description')) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/product/review.js");

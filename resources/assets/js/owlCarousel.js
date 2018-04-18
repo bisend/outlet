@@ -63,38 +63,7 @@ $(document).ready(function(){
         }
     });
 
-    $("#same-products").owlCarousel({
-        loop:false,
-        margin:15,
-        dots: false,
-        nav: true,
-        mouseDrag: false,
-        // navContainer:true,
-        // dotsContainer: true,
-        responsive:{
-            0:{
-                items:1
-            },
-            400:{
-                items:1
-            },
-            500:{
-                items:1
-            },
-            700:{
-                items:2
-            },
-            1023:{
-                items:3,
-                mouseDrag: false
-            },
-            1200:{
-                items:4,
-                mouseDrag: true
-            }
-           
-        }
-    });
+
 
     $("#new-products").owlCarousel({
         loop:false,

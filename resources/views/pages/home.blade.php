@@ -29,13 +29,14 @@
 
     {{--NEW SLIDER START--}}
     @if(!is_null($model->new_slider_products) && $model->new_slider_products->count() > 0)
-        <div class="home-prod-slider">
+        <div id="new-slider" class="home-prod-slider">
             <div class="container">
                 <div class="slider-products-section">
                     <div class="slider-products-header">
                         Новинки
                     </div>
                     <div class="owl-carousel owl-theme owl-products" id="new-products">
+                        @php($counter = 0)
                         @foreach($model->new_slider_products as $product)
                             <div>
                                 <div class="prod-item">
@@ -48,17 +49,24 @@
                                             </a>
                                             <div class="size-addToCart">
                                                 <div class="size">
-                                                    @php($counter = 0)
-                                                    @foreach($product->sizes as $size)
-                                                        @if($counter == 0)
-                                                            <span class="active">{{ $size->name }}</span>
-                                                        @else
-                                                            <span>{{ $size->name }}</span>
-                                                        @endif
-                                                        @php($counter++)
-                                                    @endforeach
+                                                    <span v-for="size in homePage.newSliderProducts[{{$counter}}].sizes"
+                                                          @click="changeCurrentSizeId({{$counter}}, size.id)"
+                                                          :class="{'active': size.id == homePage.newSliderProducts[{{$counter}}].currentSizeId}">
+                                                        @{{ size.name }}
+                                                    </span>
                                                 </div>
-                                                <a href="#" class="btn">{{ trans('layout.add_to_cart') }}</a>
+                                                <a href="#"
+                                                   @click.prevent="addToCart(homePage.newSliderProducts[{{$counter}}].id, homePage.newSliderProducts[{{$counter}}].currentSizeId, 1)"
+                                                   class="btn"
+                                                   :class="{'active': findWhere(cart.cartItems, {'productId': homePage.newSliderProducts[{{$counter}}].id, 'sizeId': homePage.newSliderProducts[{{$counter}}].currentSizeId})}">
+                                                    <span v-cloak
+                                                          v-if="!findWhere(cart.cartItems, {'productId': homePage.newSliderProducts[{{$counter}}].id, 'sizeId': homePage.newSliderProducts[{{$counter}}].currentSizeId})">
+                                                        {{ trans('layout.add_to_cart') }}
+                                                    </span>
+                                                    <span v-cloak v-else>
+                                                        {{ trans('layout.in_cart') }}
+                                                    </span>
+                                                </a>
                                             </div>
 
                                         </div>
@@ -91,6 +99,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @php($counter++)
                         @endforeach
                     </div>
                 </div>
@@ -151,13 +160,14 @@
 
     {{--SALES START--}}
     @if(!is_null($model->sales_slider_products) && $model->new_slider_products->count() > 0)
-        <div class="home-prod-slider">
+        <div id="sales-slider" class="home-prod-slider">
             <div class="container">
                 <div class="slider-products-section">
                     <div class="slider-products-header">
                         {{ trans('header.sale') }}
                     </div>
                     <div class="owl-carousel owl-theme owl-products" id="sale-products">
+                        @php($counter = 0)
                         @foreach($model->sales_slider_products as $product)
                             <div>
                                 <div class="prod-item">
@@ -170,17 +180,24 @@
                                             </a>
                                             <div class="size-addToCart">
                                                 <div class="size">
-                                                    @php($counter = 0)
-                                                    @foreach($product->sizes as $size)
-                                                        @if($counter == 0)
-                                                            <span class="active">{{ $size->name }}</span>
-                                                        @else
-                                                            <span>{{ $size->name }}</span>
-                                                        @endif
-                                                        @php($counter++)
-                                                    @endforeach
+                                                    <span v-for="size in homePage.salesSliderProducts[{{$counter}}].sizes"
+                                                          @click="changeCurrentSizeId({{$counter}}, size.id)"
+                                                          :class="{'active': size.id == homePage.salesSliderProducts[{{$counter}}].currentSizeId}">
+                                                        @{{ size.name }}
+                                                    </span>
                                                 </div>
-                                                <a href="#" class="btn">{{ trans('layout.add_to_cart') }}</a>
+                                                <a href="#"
+                                                   @click.prevent="addToCart(homePage.salesSliderProducts[{{$counter}}].id, homePage.salesSliderProducts[{{$counter}}].currentSizeId, 1)"
+                                                   class="btn"
+                                                   :class="{'active': findWhere(cart.cartItems, {'productId': homePage.salesSliderProducts[{{$counter}}].id, 'sizeId': homePage.salesSliderProducts[{{$counter}}].currentSizeId})}">
+                                                    <span v-cloak
+                                                          v-if="!findWhere(cart.cartItems, {'productId': homePage.salesSliderProducts[{{$counter}}].id, 'sizeId': homePage.salesSliderProducts[{{$counter}}].currentSizeId})">
+                                                        {{ trans('layout.add_to_cart') }}
+                                                    </span>
+                                                    <span v-cloak v-else>
+                                                        {{ trans('layout.in_cart') }}
+                                                    </span>
+                                                </a>
                                             </div>
 
                                         </div>
@@ -213,6 +230,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @php($counter++)
                         @endforeach
                     </div>
                 </div>
@@ -225,13 +243,14 @@
     {{--SALES END--}}
 
     {{--TOP START--}}
-    <div class="home-prod-slider">
+    <div id="top-slider" class="home-prod-slider">
         <div class="container">
             <div class="slider-products-section">
                 <div class="slider-products-header">
                     Топ продаж
                 </div>
                 <div class="owl-carousel owl-theme owl-products" id="top-products">
+                    @php($counter = 0)
                     @foreach($model->top_slider_products as $product)
                         <div>
                             <div class="prod-item">
@@ -244,17 +263,24 @@
                                         </a>
                                         <div class="size-addToCart">
                                             <div class="size">
-                                                @php($counter = 0)
-                                                @foreach($product->sizes as $size)
-                                                    @if($counter == 0)
-                                                        <span class="active">{{ $size->name }}</span>
-                                                    @else
-                                                        <span>{{ $size->name }}</span>
-                                                    @endif
-                                                    @php($counter++)
-                                                @endforeach
+                                                <span v-for="size in homePage.topSliderProducts[{{$counter}}].sizes"
+                                                      @click="changeCurrentSizeId({{$counter}}, size.id)"
+                                                      :class="{'active': size.id == homePage.topSliderProducts[{{$counter}}].currentSizeId}">
+                                                        @{{ size.name }}
+                                                </span>
                                             </div>
-                                            <a href="#" class="btn">{{ trans('layout.add_to_cart') }}</a>
+                                            <a href="#"
+                                               @click.prevent="addToCart(homePage.topSliderProducts[{{$counter}}].id, homePage.topSliderProducts[{{$counter}}].currentSizeId, 1)"
+                                               class="btn"
+                                               :class="{'active': findWhere(cart.cartItems, {'productId': homePage.topSliderProducts[{{$counter}}].id, 'sizeId': homePage.topSliderProducts[{{$counter}}].currentSizeId})}">
+                                                <span v-cloak
+                                                      v-if="!findWhere(cart.cartItems, {'productId': homePage.topSliderProducts[{{$counter}}].id, 'sizeId': homePage.topSliderProducts[{{$counter}}].currentSizeId})">
+                                                    {{ trans('layout.add_to_cart') }}
+                                                </span>
+                                                <span v-cloak v-else>
+                                                    {{ trans('layout.in_cart') }}
+                                                </span>
+                                            </a>
                                         </div>
 
                                     </div>
@@ -287,6 +313,7 @@
                                 </div>
                             </div>
                         </div>
+                        @php($counter++)
                     @endforeach
                 </div>
             </div>

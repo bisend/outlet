@@ -88,6 +88,14 @@ class ProductService extends LayoutService
     private function fill_similar_products($model)
     {
         $model->similar_products = $this->product_repository->get_similar_products($model);
+
+        if (!is_null($model->similar_products) && $model->similar_products->count() > 0)
+        {
+            foreach ($model->similar_products as $similar_product)
+            {
+                $similar_product->currentSizeId = $similar_product->sizes[0]->id;
+            }
+        }
     }
 
     /**

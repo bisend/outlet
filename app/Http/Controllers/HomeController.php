@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Languages;
 use App\Services\HomeService;
 use App\ViewModels\HomeViewModel;
+use JavaScript;
 
 /**
  * Class HomeController
@@ -36,6 +37,12 @@ class HomeController extends LayoutController
         $model = new HomeViewModel('home', $language);
 
         $this->home_service->fill($model);
+
+        JavaScript::put([
+            'newSliderProducts' => $model->new_slider_products,
+            'salesSliderProducts' => $model->sales_slider_products,
+            'topSliderProducts' => $model->top_slider_products
+        ]);
 
         \Debugbar::info($model);
 

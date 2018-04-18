@@ -145,6 +145,14 @@ class HomeService extends LayoutService
     private function fill_new_slider_products($model)
     {
         $model->new_slider_products = $this->product_repository->get_new_slider_products($model);
+
+        if (!is_null($model->new_slider_products) && $model->new_slider_products->count() > 0)
+        {
+            foreach ($model->new_slider_products as $new_slider_product)
+            {
+                $new_slider_product->currentSizeId = $new_slider_product->sizes[0]->id;
+            }
+        }
     }
 
     /**
@@ -163,6 +171,14 @@ class HomeService extends LayoutService
     private function fill_sales_slider_products($model)
     {
         $model->sales_slider_products = $this->product_repository->get_sales_slider_products($model);
+
+        if (!is_null($model->sales_slider_products) && $model->sales_slider_products->count() > 0)
+        {
+            foreach ($model->sales_slider_products as $sales_slider_product)
+            {
+                $sales_slider_product->currentSizeId = $sales_slider_product->sizes[0]->id;
+            }
+        }
     }
 
     /**
@@ -172,6 +188,14 @@ class HomeService extends LayoutService
     private function fill_top_slider_products($model)
     {
         $model->top_slider_products = $this->product_repository->get_top_slider_products($model);
+
+        if (!is_null($model->top_slider_products) && $model->top_slider_products->count() > 0)
+        {
+            foreach ($model->top_slider_products as $top_slider_product)
+            {
+                $top_slider_product->currentSizeId = $top_slider_product->sizes[0]->id;
+            }
+        }
     }
 
     /**

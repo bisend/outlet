@@ -21,7 +21,9 @@ $.ajaxSetup({
 window.Vue = require('vue');
 import vSelect from 'vue-select';
 import _ from 'lodash';
+import Loader from './components/Loader';
 
+Vue.component('loader', Loader);
 Vue.component('v-select', vSelect);
 
 require('./category/SortSelect');

@@ -31,6 +31,24 @@
                         @foreach($model->product->images as $image)
                             <div>
                                 <div class="prod-big-img">
+
+                                    @if(!is_null($model->product->promotions) && $model->product->promotions->count() > 0)
+                                        @if($model->product->promotions[0]->priority == 3)
+                                            <div class="label sale">
+                                                <span> Sale </span>
+                                            </div>
+                                        @endif
+                                        @if($model->product->promotions[0]->priority == 1)
+                                            <div class="label new">
+                                                <span> New </span>
+                                            </div>
+                                        @endif
+                                        @if($model->product->promotions[0]->priority == 2)
+                                            <div class="label top">
+                                                <span> Top </span>
+                                            </div>
+                                        @endif
+                                    @endif
                                     <img src="{{ $image->big }}" alt="{{ $model->product->name }}">
                                 </div>
                             </div>
@@ -68,7 +86,7 @@
                             </div>
                             <div class="comments-link">
                                 <a href="#" @click.prevent="scrollToReview">{{ trans('product.reviews_total') }} :
-                                    <span>@{{ singleProductPage.reviews_total_count }}</span>
+                                    <span v-cloak>@{{ singleProductPage.reviews_total_count }}</span>
                                 </a>
                             </div>
                         </div>
@@ -134,7 +152,8 @@
                             <div class="addTo-cart">
                                 <a href="#"
                                    v-on:click.prevent="addToCart(singleProductPage.product.id, singleProductPage.sizeId, singleProductPage.count)"
-                                   class="btn">
+                                   class="btn"
+                                   :class="{'active': findWhere(cart.cartItems, {'productId': singleProductPage.product.id, 'sizeId': singleProductPage.sizeId})}">
                                     <span v-cloak
                                           v-if="!findWhere(cart.cartItems, {'productId': singleProductPage.product.id, 'sizeId': singleProductPage.sizeId})">
                                         {{ trans('product.add_to_cart') }}
@@ -142,7 +161,6 @@
                                     <span v-cloak v-else>
                                         {{ trans('layout.in_cart') }}
                                     </span>
-                                    {{--{{ trans('product.add_to_cart') }}--}}
                                 </a>
                             </div>
                             <div class="addTo-wishlist">
@@ -163,7 +181,7 @@
                         </a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                            href="#nav-comments" role="tab" aria-controls="nav-profile" aria-selected="false">
-                            {{ trans('product.reviews') }} (<span>@{{ singleProductPage.reviews_total_count }}</span>)
+                            {{ trans('product.reviews') }} (<span v-cloak>@{{ singleProductPage.reviews_total_count }}</span>)
                         </a>
                     </div>
                 </nav>
@@ -192,11 +210,6 @@
                                         <span v-for="rate in 5" :class="{active: rate <= review.rating}">
                                             <i class="fas fa-star"></i>
                                         </span>
-                                        {{--<span class="active"><i class="fas fa-star"></i></span>--}}
-                                        {{--<span class="active"><i class="fas fa-star"></i></span>--}}
-                                        {{--<span><i class="fas fa-star"></i></span>--}}
-                                        {{--<span><i class="fas fa-star"></i></span>--}}
-                                        {{--<span><i class="fas fa-star"></i></span>--}}
                                     </div>
                                 </div>
                                 <div class="comment-date">
@@ -254,13 +267,6 @@
                                         <span class="sr-only">Next</span>
                                     </a>
                                 </li>
-
-                                {{--<li class="page-item">--}}
-                                    {{--<a class="page-link next" aria-label="Next">--}}
-                                        {{--<span aria-hidden="true">&raquo;</span>--}}
-                                        {{--<span class="sr-only">Next</span>--}}
-                                    {{--</a>--}}
-                                {{--</li>--}}
                             </ul>
                         </div>
 

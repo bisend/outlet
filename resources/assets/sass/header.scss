@@ -265,7 +265,7 @@ header{
               box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04);
               -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04);
               -o-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04);
-              display: none;
+              display: block;
               .result-item{
                 display: flex;
                 justify-content: flex-start;
@@ -451,13 +451,6 @@ header{
                 }
               }
             }
-            &:hover>.smoll-cart-products{
-              visibility: visible;
-              opacity: 1;
-              transform: translateY(0px);
-              -webkit-transform: translateY(0px);
-              -ms-transform: translateY(0px);
-            }
 
             .smoll-cart-item{
               display: flex;
@@ -551,6 +544,16 @@ header{
               }
             }
 
+          }
+
+          .show-prods {
+            &:hover>.smoll-cart-products{
+              visibility: visible;
+              opacity: 1;
+              transform: translateY(0px);
+              -webkit-transform: translateY(0px);
+              -ms-transform: translateY(0px);
+            }
           }
         }
       }

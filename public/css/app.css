@@ -10556,7 +10556,7 @@ header .main-nav .flex-container .search_phone .search form .search-result {
           box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04);
   -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04);
   -o-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04);
-  display: none;
+  display: block;
 }
 
 header .main-nav .flex-container .search_phone .search form .search-result .result-item {
@@ -10772,14 +10772,6 @@ header .main-nav .flex-container .main-nav_btn ul .smoll-cart .smoll-cart-produc
   font-size: 14px;
 }
 
-header .main-nav .flex-container .main-nav_btn ul .smoll-cart:hover > .smoll-cart-products {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0px);
-  -webkit-transform: translateY(0px);
-  -ms-transform: translateY(0px);
-}
-
 header .main-nav .flex-container .main-nav_btn ul .smoll-cart .smoll-cart-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10891,6 +10883,14 @@ header .main-nav .flex-container .main-nav_btn ul .smoll-cart .smoll-cart-item .
   line-height: 0;
   font-weight: 500;
   font-size: 13px;
+}
+
+header .main-nav .flex-container .main-nav_btn ul .show-prods:hover > .smoll-cart-products {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0px);
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
 }
 
 header .category-nav {

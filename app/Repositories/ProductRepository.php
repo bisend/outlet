@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 use App\DatabaseModels\Product;
+use App\DatabaseModels\Promotion;
 
 /**
  * Class ProductRepository
@@ -16,6 +17,18 @@ use App\DatabaseModels\Product;
  */
 class ProductRepository
 {
+    /**
+     * word separator for search
+     * @var string
+     */
+    protected $wordsSeparator = '+';
+
+    /**
+     * like separator for search query
+     * @var string
+     */
+    protected $likeSeparator = '%';
+
     /**
      * get products for 'new' slider
      * @param $model
@@ -420,5 +433,313 @@ class ProductRepository
                 "meta_keywords_$language as meta_keywords",
                 "meta_h1_$language as meta_h1",
             ]);
+    }
+
+
+    /**
+     * return search products
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getAllProductsForSearch($model)
+    {
+        $orderByRaw = 'name';
+
+        if ($model->sort == 'popularity')
+        {
+            $orderByRaw = 'rating desc, name';
+        }
+        elseif ($model->sort == 'new')
+        {
+            $orderByRaw = 'created_at desc, name';
+        }
+        elseif ($model->sort == 'price-asc')
+        {
+            $orderByRaw = 'price asc, name';
+        }
+        elseif ($model->sort == 'price-desc')
+        {
+            $orderByRaw = 'price desc, name';
+        }
+
+        $words = explode($this->wordsSeparator, $model->series);
+        $wordsReverse = array_reverse($words);
+        $seriesReverse = implode($this->likeSeparator, $wordsReverse);
+        $series = implode($this->likeSeparator, $words);
+
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->where(function ($query) use ($series, $seriesReverse) {
+                $query->where('is_visible', '=', true);
+                $query->where("name_ru", 'like', '%' . $series . '%');
+                $query->orWhere("name_ru", 'like', '%' . $seriesReverse . '%');
+                $query->where('is_visible', '=', true);
+            })
+            ->orWhere(function ($query) use ($series, $seriesReverse) {
+                $query->where('is_visible', '=', true);
+                $query->where("name_uk", 'like', '%' . $series . '%');
+                $query->orWhere("name_uk", 'like', '%' . $seriesReverse . '%');
+                $query->where('is_visible', '=', true);
+            })
+            ->orderByRaw($orderByRaw)
+            ->offset($model->searchProductsOffset)
+            ->limit($model->searchProductsLimit)
+            ->get([
+                'products.id',
+                'category_id',
+                'breadcrumb_category_id',
+                "name_$model->language as name",
+                "slug",
+                "is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$model->language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$model->language as meta_title",
+                "meta_description_$model->language as meta_description",
+                "meta_keywords_$model->language as meta_keywords",
+                "meta_h1_$model->language as meta_h1",
+            ]);
+    }
+
+    /**
+     * return count of search products
+     * @param $model
+     * @return int
+     */
+    public function getCountSearchProducts($model)
+    {
+        $words = explode($this->wordsSeparator, $model->series);
+        $wordsReverse = array_reverse($words);
+        $seriesReverse = implode($this->likeSeparator, $wordsReverse);
+        $series = implode($this->likeSeparator, $words);
+
+        return Product::where(function ($query) use ($series, $seriesReverse) {
+            $query->where('is_visible', '=', true);
+            $query->where("name_ru", 'like', '%' . $series . '%');
+            $query->orWhere("name_ru", 'like', '%' . $seriesReverse . '%');
+            $query->where('is_visible', '=', true);
+        })->orWhere(function ($query) use ($series, $seriesReverse) {
+            $query->where('is_visible', '=', true);
+            $query->where("name_uk", 'like', '%' . $series . '%');
+            $query->orWhere("name_uk", 'like', '%' . $seriesReverse . '%');
+            $query->where('is_visible', '=', true);
+        })->count();
+    }
+
+    /**
+     * return ajax search products
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getAjaxSearchProducts($model)
+    {
+        $orderByRaw = 'name';
+
+        $words = explode($this->wordsSeparator, $model->series);
+        $wordsReverse = array_reverse($words);
+        $seriesReverse = implode($this->likeSeparator, $wordsReverse);
+        $series = implode($this->likeSeparator, $words);
+
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->where(function ($query) use ($series, $seriesReverse) {
+                $query->where('products.is_visible', '=', true);
+                $query->where("name_ru", 'like', '%' . $series . '%');
+                $query->orWhere("name_ru", 'like', '%' . $seriesReverse . '%');
+                $query->where('products.is_visible', '=', true);
+            })
+            ->orWhere(function ($query) use ($series, $seriesReverse) {
+                $query->where('products.is_visible', '=', true);
+                $query->where("name_uk", 'like', '%' . $series . '%');
+                $query->orWhere("name_uk", 'like', '%' . $seriesReverse . '%');
+                $query->where('products.is_visible', '=', true);
+            })
+            ->orderByRaw($orderByRaw)
+            ->limit(5)
+            ->get([
+                'products.id',
+                'category_id',
+                'breadcrumb_category_id',
+                "name_$model->language as name",
+                "slug",
+                "is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$model->language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$model->language as meta_title",
+                "meta_description_$model->language as meta_description",
+                "meta_keywords_$model->language as meta_keywords",
+                "meta_h1_$model->language as meta_h1",
+            ]);
+    }
+
+    /**
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
+    public function getAllSalesProducts($model)
+    {
+        $model->salesPromotion = Promotion::wherePriority(3)->first();
+
+        $orderByRaw = 'name';
+
+        if ($model->sort == 'popularity')
+        {
+            $orderByRaw = 'rating desc, name';
+        }
+        elseif ($model->sort == 'new')
+        {
+            $orderByRaw = 'created_at desc, name';
+        }
+        elseif ($model->sort == 'price-asc')
+        {
+            $orderByRaw = 'price asc, name';
+        }
+        elseif ($model->sort == 'price-desc')
+        {
+            $orderByRaw = 'price desc, name';
+        }
+
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->whereHas('promotions', function ($query) use ($model) {
+                $query->where('products_promotions.promotion_id', '=', $model->salesPromotion->id);
+            })
+            ->whereIsVisible(true)
+            ->orderByRaw($orderByRaw)
+            ->offset($model->offset)
+            ->limit($model->limit)
+            ->get([
+                'products.id',
+                'category_id',
+                'breadcrumb_category_id',
+                "name_$model->language as name",
+                "slug",
+                "is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$model->language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$model->language as meta_title",
+                "meta_description_$model->language as meta_description",
+                "meta_keywords_$model->language as meta_keywords",
+                "meta_h1_$model->language as meta_h1",
+            ]);
+    }
+
+    public function getCountAllSalesProducts($model)
+    {
+        $model->salesPromotion = Promotion::wherePriority(3)->first();
+
+        return Product::whereHas('promotions', function ($query) use ($model) {
+            $query->where('products_promotions.promotion_id', '=', $model->salesPromotion->id);
+        })->whereIsVisible(true)->count();
     }
 }
