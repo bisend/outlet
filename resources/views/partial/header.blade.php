@@ -46,10 +46,10 @@
                             </li>
                         @else
                             <li>
-                                <a href="#">{{ trans('header.login') }}</a>
+                                <a data-toggle="modal" data-target="#loginModal" href="#">{{ trans('header.login') }}</a>
                             </li>
                             <li>
-                                <a href="#">{{ trans('header.register') }}</a>
+                                <a data-toggle="modal" data-target="#registrModal" href="#">{{ trans('header.register') }}</a>
                             </li>
                         @endif
                     </ul>

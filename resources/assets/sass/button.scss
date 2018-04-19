@@ -20,21 +20,21 @@
     -moz-transition: all 0.4s;
     transition: all 0.4s;
 
-    outline: none;
+    outline: none!important;
   }
 
   &:focus{
-    outline: none;
+    outline: none!important;
     color: #ffffff;
   }
 
   &:active{
-    outline: none;
+    outline: none!important;
     color: #ffffff;
   }
 
   &:visited{
-    outline: none;
+    outline: none!important;
     color: #ffffff;
   }
 }
@@ -42,4 +42,19 @@
 .btn.active{
   background-color: #e65540;
   color: #fff;
+  outline: none!important;
+  &:focus{
+    outline: none!important;
+    color: #ffffff;
+  }
+
+  &:active{
+    outline: none!important;
+    color: #ffffff;
+  }
+
+  &:visited{
+    outline: none!important;
+    color: #ffffff;
+  }
 }

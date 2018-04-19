@@ -195,7 +195,7 @@
                                                     <span>38</span>
                                                     <span>39</span>
                                                 </div>
-                                                <a href="" class="btn active">В кошику</a>
+                                                <a href="#" class="btn active">В кошику</a>
                                             </div>
 
                                         </div>

@@ -45,7 +45,7 @@
                                     <tr class="item-list-order">
                                         <td>
                                             <div class="order-number">
-                                                <a href="javascript:void(0);" class="fsz-16 font-2">10002</a>
+                                                <a data-toggle="modal" data-target="#orderModal" href="javascript:void(0);" class="fsz-16 font-2">10002</a>
                                             </div>
                                         </td>
                                         <td>
@@ -64,119 +64,12 @@
                                             </div>
                                         </td>
                                         <td class="view-order-details">
-                                            <a href="javascript:void(0);">
+                                            <a data-toggle="modal" data-target="#orderModal" href="javascript:void(0);">
                                                 Детальніше...
                                             </a>
                                         </td>
                                     </tr>
-                                    <tr class="item-list-order">
-                                        <td>
-                                            <div class="order-number">
-                                                <a href="javascript:void(0);" class="fsz-16 font-2">10002</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-status">
-                                                <span>Новый</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-total-count">
-                                                <span>1</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-total-summ">
-                                                <span>1220.00 грн</span>
-                                            </div>
-                                        </td>
-                                        <td class="view-order-details">
-                                            <a href="javascript:void(0);">
-                                                Детальніше...
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="item-list-order">
-                                        <td>
-                                            <div class="order-number">
-                                                <a href="javascript:void(0);" class="fsz-16 font-2">10002</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-status">
-                                                <span>Новый</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-total-count">
-                                                <span>1</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-total-summ">
-                                                <span>1220.00 грн</span>
-                                            </div>
-                                        </td>
-                                        <td class="view-order-details">
-                                            <a href="javascript:void(0);">
-                                                Детальніше...
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="item-list-order">
-                                        <td>
-                                            <div class="order-number">
-                                                <a href="javascript:void(0);" class="fsz-16 font-2">10002</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-status">
-                                                <span>Новый</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-total-count">
-                                                <span>1</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-total-summ">
-                                                <span>1220.00 грн</span>
-                                            </div>
-                                        </td>
-                                        <td class="view-order-details">
-                                            <a href="javascript:void(0);">
-                                                Детальніше...
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="item-list-order">
-                                        <td>
-                                            <div class="order-number">
-                                                <a href="javascript:void(0);" class="fsz-16 font-2">10002</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-status">
-                                                <span>Новый</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-total-count">
-                                                <span>1</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-total-summ">
-                                                <span>1220.00 грн</span>
-                                            </div>
-                                        </td>
-                                        <td class="view-order-details">
-                                            <a href="javascript:void(0);">
-                                                Детальніше...
-                                            </a>
-                                        </td>
-                                    </tr>
+
                                     </tbody>
                                 </table>
                             </div>

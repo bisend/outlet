@@ -150,7 +150,7 @@
                         </div>
                         <div class="product-btns">
                             <div class="addTo-cart">
-                                <a href="#"
+                                <a data-toggle="modal" data-target="#cartModal" href="#"
                                    v-on:click.prevent="addToCart(singleProductPage.product.id, singleProductPage.sizeId, singleProductPage.count)"
                                    class="btn"
                                    :class="{'active': findWhere(cart.cartItems, {'productId': singleProductPage.product.id, 'sizeId': singleProductPage.sizeId})}">

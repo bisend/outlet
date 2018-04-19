@@ -29,6 +29,12 @@
 
 </head>
 <body>
+@include('modals.loginModal')
+@include('modals.registrModal')
+@include('modals.restoreModal')
+@include('modals.messageModal')
+@include('modals.cartModal')
+@include('modals.orderModal')
 
 <div class="mobile-nav-bg"></div>
 
