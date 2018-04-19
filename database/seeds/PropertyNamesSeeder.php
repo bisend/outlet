@@ -12,8 +12,7 @@ class PropertyNamesSeeder extends Seeder
      */
     public function run()
     {
-        try
-        {
+
             $array = [
                 [
                     'name_ru' => 'Материал верха',
@@ -56,10 +55,6 @@ class PropertyNamesSeeder extends Seeder
 
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
             DB::commit();
-        }
-        catch (Exception $e)
-        {
-            DB::rollBack();
-        }
+
     }
 }

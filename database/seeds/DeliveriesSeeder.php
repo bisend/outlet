@@ -12,8 +12,7 @@ class DeliveriesSeeder extends Seeder
      */
     public function run()
     {
-        try
-        {
+
             DB::beginTransaction();
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
             Delivery::truncate();
@@ -52,10 +51,6 @@ class DeliveriesSeeder extends Seeder
 
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
             DB::commit();
-        }
-        catch (Exception $e)
-        {
-            DB::rollBack();
-        }
+
     }
 }

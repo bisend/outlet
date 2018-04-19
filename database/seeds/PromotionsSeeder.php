@@ -12,8 +12,7 @@ class PromotionsSeeder extends Seeder
      */
     public function run()
     {
-        try
-        {
+
             DB::beginTransaction();
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
             Promotion::truncate();
@@ -42,10 +41,6 @@ class PromotionsSeeder extends Seeder
 
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
             DB::commit();
-        }
-        catch (Exception $e)
-        {
-            DB::rollBack();
-        }
+
     }
 }

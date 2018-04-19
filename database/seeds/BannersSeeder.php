@@ -12,8 +12,6 @@ class BannersSeeder extends Seeder
      */
     public function run()
     {
-        try
-        {
             DB::beginTransaction();
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
             Banner::truncate();
@@ -80,10 +78,5 @@ class BannersSeeder extends Seeder
 
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
             DB::commit();
-        }
-        catch (Exception $e)
-        {
-            DB::rollBack();
-        }
     }
 }

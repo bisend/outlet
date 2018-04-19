@@ -12,8 +12,7 @@ class CheckoutPointsSeeder extends Seeder
      */
     public function run()
     {
-        try
-        {
+
             DB::beginTransaction();
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
             CheckoutPoint::truncate();
@@ -38,10 +37,6 @@ class CheckoutPointsSeeder extends Seeder
 
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
             DB::commit();
-        }
-        catch (Exception $e)
-        {
-            DB::rollBack();
-        }
+
     }
 }

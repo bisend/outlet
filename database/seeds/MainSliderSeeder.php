@@ -12,8 +12,6 @@ class MainSliderSeeder extends Seeder
      */
     public function run()
     {
-        try
-        {
             DB::beginTransaction();
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
             MainSlider::truncate();
@@ -56,10 +54,6 @@ class MainSliderSeeder extends Seeder
 
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
             DB::commit();
-        }
-        catch (Exception $e)
-        {
-            DB::rollBack();
-        }
+
     }
 }
