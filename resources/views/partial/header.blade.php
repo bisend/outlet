@@ -304,9 +304,13 @@
                                             <div class="count_price">
                                                 <span class="count">@{{ cartItem.count }}</span> x <span class="price">@{{ cartItem.product.price }} грн</span>
                                             </div>
+                                            <div class="size">
+                                                <span class="active">36</span>
+                                            </div>
                                             <div class="total_price">
                                                 {{ trans('header.sum') }}: <span>@{{ (cartItem.product.price * cartItem.count).toFixed(2) }} грн</span>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>

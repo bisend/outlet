@@ -54537,7 +54537,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 		/*$el.on('focusin', function() {
   	$(document).off(".carousel");
-  			$(document).on('keydown.carousel', function(e) {
+  		$(document).on('keydown.carousel', function(e) {
   		if(e.keyCode == 37) {
   			$el.trigger('prev.owl')
   		}

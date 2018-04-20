@@ -11256,6 +11256,32 @@ header .main-nav .flex-container .main-nav_btn ul .smoll-cart .smoll-cart-item .
   text-decoration: underline;
 }
 
+header .main-nav .flex-container .main-nav_btn ul .smoll-cart .smoll-cart-item .smoll-cart-info .size {
+  margin: 0;
+}
+
+header .main-nav .flex-container .main-nav_btn ul .smoll-cart .smoll-cart-item .smoll-cart-info .size span {
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  /* line-height: 2.6; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: default;
+}
+
+header .main-nav .flex-container .main-nav_btn ul .smoll-cart .smoll-cart-item .smoll-cart-info .size span:hover {
+  background-color: #e65540;
+}
+
 header .main-nav .flex-container .main-nav_btn ul .smoll-cart .smoll-cart-item .smoll-cart-info .count_price span {
   color: #222222;
   font-size: 13px;
@@ -14363,7 +14389,7 @@ textarea.incorrect-field:-ms-input-placeholder {
 }
 
 .cartModal .modal-dialog .modal-body .cart-item .img_info .img .label {
-  left: -7px;
+  left: 3px;
 }
 
 .cartModal .modal-dialog .modal-body .cart-item .img_info .img img {
@@ -14391,6 +14417,13 @@ textarea.incorrect-field:-ms-input-placeholder {
 
 .cartModal .modal-dialog .modal-body .cart-item .img_info .info .prod-price {
   margin-top: 8px;
+}
+
+.cartModal .modal-dialog .modal-body .cart-item .img_info .info .size span {
+  cursor: default;
+  width: 25px;
+  height: 25px;
+  font-size: 11px;
 }
 
 .cartModal .modal-dialog .modal-body .cart-item .prod_count {

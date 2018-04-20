@@ -42,6 +42,12 @@
                                     </span>
                                     <span> @{{ cartItem.product.price }} грн </span>
                                 </div>
+                                {{--<div class="size-cart">--}}
+                                    {{--<span>@{{ cartItem.sizeId }}</span>--}}
+                                {{--</div>--}}
+                                <div class="size">
+                                    <span class="active">36</span>
+                                </div>
                             </div>
                         </div>
                         <div class="prod_count">

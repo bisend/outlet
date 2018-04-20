@@ -74,7 +74,7 @@
           height: 100px;
           position: relative;
           .label{
-            left: -7px;
+            left: 3px;
           }
           img{
             width: 110px;
@@ -98,6 +98,14 @@
           }
           .prod-price{
             margin-top: 8px;
+          }
+          .size{
+            span{
+              cursor: default;
+              width: 25px;
+              height: 25px;
+              font-size: 11px;
+            }
           }
         }
       }
