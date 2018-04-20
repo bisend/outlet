@@ -9,6 +9,7 @@ function openNavRight(e) {
     // }, 250, 'swing');
 
     $('#filters-mobile').removeClass('hideFilters').addClass('showFilters');
+    $('#selected-filters-mobile').removeClass('hideFilters').addClass('showFilters');
 }
 
 function closeNavRight(e) {
@@ -20,6 +21,7 @@ function closeNavRight(e) {
     // }, 250, 'swing');
 
     $('#filters-mobile').removeClass('showFilters').addClass('hideFilters');
+    $('#selected-filters-mobile').removeClass('showFilters').addClass('hideFilters');
 }
 
 $(document).ready(function () {
@@ -44,9 +46,15 @@ $(document).ready(function () {
     $(document).on('click', 'body', function (e) {
         var $targetR = $(e.target);
 
-        if (isMenuOpenedRight &&
-            ($targetR.attr('id') != 'filters-mobile' &&
-            $targetR.closest('#filters-mobile').length === 0)) {
+        // if (isMenuOpenedRight &&
+        //     (($targetR.attr('id') != 'selected-filters-mobile' && $targetR.closest('#selected-filters-mobile').length === 0) ||
+        //         ($targetR.attr('id') != 'filters-mobile' && $targetR.closest('#filters-mobile').length === 0))) {
+        //
+        //     closeNavRight(e);
+        //
+        //     isMenuOpenedRight = false;
+        // }
+        if (isMenuOpenedRight && $targetR.hasClass('mobile-nav-bg')) {
 
             closeNavRight(e);
 
@@ -57,6 +65,7 @@ $(document).ready(function () {
 
 $(window).resize(function(){
     $('#filters-mobile').removeClass('hideFilters').removeClass('showFilters');
+    $('#selected-filters-mobile').removeClass('hideFilters').removeClass('showFilters');
 });
 
 /* RIGHT slide bar END */
