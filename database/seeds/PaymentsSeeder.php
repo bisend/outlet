@@ -13,9 +13,9 @@ class PaymentsSeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            Payment::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Payment::truncate();
+        DB::beginTransaction();
 
             $payments = [
                 0 => [
@@ -44,8 +44,8 @@ class PaymentsSeeder extends Seeder
                 $model->save();
             }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

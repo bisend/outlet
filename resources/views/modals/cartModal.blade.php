@@ -46,7 +46,9 @@
                                     {{--<span>@{{ cartItem.sizeId }}</span>--}}
                                 {{--</div>--}}
                                 <div class="size">
-                                    <span class="active">36</span>
+                                    <span v-for="size in cartItem.product.sizes" v-if="size.id == cartItem.sizeId" class="active">
+                                        @{{ size.name }}
+                                    </span>
                                 </div>
                             </div>
                         </div>

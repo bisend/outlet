@@ -36,6 +36,10 @@ mix.js('resources/assets/js/search/search.js', 'public/js').version();
 
 mix.js('resources/assets/js/product-grid/product-grid.js', 'public/js').version();
 
+mix.js('resources/assets/js/filters/filters.js', 'public/js').version();
+
+mix.js('resources/assets/js/filters/selected-filters.js', 'public/js').version();
+
 
 mix.scripts([
     'resources/assets/plugins/jclient-validation/jclient.validation.js',

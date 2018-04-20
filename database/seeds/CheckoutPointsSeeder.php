@@ -13,9 +13,9 @@ class CheckoutPointsSeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            CheckoutPoint::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        CheckoutPoint::truncate();
+        DB::beginTransaction();
 
             $checkout_point = new CheckoutPoint();
             $checkout_point->name_ru = "тц Екватор 123123";

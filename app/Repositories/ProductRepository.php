@@ -734,6 +734,10 @@ class ProductRepository
             ]);
     }
 
+    /**
+     * @param $model
+     * @return int
+     */
     public function getCountAllSalesProducts($model)
     {
         $model->salesPromotion = Promotion::wherePriority(3)->first();
@@ -742,4 +746,339 @@ class ProductRepository
             $query->where('products_promotions.promotion_id', '=', $model->salesPromotion->id);
         })->whereIsVisible(true)->count();
     }
+
+    /**
+     * return all products for category (with pagination)
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getAllProductsForCategory($model)
+    {
+        $orderByRaw = 'priority desc, name';
+
+        if ($model->sort == 'popularity')
+        {
+            $orderByRaw = 'rating desc, name';
+        }
+        elseif ($model->sort == 'new')
+        {
+            $orderByRaw = 'created_at desc, name';
+        }
+        elseif ($model->sort == 'price-asc')
+        {
+            $orderByRaw = 'price asc, name';
+        }
+        elseif ($model->sort == 'price-desc')
+        {
+            $orderByRaw = 'price desc, name';
+        }
+
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->join('product_category', function ($query) use ($model) {
+                $query->on('products.id', '=', 'product_category.product_id')
+                    ->where('product_category.category_id', '=', "".$model->currentCategory->id."");
+            })
+            ->where('products.is_visible', '=', true)
+            ->orderByRaw($orderByRaw)
+            ->offset($model->categoryProductsOffset)
+            ->limit($model->categoryProductsLimit)
+            ->get([
+                'products.id',
+                'products.category_id',
+                'breadcrumb_category_id',
+                "name_$model->language as name",
+                "slug",
+                "products.is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$model->language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$model->language as meta_title",
+                "meta_description_$model->language as meta_description",
+                "meta_keywords_$model->language as meta_keywords",
+                "meta_h1_$model->language as meta_h1",
+            ]);
+    }
+
+    /**
+     * return count of all products related to current Category
+     * @param $model
+     * @return int
+     */
+    public function getCountProductsCategory($model)
+    {
+        return Product::join('product_category', function ($query) use ($model) {
+            $query->on('products.id', '=', 'product_category.product_id')
+                ->where('product_category.category_id', '=', "".$model->currentCategory->id."");
+        })
+            ->where('products.is_visible', '=',true)
+            ->count();
+    }
+
+    /**
+     * return min value of price for categories
+     * @param $model
+     * @return mixed
+     */
+    public function getPriceMinForCategoryProducts($model)
+    {
+        return Product::join('product_category', function ($query) use ($model) {
+                $query->on('products.id', '=', 'product_category.product_id')
+                    ->where('product_category.category_id', '=', "". $model->currentCategory->id . "");
+            })->where('products.is_visible', '=',true)->min('price');
+    }
+
+    /**
+     * return max value of price for categories
+     * @param $model
+     * @return mixed
+     */
+    public function getPriceMaxForCategoryProducts($model)
+    {
+        return Product::join('product_category', function ($query) use ($model) {
+            $query->on('products.id', '=', 'product_category.product_id')
+                ->where('product_category.category_id', '=', "". $model->currentCategory->id . "");
+        })->where('products.is_visible', '=',true)->max('price');
+    }
+
+    /**
+     * return min value of price for filtered categories
+     * @param $model
+     * @return mixed
+     */
+    public function getPriceMinForFiltersCategoryProducts($model)
+    {
+        $query = Product::query();
+
+        $query->join('product_category', function ($query) use ($model) {
+            $query->on('products.id', '=', 'product_category.product_id')
+                ->where('product_category.category_id', '=', "". $model->currentCategory->id . "");
+        })->min('price');
+
+        if (count($model->parsedFilters) > 0)
+        {
+            foreach ($model->parsedFilters as $name => $values) {
+                $query->whereHas('properties', function ($query) use ($name, $values) {
+                    $query->whereHas('property_names', function ($query) use ($name) {
+                        $query->whereIn('slug', [$name]);
+                    })->whereHas('property_values', function ($query) use ($values) {
+                        $query->whereIn('slug', $values);
+                    });
+                });
+            }
+        }
+
+        return $query->where('products.is_visible', '=', true)->min('price');
+    }
+
+    /**
+     * return max value of price for filtered categories
+     * @param $model
+     * @return mixed
+     */
+    public function getPriceMaxForFiltersCategoryProducts($model)
+    {
+        $query = Product::query();
+
+        $query->join('product_category', function ($query) use ($model) {
+            $query->on('products.id', '=', 'product_category.product_id')
+                ->where('product_category.category_id', '=', "". $model->currentCategory->id . "");
+        })->max('price');
+
+        if (count($model->parsedFilters) > 0)
+        {
+            foreach ($model->parsedFilters as $name => $values) {
+                $query->whereHas('properties', function ($query) use ($name, $values) {
+                    $query->whereHas('property_names', function ($query) use ($name) {
+                        $query->whereIn('slug', [$name]);
+                    })->whereHas('property_values', function ($query) use ($values) {
+                        $query->whereIn('slug', $values);
+                    });
+                });
+            }
+        }
+
+        return $query->where('products.is_visible', '=', true)->max('price');
+    }
+
+    /**
+     * return products for filtered categories
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getAllProductsForFiltersCategory($model)
+    {
+        $orderByRaw = 'priority desc, name';
+
+        if ($model->sort == 'popularity')
+        {
+            $orderByRaw = 'rating desc, priority desc, name';
+        }
+        elseif ($model->sort == 'new')
+        {
+            $orderByRaw = 'created_at desc, priority desc, name';
+        }
+        elseif ($model->sort == 'price-asc')
+        {
+            $orderByRaw = 'price asc, priority desc, name';
+        }
+        elseif ($model->sort == 'price-desc')
+        {
+            $orderByRaw = 'price desc, priority desc, name';
+        }
+
+        $query = Product::query();
+
+        $query->with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ]);
+
+        if ($model->priceMin && $model->priceMax)
+        {
+            $query->whereBetween('price', [$model->priceMin, $model->priceMax]);
+        }
+
+        foreach ($model->parsedFilters as $name => $values) {
+            $query->whereHas('properties', function ($query) use ($name, $values) {
+                $query->whereHas('property_names', function ($query) use ($name) {
+                    $query->whereIn('slug', [$name]);
+                })->whereHas('property_values', function ($query) use ($values) {
+                    $query->whereIn('slug', $values);
+                });
+            });
+        }
+
+        $query->orderByRaw($orderByRaw)
+            ->join('product_category', function ($query) use ($model) {
+                $query->on('products.id', '=', 'product_category.product_id')
+                    ->where('product_category.category_id', '=', "".$model->currentCategory->id."");
+            })
+            ->offset($model->categoryProductsOffset)
+            ->limit($model->categoryProductsLimit);
+
+
+        return $query->where('products.is_visible', '=', true)->get([
+            'products.id',
+            'products.category_id',
+            'breadcrumb_category_id',
+            "name_$model->language as name",
+            "slug",
+            "products.is_visible",
+            "in_stock",
+            "price",
+            "old_price",
+            "description_$model->language as description",
+            "products.priority",
+            "vendor_code",
+            "rating",
+            "number_of_views",
+            "meta_title_$model->language as meta_title",
+            "meta_description_$model->language as meta_description",
+            "meta_keywords_$model->language as meta_keywords",
+            "meta_h1_$model->language as meta_h1",
+            'products.created_at'
+        ]);
+    }
+
+    /**
+     * return count of product filtered categories
+     * @param $model
+     * @return int
+     */
+    public function getCountProductsFiltersCategory($model)
+    {
+        $query = Product::query();
+
+        if ($model->priceMin && $model->priceMax)
+        {
+            if ($model->priceMin && $model->priceMax)
+            {
+                $query->whereBetween('price', [$model->priceMin, $model->priceMax]);
+            }
+        }
+
+        foreach ($model->parsedFilters as $name => $values) {
+            $query->whereHas('properties', function ($query) use ($name, $values) {
+                $query->whereHas('property_names', function ($query) use ($name) {
+                    $query->whereIn('slug', [$name]);
+                })->whereHas('property_values', function ($query) use ($values) {
+                    $query->whereIn('slug', $values);
+                });
+            });
+        }
+
+        $query->join('product_category', function ($query) use ($model) {
+            $query->on('products.id', '=', 'product_category.product_id')
+                ->where('product_category.category_id', '=', "". $model->currentCategory->id . "");
+        })->where('products.is_visible', '=', true);
+
+        return $query->count();
+    }
+
 }

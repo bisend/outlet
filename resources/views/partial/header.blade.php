@@ -305,7 +305,9 @@
                                                 <span class="count">@{{ cartItem.count }}</span> x <span class="price">@{{ cartItem.product.price }} грн</span>
                                             </div>
                                             <div class="size">
-                                                <span class="active">36</span>
+                                                <span v-for="size in cartItem.product.sizes" v-if="size.id == cartItem.sizeId" class="active">
+                                                    @{{ size.name }}
+                                                </span>
                                             </div>
                                             <div class="total_price">
                                                 {{ trans('header.sum') }}: <span>@{{ (cartItem.product.price * cartItem.count).toFixed(2) }} грн</span>

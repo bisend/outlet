@@ -13,9 +13,9 @@ class DeliveriesSeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            Delivery::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Delivery::truncate();
+        DB::beginTransaction();
 
             $deliveries = [
                 0 => [
@@ -49,8 +49,8 @@ class DeliveriesSeeder extends Seeder
                 $model->save();
             }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

@@ -13,9 +13,9 @@ class PropertiesSeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            Property::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Property::truncate();
+        DB::beginTransaction();
 
             for ($i = 1; $i <= 360; $i++)
             {
@@ -34,7 +34,7 @@ class PropertiesSeeder extends Seeder
                         $property = new Property();
                         $property->product_id = $i;
                         $property->property_name_id = $j;
-                        $property->property_value_id = rand(1, 9);
+                        $property->property_value_id = rand(26, 34);
                         $property->save();
                     }
                     if ($j = 3)
@@ -48,7 +48,7 @@ class PropertiesSeeder extends Seeder
                     //SIZE
                     if ($j = 4)
                     {
-                        for ($k = 26; $k <= 64; $k++)
+                        for ($k = 35; $k <= 64; $k++)
                         {
                             $property = new Property();
                             $property->product_id = $i;
@@ -76,8 +76,8 @@ class PropertiesSeeder extends Seeder
                 }
             }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

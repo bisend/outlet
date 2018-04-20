@@ -13,9 +13,9 @@ class CategoriesSeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            Category::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Category::truncate();
+        DB::beginTransaction();
 
             //id 1
             $category = new Category();
@@ -217,8 +217,8 @@ class CategoriesSeeder extends Seeder
             $category->meta_h1_uk = $category->name_uk;
             $category->save();
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

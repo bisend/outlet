@@ -23,9 +23,9 @@ class ImagesSeeder extends Seeder
         ];
 
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            Image::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Image::truncate();
+        DB::beginTransaction();
 
             foreach ($array as $arr_img)
             {
@@ -37,8 +37,8 @@ class ImagesSeeder extends Seeder
                 $image->save();
             }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

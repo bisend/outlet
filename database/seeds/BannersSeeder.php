@@ -12,9 +12,9 @@ class BannersSeeder extends Seeder
      */
     public function run()
     {
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            Banner::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Banner::truncate();
+        DB::beginTransaction();
 
             $banner = new Banner();
             $banner->image = "/img/products/medium/item-1.jpg";
@@ -76,7 +76,7 @@ class BannersSeeder extends Seeder
             $banner->btn_text_uk = 'Переглянути';
             $banner->save();
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

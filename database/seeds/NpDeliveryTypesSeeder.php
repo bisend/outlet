@@ -13,9 +13,9 @@ class NpDeliveryTypesSeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            DeliveryType::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DeliveryType::truncate();
+        DB::beginTransaction();
 
             $delivery_type = new DeliveryType();
             $delivery_type->name_ru = 'Адресная доставка';
@@ -29,8 +29,8 @@ class NpDeliveryTypesSeeder extends Seeder
             $delivery_type->slug = str_slug('Номер отделения');
             $delivery_type->save();
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

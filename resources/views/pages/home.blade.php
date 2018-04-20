@@ -235,7 +235,7 @@
                     </div>
                 </div>
                 <div class="show-all-products">
-                    <a href="">{{ trans('home.see_all') }}</a>
+                    <a href="{{ url_sale($model->language) }}">{{ trans('home.see_all') }}</a>
                 </div>
             </div>
         </div>

@@ -13,9 +13,9 @@ class OrderSatusesSeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            OrderStatus::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        OrderStatus::truncate();
+        DB::beginTransaction();
 
             $order_status = new OrderStatus();
             $order_status->name_ru = 'Новый';
@@ -48,8 +48,8 @@ class OrderSatusesSeeder extends Seeder
             $order_status->slug = str_slug('Оплачен');
             $order_status->save();
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

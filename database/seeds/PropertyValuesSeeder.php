@@ -13,7 +13,7 @@ class PropertyValuesSeeder extends Seeder
     public function run()
     {
 
-            $array = [
+        $array = [
                 [
                     'name_ru' => 'Болонья',
                     'name_uk' => 'Болонья'
@@ -114,9 +114,45 @@ class PropertyValuesSeeder extends Seeder
                     'name_ru' => 'Мульти',
                     'name_uk' => 'Мульти'
                 ],
+                [
+                    'name_ru' => 'Болонья1',
+                    'name_uk' => 'Болонья1'
+                ],
+                [
+                    'name_ru' => 'Велюр1',
+                    'name_uk' => 'Велюр1'
+                ],
+                [
+                    'name_ru' => 'Войлок1',
+                    'name_uk' => 'Войлок1'
+                ],
+                [
+                    'name_ru' => 'Дубленка1',
+                    'name_uk' => 'Дублянка1'
+                ],
+                [
+                    'name_ru' => 'Замша1',
+                    'name_uk' => 'Замша1'
+                ],
+                [
+                    'name_ru' => 'Кожа1',
+                    'name_uk' => 'Шкіра1'
+                ],
+                [
+                    'name_ru' => 'ПВХ1',
+                    'name_uk' => 'ПВХ1'
+                ],
+                [
+                    'name_ru' => 'Хлопок1',
+                    'name_uk' => 'Бавовна1'
+                ],
+                [
+                    'name_ru' => 'Шерсть1',
+                    'name_uk' => 'Вовна1'
+                ],
             ];
 
-            $array2 = [
+        $array2 = [
                 [
                     'name_ru' => '30',
                     'name_uk' => '30',
@@ -314,9 +350,9 @@ class PropertyValuesSeeder extends Seeder
                 ],
             ];
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            PropertyValue::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        PropertyValue::truncate();
+        DB::beginTransaction();
 
             foreach ($array as $item)
             {
@@ -336,7 +372,7 @@ class PropertyValuesSeeder extends Seeder
                 $property_value->save();
             }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

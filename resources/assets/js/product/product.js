@@ -288,7 +288,7 @@ if (document.getElementById('single-product-info-container'))
                     }
                 }
             },
-            scrollToReview() {
+            scrollToReview: function () {
                 $('#nav-home-tab').removeClass('active show').attr('aria-selected', false);
 
                 $('#nav-description').removeClass('active show');

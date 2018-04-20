@@ -13,7 +13,7 @@ class PropertyNamesSeeder extends Seeder
     public function run()
     {
 
-            $array = [
+        $array = [
                 [
                     'name_ru' => 'Материал верха',
                     'name_uk' => 'Матеріал верху'
@@ -40,9 +40,9 @@ class PropertyNamesSeeder extends Seeder
                 ],
             ];
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            PropertyName::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        PropertyName::truncate();
+        DB::beginTransaction();
 
             foreach ($array as $item)
             {
@@ -53,8 +53,8 @@ class PropertyNamesSeeder extends Seeder
                 $property_name->save();
             }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

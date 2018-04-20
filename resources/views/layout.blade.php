@@ -65,6 +65,8 @@
 <script defer src="{{ mix('/js/top-slider.js') }}"></script>
 <script defer src="{{ mix('/js/search.js') }}"></script>
 <script defer src="{{ mix('/js/product-grid.js') }}"></script>
+<script defer src="{{ mix('/js/filters.js') }}"></script>
+<script defer src="{{ mix('/js/selected-filters.js') }}"></script>
 
 @include('modals.loader')
 </body>

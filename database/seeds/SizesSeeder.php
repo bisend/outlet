@@ -12,20 +12,20 @@ class SizesSeeder extends Seeder
      */
     public function run()
     {
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            Size::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Size::truncate();
+        DB::beginTransaction();
 
-            for ($i = 10; $i <= 50; ($i += 0.5))
-            {
-                $size = new Size();
-                $size->name_ru = str_replace(".", ",", "$i");
-                $size->name_uk = str_replace(".", ",", "$i");
-                $size->slug = str_replace(".", "-", "$i");
-                $size->save();
-            }
+        for ($i = 10; $i <= 50; ($i += 0.5))
+        {
+            $size = new Size();
+            $size->name_ru = str_replace(".", ",", "$i");
+            $size->name_uk = str_replace(".", ",", "$i");
+            $size->slug = str_replace(".", "-", "$i");
+            $size->save();
+        }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

@@ -25,7 +25,7 @@
                     <a href="javascript:void(0);" class="open-nav btn" data-menu-open-link-right>Фільтри</a>
                 </div>
 
-                <div class="col-md-12 col-lg-3 filters-mobile" id="filters-mobile">
+                <div class="col-md-12 col-lg-3 filters-mobile" id="selected-filters-mobile">
                     <div class="left-navbar">
                         <div class="filters">
                             <div class="mobile-folters-header">
@@ -198,7 +198,7 @@
                                 @if($isPrev)
                                     <li class="page-item">
                                         <a class="page-link previous"
-                                           href="{{ url_category_per_page($model->currentCategory->slug . ($model->sort == 'default' ? '' : '/' . $model->sort), $model->page - 1, $model->language) }}"
+                                           href="{{ url_category_filters_per_page($model->currentCategory->slug, $model->filtersParam . ($model->sort == 'default' ? '' : '/' . $model->sort), $model->page - 1, $model->language) }}"
                                            aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                             <span class="sr-only">Previous</span>
@@ -232,7 +232,7 @@
                                             </li>
                                         @else
                                             <li class="page-item">
-                                                <a href="{{ url_category_per_page($model->currentCategory->slug  . ($model->sort == 'default' ? '' : '/' . $model->sort), $page, $model->language) }}"
+                                                <a href="{{ url_category_filters_per_page($model->currentCategory->slug, $model->filtersParam . ($model->sort == 'default' ? '' : '/' . $model->sort), $page, $model->language) }}"
                                                    class="page-link">
                                                     {{ $page }}
                                                 </a>
@@ -247,7 +247,7 @@
                                 @if($isNext)
                                     <li class="page-item">
                                         <a class="page-link next"
-                                           href="{{ url_category_per_page($model->currentCategory->slug  . ($model->sort == 'default' ? '' : '/' . $model->sort), $model->page + 1, $model->language) }}"
+                                           href="{{ url_category_filters_per_page($model->currentCategory->slug, $model->filtersParam . ($model->sort == 'default' ? '' : '/' . $model->sort), $model->page + 1, $model->language) }}"
                                            aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                             <span class="sr-only">Next</span>

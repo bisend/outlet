@@ -12,9 +12,9 @@ class MainSliderSeeder extends Seeder
      */
     public function run()
     {
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            MainSlider::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        MainSlider::truncate();
+        DB::beginTransaction();
 
             $slide = new MainSlider();
             $slide->image = '/img/main-slider/img-1.jpg';
@@ -52,8 +52,8 @@ class MainSliderSeeder extends Seeder
             $slide->btn_text_uk = 'Переглянути';
             $slide->save();
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

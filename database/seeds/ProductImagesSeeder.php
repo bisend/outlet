@@ -13,9 +13,9 @@ class ProductImagesSeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            ProductImage::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        ProductImage::truncate();
+        DB::beginTransaction();
 
             for ($i = 1; $i <= 360; $i++)
             {
@@ -28,8 +28,8 @@ class ProductImagesSeeder extends Seeder
                 }
             }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }

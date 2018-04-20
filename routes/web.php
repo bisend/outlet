@@ -21,9 +21,9 @@ Route::get('/product/{slug}/{language?}', 'ProductController@index')->where([
     'language' => '^(uk|ru)?$'
 ])->name('product');
 
-Route::get('/category', function () {
-    return view('pages.category');
-})->name('category');
+//Route::get('/category', function () {
+//    return view('pages.category');
+//})->name('category');
 
 Route::get('/order', function () {
     return view('pages.order');
@@ -124,7 +124,77 @@ Route::group(['prefix' => 'sale'], function () {
 });
 
 
+/**
+ * Category page
+ */
+Route::group(['prefix' => 'category'], function ()
+{
+    /**
+     * Category
+     */
+    Route::get('/{slug}/{language?}', 'CategoryController@index')
+        ->where([
+            'slug' => '^[a-z0-9-]+$',
+            'language' => '^(uk|ru)?$'
+        ]);
 
+    Route::get('/{slug}/{page}/{language?}', 'CategoryController@indexPagination')
+        ->where([
+            'slug' => '^[a-z0-9-]+$',
+            'page' => '^[2-9]{1}|[1-9]{1}[0-9]+$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::get('/{slug}/{sort}/{language?}', 'CategoryController@indexSort')
+        ->where([
+            'slug' => '^[a-z0-9-]+$',
+            'sort' => '^(popularity|new|price-asc|price-desc)$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::get('/{slug}/{sort}/{page}/{language?}', 'CategoryController@indexPaginationSort')
+        ->where([
+            'slug' => '^[a-z0-9-]+$',
+            'sort' => '^(popularity|new|price-asc|price-desc)$',
+            'page' => '^[2-9]{1}|[1-9]{1}[0-9]+$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    /**
+     * Category Filters
+     */
+    Route::get('/{slug}/{filters}/{language?}', 'CategoryFiltersController@index')
+        ->where([
+            'slug' => '^[a-z0-9-]+$',
+            'filters' => '^[a-z0-9=,;-]+$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::get('/{slug}/{filters}/{page}/{language?}', 'CategoryFiltersController@indexPagination')
+        ->where([
+            'slug' => '^[a-z0-9-]+$',
+            'filters' => '^[a-z0-9=,;-]+$',
+            'page' => '^[2-9]{1}|[1-9]{1}[0-9]+$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::get('/{slug}/{filters}/{sort}/{language?}', 'CategoryFiltersController@indexSort')
+        ->where([
+            'slug' => '^[a-z0-9-]+$',
+            'filters' => '^[a-z0-9=,;-]+$',
+            'sort' => '^(popularity|new|price-asc|price-desc)$',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::get('/{slug}/{filters}/{sort}/{page}/{language?}', 'CategoryFiltersController@indexPaginationSort')
+        ->where([
+            'slug' => '^[a-z0-9-]+$',
+            'filters' => '^[a-z0-9=,;-]+$',
+            'sort' => '^(popularity|new|price-asc|price-desc)$',
+            'page' => '^[2-9]{1}|[1-9]{1}[0-9]+$',
+            'language' => '^(uk|ru)?$'
+        ]);
+});
 
 
 /**

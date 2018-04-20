@@ -15,9 +15,9 @@ class ProductCategorySeeder extends Seeder
     public function run()
     {
 
-            DB::beginTransaction();
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            ProductCategory::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        ProductCategory::truncate();
+        DB::beginTransaction();
 
             $products = Product::all();
 
@@ -48,8 +48,8 @@ class ProductCategorySeeder extends Seeder
                 }
             }
 
-            DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            DB::commit();
+        DB::commit();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
     }
 }
