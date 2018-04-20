@@ -79,15 +79,8 @@ if (document.getElementById('new-slider'))
                             GD.cart.totalCount = data.totalCount;
                             GD.cart.totalAmount = data.totalAmount;
 
-                            // let LOADED = true;
-                            // $('#similar-preview').modal('hide');
-                            // $('#similar-preview').on('hidden.bs.modal', function () {
-                            //     if (LOADED) {
-                            //         $('#big-cart').modal();
-                            //         // $('body').addClass('modal-open').css('padding-right', '17px');
-                            //         LOADED = false;
-                            //     }
-                            // });
+
+                            $('#big-cart').modal();
 
 
                         },
@@ -99,16 +92,9 @@ if (document.getElementById('new-slider'))
                     });
                 }
                 else {
-                    // let LOADED = true;
-                    // $('#similar-preview').modal('hide');
-                    // $('#similar-preview').on('hidden.bs.modal', function () {
-                    //     if (LOADED) {
-                    //         $('#big-cart').modal();
-                    //         LOADED = false;
-                    //     }
-                    // });
 
-                    console.log('already in cart');
+                    $('#big-cart').modal();
+
                 }
             },
             //changing current sizeId in preview

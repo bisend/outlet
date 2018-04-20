@@ -158,7 +158,7 @@ if (document.getElementById('single-product-info-container'))
                             GD.cart.totalCount = data.totalCount;
                             GD.cart.totalAmount = data.totalAmount;
 
-                            // $('#big-cart').modal();
+                            $('#big-cart').modal();
                         },
                         error: function (error) {
                             GD.LOADING = false;
@@ -168,8 +168,8 @@ if (document.getElementById('single-product-info-container'))
                     });
                 }
                 else {
-                    // $('#big-cart').modal();
-                    console.log('already in cart');
+                    $('#big-cart').modal();
+                    // console.log('already in cart');
                 }
             },
             //method handles updating cart, change count

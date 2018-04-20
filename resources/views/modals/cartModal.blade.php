@@ -1,4 +1,4 @@
-<div class="modal fade default-modal cartModal" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal" aria-hidden="true">
+<div class="modal fade default-modal cartModal" id="big-cart" tabindex="-1" role="dialog" aria-labelledby="big-cart" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,50 +8,82 @@
                 </button>
             </div>
             <div class="modal-body">
-                @for($i = 0; $i < 3; $i++)
-                    <div class="cart-item">
+
+                    <div v-for="cartItem in cart.cartItems" class="cart-item">
                         <div class="img_info">
                             <div class="img">
-                                <div class="label new">New</div>
-                                <a href=""><img src="/image/products/item-2.jpg" alt=""></a>
+
+                                <div v-if="cartItem.product.promotions != null && cartItem.product.promotions.length > 0 && cartItem.product.promotions[0].priority == 3"
+                                     class="label sale">
+                                    <span> Sale </span>
+                                </div>
+                                <div v-if="cartItem.product.promotions != null && cartItem.product.promotions.length > 0 && cartItem.product.promotions[0].priority == 1"
+                                     class="label new">
+                                    <span> New </span>
+                                </div>
+                                <div v-if="cartItem.product.promotions != null && cartItem.product.promotions.length > 0 && cartItem.product.promotions[0].priority == 2"
+                                     class="label top">
+                                    <span> Top </span>
+                                </div>
+
+                                <a :href="'/product/' + cartItem.product.slug + '/{{ $model->language == 'ru' ? '' : $model->language }}'">
+                                    <img :src="cartItem.product.images[0].small" :alt="cartItem.product.name">
+                                </a>
                             </div>
                             <div class="info">
                                 <div class="prod_title">
-                                    <a href="">Reabook Classic</a>
+                                    <a :href="'/product/' + cartItem.product.slug + '/{{ $model->language == 'ru' ? '' : $model->language }}'">
+                                        @{{ cartItem.product.name }}
+                                    </a>
                                 </div>
                                 <div class="prod-price">
-                                    <span class="old-price"> 2000 грн </span>
-                                    <span> 1800 грн </span>
+                                    <span v-if="cartItem.old_price" class="old-price">
+                                        @{{ cartItem.product.old_price }} грн
+                                    </span>
+                                    <span> @{{ cartItem.product.price }} грн </span>
                                 </div>
                             </div>
                         </div>
                         <div class="prod_count">
                             <div class="quantity">
-                                <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
-                                <input type="text" name="quantity" title="Количество" class="qty" value="1">
-                                <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
+                                <button @click="decrement(cartItem.productId, cartItem.sizeId)"
+                                        class="quantity-btn minus">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+
+                                <input type="text"
+                                       v-model.number="cartItem.count"
+                                       @change="toInteger(cartItem.productId, cartItem.sizeId, cartItem.count)"
+                                       name="quantity" title="Количество" class="qty">
+
+                                <button @click="increment(cartItem.productId, cartItem.sizeId)"
+                                        class="quantity-btn plus">
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
                         </div>
                         <div class="prod_total-price">
-                            <span>3000 грн</span>
+                            <span>@{{ (cartItem.product.price * cartItem.count).toFixed(2) }} грн</span>
                         </div>
                         <div class="delete_prod">
-                            <a href=""><i class="far fa-trash-alt"></i></a>
+                            <a href="#" @click.prevent="deleteFromCart(cartItem.productId, cartItem.sizeId)">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
                         </div>
                     </div>
-                @endfor
+
                 <div class="cart-footer">
                     <div class="total_count_price">
                         <div class="cart_total-count">
-                            Всього товарів: <span>3</span>
+                            Всього товарів: <span>@{{ cart.totalCount }}</span>
                         </div>
                         <div class="cart_total-price">
-                            Сумма: <span>4000 грн</span>
+                            Сумма: <span>@{{ cart.totalAmount.toFixed(2) }} грн</span>
                         </div>
                     </div>
                     <div class="cart_btn">
                         <a href="" class="btn">Оформити замовлення</a>
-                        <a href="" class="btn">Продовжити покупки</a>
+                        <a href="#" class="btn" data-dismiss="modal" aria-label="Close">Продовжити покупки</a>
                     </div>
                 </div>
             </div>

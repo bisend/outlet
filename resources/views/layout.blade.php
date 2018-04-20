@@ -59,6 +59,7 @@
 <script defer src="{{ mix('/js/product.js') }}"></script>
 <script defer src="{{ mix('/js/similar-products.js') }}"></script>
 <script defer src="{{ mix('/js/small-cart.js') }}"></script>
+<script defer src="{{ mix('/js/big-cart.js') }}"></script>
 <script defer src="{{ mix('/js/new-slider.js') }}"></script>
 <script defer src="{{ mix('/js/sales-slider.js') }}"></script>
 <script defer src="{{ mix('/js/top-slider.js') }}"></script>

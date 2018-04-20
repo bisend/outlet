@@ -212,7 +212,20 @@
                             <div v-cloak v-if="countSearchProducts > 0 && series != '' && showResult" class="search-result">
                                 <div v-for="searchProduct in searchProducts" class="result-item">
                                     <div class="product-img">
-                                        <div class="label sale">Sale</div>
+
+                                        <div v-if="searchProduct.promotions != null && searchProduct.promotions.length > 0 && searchProduct.promotions[0].priority == 3"
+                                             class="label sale">
+                                            <span> Sale </span>
+                                        </div>
+                                        <div v-if="searchProduct.promotions != null && searchProduct.promotions.length > 0 && searchProduct.promotions[0].priority == 1"
+                                             class="label new">
+                                            <span> New </span>
+                                        </div>
+                                        <div v-if="searchProduct.promotions != null && searchProduct.promotions.length > 0 && searchProduct.promotions[0].priority == 2"
+                                             class="label top">
+                                            <span> Top </span>
+                                        </div>
+
                                         <a :href="'/product/' + searchProduct.slug + '/{{ $model->language == 'ru' ? '' : $model->language }}'" class="result-item-link">
                                             <img :src="searchProduct.images[0].small" :alt="searchProduct.name">
                                         </a>
@@ -303,7 +316,7 @@
                                     </div>
                                     <div class="smoll-cart-footer-btn">
                                         <a href="#" class="btn">{{ trans('header.to_order') }}</a>
-                                        <a href="#" class="btn">{{ trans('header.open_cart') }}</a>
+                                        <a href="#" data-toggle="modal" data-target="#big-cart" class="btn">{{ trans('header.open_cart') }}</a>
                                     </div>
                                 </div>
                             </div>

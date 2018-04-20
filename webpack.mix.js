@@ -24,6 +24,8 @@ mix.js('resources/assets/js/product/similar-products.js', 'public/js').version()
 
 mix.js('resources/assets/js/cart/small-cart.js', 'public/js').version();
 
+mix.js('resources/assets/js/cart/big-cart.js', 'public/js').version();
+
 mix.js('resources/assets/js/home/new-slider.js', 'public/js').version();
 
 mix.js('resources/assets/js/home/sales-slider.js', 'public/js').version();

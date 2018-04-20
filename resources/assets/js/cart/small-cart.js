@@ -31,10 +31,10 @@ if (document.getElementById('small-cart'))
                         GD.cart.totalCount = data.totalCount;
                         GD.cart.totalAmount = data.totalAmount;
 
-                        // if (GD.cart.cartItems.length < 1)
-                        // {
-                        //     $('#big-cart').modal('hide');
-                        // }
+                        if (GD.cart.cartItems.length < 1)
+                        {
+                            $('#big-cart').modal('hide');
+                        }
                     },
                     error: function (error) {
                         GD.IS_DATA_PROCESSING = false;

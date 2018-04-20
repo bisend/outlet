@@ -13,7 +13,7 @@
                         <div class="img_info">
                             <div class="img">
                                 <div class="label new">New</div>
-                                <a href=""><img src="/image/products/item-2.jpg" alt=""></a>
+                                {{--<a href=""><img src="/image/products/item-2.jpg" alt=""></a>--}}
                             </div>
                             <div class="info">
                                 <div class="prod_title">
