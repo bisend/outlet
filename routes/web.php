@@ -25,31 +25,31 @@ Route::get('/product/{slug}/{language?}', 'ProductController@index')->where([
 //    return view('pages.category');
 //})->name('category');
 
-Route::get('/order', function () {
-    return view('pages.order');
-})->name('order');
-
-Route::get('/payment', function () {
-    return view('pages.payment');
-})->name('payment');
-
-Route::get('/error', function () {
-    return view('pages.error');
-})->name('error');
+//Route::get('/order', function () {
+//    return view('pages.order');
+//})->name('order');
+//
+//Route::get('/payment', function () {
+//    return view('pages.payment');
+//})->name('payment');
+//
+//Route::get('/error', function () {
+//    return view('pages.error');
+//})->name('error');
 
 
 //PROFILE
-Route::get('/profile/personal-info', function () {
-    return view('profile.personal-info');
-})->name('personal-info');
-
-Route::get('/profile/wishlist', function () {
-    return view('profile.wishlist');
-})->name('wishlist');
-
-Route::get('/profile/my-orders', function () {
-    return view('profile.my-orders');
-})->name('my-orders');
+//Route::get('/profile/personal-info', function () {
+//    return view('profile.personal-info');
+//})->name('personal-info');
+//
+//Route::get('/profile/wishlist', function () {
+//    return view('profile.wishlist');
+//})->name('wishlist');
+//
+//Route::get('/profile/my-orders', function () {
+//    return view('profile.my-orders');
+//})->name('my-orders');
 
 
 Route::group(['prefix' => 'search'], function () {
@@ -127,8 +127,7 @@ Route::group(['prefix' => 'sale'], function () {
 /**
  * Category page
  */
-Route::group(['prefix' => 'category'], function ()
-{
+Route::group(['prefix' => 'category'], function () {
     /**
      * Category
      */
@@ -203,8 +202,7 @@ Route::group(['prefix' => 'category'], function ()
 Route::post('/get-reviews', 'ProductController@get_reviews');
 Route::post('/add-review', 'ProductController@add_review');
 
-Route::group(['prefix' => 'cart'], function ()
-{
+Route::group(['prefix' => 'cart'], function () {
     Route::post('/init-cart', 'CartController@initCart');
     Route::post('/add-to-cart', 'CartController@addToCart');
     Route::post('/update-cart', 'CartController@updateCart');
@@ -215,9 +213,9 @@ Route::group(['prefix' => 'cart'], function ()
 /**
  * dev commands
  */
-Route::get('/clear-compiled', function () {
-    Artisan::call('clear-compiled');
-    Artisan::call('config:clear');
-    Artisan::call('config:cache');
-    return redirect()->route('home');
-});
+//Route::get('/clear-compiled', function () {
+//    Artisan::call('clear-compiled');
+//    Artisan::call('config:clear');
+//    Artisan::call('config:cache');
+//    return redirect()->route('home');
+//});

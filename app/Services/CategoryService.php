@@ -12,6 +12,7 @@ use App\Helpers\Paginator;
 use App\Repositories\CategoryRepository;
 use App\Repositories\FilterRepository;
 use App\Repositories\ProductRepository;
+
 /**
  * Class CategoryService
  * @package App\Services

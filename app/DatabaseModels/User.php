@@ -2,8 +2,8 @@
 
 namespace App\DatabaseModels;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * App\DatabaseModels\User
