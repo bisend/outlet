@@ -14,6 +14,11 @@ class CreateProductsPromotionsTable extends Migration
     public function up()
     {
         Schema::create('products_promotions', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+            // ---------------------------------------------------------------------------------------------------------
+
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->integer('promotion_id')->unsigned();

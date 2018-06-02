@@ -14,6 +14,11 @@ class CreateMainSliderTable extends Migration
     public function up()
     {
         Schema::create('main_slider', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+            // ---------------------------------------------------------------------------------------------------------
+
             $table->increments('id');
             $table->string('image')->unique();
             $table->string('url_ru')->nullable();

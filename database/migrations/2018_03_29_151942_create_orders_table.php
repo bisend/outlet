@@ -14,6 +14,11 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+            // ---------------------------------------------------------------------------------------------------------
+
             $table->increments('id');
             $table->integer('user_id')->nullable()->unsigned();
             $table->integer('payment_id')->unsigned();

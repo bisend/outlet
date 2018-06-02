@@ -14,6 +14,11 @@ class CreateMetaTagsTable extends Migration
     public function up()
     {
         Schema::create('meta_tags', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+            // ---------------------------------------------------------------------------------------------------------
+
             $table->increments('id');
             $table->string('page_name');
             $table->string('meta_title_ru');

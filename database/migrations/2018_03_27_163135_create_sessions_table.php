@@ -14,6 +14,11 @@ class CreateSessionsTable extends Migration
     public function up()
     {
         Schema::create('sessions', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+            // ---------------------------------------------------------------------------------------------------------
+
             $table->string('id')->unique();
             $table->unsignedInteger('user_id')->nullable();
             $table->string('ip_address', 45)->nullable();
