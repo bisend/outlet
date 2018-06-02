@@ -1,8 +1,6 @@
 <?php
 
-use App\DatabaseModels\Product;
 use App\DatabaseModels\ProductSize;
-use App\DatabaseModels\Size;
 use Illuminate\Database\Seeder;
 
 class ProductSizesSeeder extends Seeder
