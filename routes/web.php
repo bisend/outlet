@@ -291,9 +291,9 @@ Route::group(['prefix' => 'artisan'], function () {
 Route::group(['prefix' => 'auth'], function () {
     Route::post('register', 'Auth\RegisterController@register');
 
-    Route::get('login', 'Auth\LoginController@login');
+    Route::post('login', 'Auth\LoginController@login');
 
-    Route::get('logout', 'Auth\LoginController@logout');
+    Route::get('logout', 'Auth\LoginController@logout')->name('auth-logout');
 
     Route::get('login/facebook/{language?}', 'Auth\FacebookLoginController@redirectToProvider')
         ->where([

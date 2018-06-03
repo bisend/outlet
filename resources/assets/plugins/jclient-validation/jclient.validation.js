@@ -34,7 +34,7 @@ window.RegularExpressions = {
 //}
 function RegExValidatingInput(input, options) {
 	// The context of this object
-	let context = this;
+	var context = this;
 
 	// Input for validation
 	this.input = input;
@@ -100,7 +100,7 @@ function RegExValidatingInput(input, options) {
 	// General validation function
 	this.Validate = function () {
 		// Gets value of input
-		let value = context.input.val();
+		var value = context.input.val();
 
 		if (context.options.required) {
 			if (context.IsValueCorrect(value, context.options.expression)) {
@@ -124,7 +124,7 @@ function RegExValidatingInput(input, options) {
 	// Idle validation function ( without callbacks )
 	this.IdleValidate = function () {
 		// Gets value of input
-		let value = context.input.val();
+		var value = context.input.val();
 
 		if (context.options.required) {
 			if (context.IsValueCorrect(value, context.options.expression)) {
@@ -261,7 +261,7 @@ function RegExValidatingInput(input, options) {
 //}
 function EqualValidatingInput(input, options) {
 	// The context of this object
-	let context = this;
+	var context = this;
 
 	// Input for validation
 	this.input = input;
@@ -323,7 +323,7 @@ function EqualValidatingInput(input, options) {
 	// General validation function
 	this.Validate = function () {
 		// Gets value of input
-		let value = context.input.val();
+		var value = context.input.val();
 
 		if (context.options.required) {
 			if (context.options.compareValue == value) {

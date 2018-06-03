@@ -50,5 +50,6 @@ mix.js('resources/assets/js/filters/selected-filters.js', 'public/js').version()
 mix.scripts([
     'resources/assets/plugins/jclient-validation/jclient.validation.js',
     'resources/assets/plugins/waitsync/waitsync.min.js',
+    'resources/assets/plugins/md5/md5.js',
     'resources/assets/js/layout.js',
-], 'public/js/all.js');
+], 'public/js/all.js').version();

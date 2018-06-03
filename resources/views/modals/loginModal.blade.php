@@ -1,3 +1,5 @@
+@if(false)<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">@endif
+
 <div class="modal fade default-modal loginModal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -8,25 +10,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form>
                     <div class="input-group-default">
                         <label>Електрона адреса :</label>
-                        <input type="text" class="input-default" placeholder="Електрона адреса">
+                        <input type="text" class="input-default" placeholder="Електрона адреса"
+                               data-login-email
+                               v-model="email">
                     </div>
                     <div class="input-group-default">
                         <label>Пароль :</label>
-                        <input type="password" class="input-default" placeholder="Пароль">
+                        <input type="password" class="input-default" placeholder="Пароль"
+                               data-login-password
+                               v-model="password">
                     </div>
                     <div class="input-group-default">
                         <div class="add-prod-check">
-                            <input type="checkbox" id="saveLogin" name="check" value="">
+                            <input type="checkbox" id="saveLogin" name="check"
+                                   v-model="rememberMe">
                             <label for="saveLogin">
                                 <span></span>Запам'ятати мене?
                             </label>
                         </div>
                     </div>
                     <div class="input-group-default">
-                       <button type="submit" class="btn">Увійти</button>
+                       <button type="submit" class="btn"
+                               v-on:click.prevent="validateBeforeSubmit()">Увійти</button>
                     </div>
                 </form>
                 <div class="other-info">

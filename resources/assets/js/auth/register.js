@@ -116,31 +116,31 @@ if (document.getElementById('registrModal')) {
             },
             registerUser: function () {
                 let _this = this;
-                
-                showLoader();
+
+                GD.IS_DATA_PROCESSING = true;
+                GD.LOADING = true;
                 
                 $.ajax({
                     type: 'post',
-                    url: '/user/register',
+                    url: '/auth/register',
                     data: {
                         name: _this.name,
                         email: _this.email,
-                        password: _this.password,
+                        password: md5(_this.password),
                         language: GD.LANGUAGE
                     },
                     success: function (data) {
-                        hideLoader();
-
                         let LOADED = true;
 
-                        $('#register-popup').modal('hide');
+                        $('#registrModal').modal('hide');
 
                         if (data.status == 'success')
                         {
-                            $('#register-popup').on('hidden.bs.modal', function () {
+                            $('#registrModal').on('hidden.bs.modal', function () {
                                 if (LOADED)
                                 {
-                                    showPopup(REGISTER_SUCCESS);
+                                    //showPopup(REGISTER_SUCCESS);
+
                                     LOADED = false;
                                 }
                             });
@@ -150,10 +150,10 @@ if (document.getElementById('registrModal')) {
                         {
                             if (data.failed == 'email')
                             {
-                                $('#register-popup').on('hidden.bs.modal', function () {
+                                $('#registrModal').on('hidden.bs.modal', function () {
                                     if (LOADED)
                                     {
-                                        showPopup(EMAIL_NOT_VALID);
+                                        //showPopup(EMAIL_NOT_VALID);
                                         LOADED = false;
                                     }
                                 });
@@ -161,19 +161,22 @@ if (document.getElementById('registrModal')) {
 
                             if (data.failed == 'server')
                             {
-                                $('#register-popup').on('hidden.bs.modal', function () {
+                                $('#registrModal').on('hidden.bs.modal', function () {
                                     if (LOADED)
                                     {
-                                        showPopup(SERVER_ERROR);
+                                        //showPopup(SERVER_ERROR);
                                         LOADED = false;
                                     }
                                 });
                             }
                         }
+
+                        GD.IS_DATA_PROCESSING = false;
+                        GD.LOADING = false;
+
+                        console.log(data);
                     },
                     error: function (error) {
-                        hideLoader();
-
                         $('#register-popup').modal('hide');
 
                         let LOADED = true;
@@ -181,12 +184,15 @@ if (document.getElementById('registrModal')) {
                         $('#register-popup').on('hidden.bs.modal', function () {
                             if (LOADED)
                             {
-                                showPopup(SERVER_ERROR);
+                                //showPopup(SERVER_ERROR);
                                 LOADED = false;
                             }
                         });
 
                         console.log(error);
+
+                        GD.IS_DATA_PROCESSING = false;
+                        GD.LOADING = false;
                     }
                 });
 

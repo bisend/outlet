@@ -61,9 +61,7 @@ class RegisterController extends LayoutController
             $confirmationUrl = url_confirmation($confirmationToken, $language);
 
             Mail::to($user)->send(new EmailConfirm($user, $confirmationUrl, $language));
-        }
-        catch (Exception $e) {
-
+        } catch (Exception $e) {
             DB::rollBack();
 
             return response()->json([
@@ -73,6 +71,8 @@ class RegisterController extends LayoutController
         }
 
         DB::commit();
+
+        $this->storeNotificationMessage('Дякуємо за реєстрацію!');
 
         return response()->json([
             'status' => 'success'

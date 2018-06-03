@@ -21,7 +21,9 @@ class EmailConfirm extends Mailable
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param User $user
+     * @param null $confirmationUrl
+     * @param string $language
      */
     public function __construct(User $user, $confirmationUrl = null, $language = Languages::DEFAULT_LANGUAGE)
     {

@@ -40,9 +40,12 @@
                             </li>
                         @endif
 
-                        @if(auth()->check())
+                        @if(Auth::check())
                             <li>
-                                <a href="#">John Doe</a>
+                                <a href="#">{{ Auth::user()->first_name }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('auth-logout') }}">{{ trans('header.logout') }}</a>
                             </li>
                         @else
                             <li>

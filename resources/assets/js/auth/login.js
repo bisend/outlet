@@ -6,7 +6,8 @@ if (document.getElementById('loginModal')) {
         el: '#loginModal',
         data: {
             email: '',
-            password: ''
+            password: '',
+            rememberMe: false
         },
         mounted: function () {
             let _this = this;
@@ -64,19 +65,19 @@ if (document.getElementById('loginModal')) {
             loginUser: function () {
                 let _this = this;
 
-                showLoader();
+                GD.IS_DATA_PROCESSING = true;
+                GD.LOADING = true;
 
                 $.ajax({
-                    type: 'get',
-                    url: '/user/login',
+                    type: 'post',
+                    url: '/auth/login',
                     data: {
                         email: _this.email,
-                        password: _this.password,
+                        password: md5(_this.password),
+                        remember: _this.rememberMe,
                         language: GD.LANGUAGE
                     },
                     success: function (data) {
-                        hideLoader();
-
                         let LOADED = true;
 
                         if (data.status == 'success')
@@ -93,7 +94,7 @@ if (document.getElementById('loginModal')) {
                                 $('#login-popup').on('hidden.bs.modal', function () {
                                     if (LOADED)
                                     {
-                                        showPopup(EMAIL_NOT_EXISTS);
+                                        //showPopup(EMAIL_NOT_EXISTS);
                                         LOADED = false;
                                     }
                                 });
@@ -106,7 +107,7 @@ if (document.getElementById('loginModal')) {
                                 $('#login-popup').on('hidden.bs.modal', function () {
                                     if (LOADED)
                                     {
-                                        showPopup(EMAIL_CONFIRM_NOT_VALID);
+                                        //showPopup(EMAIL_CONFIRM_NOT_VALID);
                                         LOADED = false;
                                     }
                                 });
@@ -117,10 +118,11 @@ if (document.getElementById('loginModal')) {
                                 $('[data-login-password]').val('').addClass(GD.INCORRECT_FIELD_CLASS).attr("placeholder", GD.INCORRECT_FIELD_TEXT);
                             }
                         }
+
+                        GD.IS_DATA_PROCESSING = false;
+                        GD.LOADING = false;
                     },
                     error: function (error) {
-                        hideLoader();
-
                         $('#login-popup').modal('hide');
 
                         let LOADED = true;
@@ -128,12 +130,15 @@ if (document.getElementById('loginModal')) {
                         $('#login-popup').on('hidden.bs.modal', function () {
                             if (LOADED)
                             {
-                                showPopup(SERVER_ERROR);
+                                //showPopup(SERVER_ERROR);
                                 LOADED = false;
                             }
                         });
 
                         console.log(error);
+
+                        GD.IS_DATA_PROCESSING = false;
+                        GD.LOADING = false;
                     }
                 });
 

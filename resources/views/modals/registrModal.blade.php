@@ -1,3 +1,5 @@
+@if(false)<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">@endif
+
 <div class="modal fade default-modal registrModal" id="registrModal" tabindex="-1" role="dialog" aria-labelledby="registrModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -11,22 +13,31 @@
                 <form action="">
                     <div class="input-group-default">
                         <label>Ім'я :</label>
-                        <input type="text" class="input-default" placeholder="Ім'я">
+                        <input type="text" class="input-default" placeholder="Ім'я"
+                               data-register-name
+                               v-model="name">
                     </div>
                     <div class="input-group-default">
                         <label>Електрона адреса :</label>
-                        <input type="text" class="input-default" placeholder="Електрона адреса">
+                        <input type="text" class="input-default" placeholder="Електрона адреса"
+                               data-register-email
+                               v-model="email">
                     </div>
                     <div class="input-group-default">
                         <label>Пароль :</label>
-                        <input type="password" class="input-default" placeholder="Пароль">
+                        <input type="password" class="input-default" placeholder="Пароль"
+                               data-register-password
+                               v-model="password">
                     </div>
                     <div class="input-group-default">
                         <label>Повторіть пароль :</label>
-                        <input type="password" class="input-default" placeholder="Повторіть пароль">
+                        <input type="password" class="input-default" placeholder="Повторіть пароль"
+                               data-register-confirm
+                               v-model="confirmPassword">
                     </div>
                     <div class="input-group-default">
-                       <button type="submit" class="btn">Зареєструватися</button>
+                       <button type="submit" class="btn"
+                               v-on:click.prevent="validateBeforeSubmit()">Зареєструватися</button>
                     </div>
                 </form>
             </div>
