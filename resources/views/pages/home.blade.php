@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="show-all-products">
-                    <a href="">{{ trans('home.see_all') }}</a>
+                    <a href="{{ url_novelty($model->language) }}">{{ trans('home.see_all') }}</a>
                 </div>
             </div>
         </div>
@@ -318,7 +318,7 @@
                 </div>
             </div>
             <div class="show-all-products">
-                <a href="">{{ trans('home.see_all') }}</a>
+                <a href="{{ url_top_sale($model->language) }}">{{ trans('home.see_all') }}</a>
             </div>
         </div>
     </div>

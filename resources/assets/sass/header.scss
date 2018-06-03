@@ -681,11 +681,37 @@ header{
           }
         }
       }
+      .nav-novelty-btn a{
+        color: #222222;
+        font-weight: 500;
+        &:hover{
+          color: #000;
+        }
+        &.current {
+          font-weight: 600;
+          border-bottom: 1px dotted #000;
+        }
+      }
       .nav-sale-btn a{
         color: #222222;
         font-weight: 500;
         &:hover{
           color: #000;
+        }
+        &.current {
+          font-weight: 600;
+          border-bottom: 1px dotted #000;
+        }
+      }
+      .nav-top-sale-btn a{
+        color: #222222;
+        font-weight: 500;
+        &:hover{
+          color: #000;
+        }
+        &.current {
+          font-weight: 600;
+          border-bottom: 1px dotted #000;
         }
       }
     }

@@ -3,7 +3,10 @@
 return [
     'login' => 'Вход',
     'register' => 'Регистрация',
+    'novelty' => 'Новинки',
     'sale' => 'Распродажа',
+    'top-sale-short' => 'Топ',
+    'top-sale' => 'Топ продаж',
     'search_all_results' => 'Все результаты',
     'sum' => 'Сумма',
     'to_order' => 'Оформить заказ',

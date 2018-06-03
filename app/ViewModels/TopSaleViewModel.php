@@ -4,7 +4,11 @@ namespace App\ViewModels;
 
 use App\Helpers\ProductsSort;
 
-class SaleViewModel extends LayoutViewModel
+/**
+ * Class TopSaleViewModel
+ * @package App\ViewModels
+ */
+class TopSaleViewModel extends LayoutViewModel
 {
     /**
      * @var string
@@ -42,6 +46,13 @@ class SaleViewModel extends LayoutViewModel
      */
     public $products;
 
+    /**
+     * TopSaleViewModel constructor.
+     * @param string $view
+     * @param string $language
+     * @param string $sort
+     * @param $page
+     */
     public function __construct(string $view, string $language, string $sort, $page)
     {
         parent::__construct($view, $language);

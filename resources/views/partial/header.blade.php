@@ -362,8 +362,14 @@
                         @endif
                     @endforeach
                 </ul>
+                <div class="nav-novelty-btn">
+                    <a href="{{ url_novelty($model->language) }}" class="{{ $model->view == 'novelty' ? 'current' : '' }}">{{ trans('header.novelty') }}</a>
+                </div>
                 <div class="nav-sale-btn">
-                    <a href="{{ url_sale($model->language) }}">{{ trans('header.sale') }}</a>
+                    <a href="{{ url_sale($model->language) }}" class="{{ $model->view == 'sale' ? 'current' : '' }}">{{ trans('header.sale') }}</a>
+                </div>
+                <div class="nav-top-sale-btn">
+                    <a href="{{ url_top_sale($model->language) }}" class="{{ $model->view == 'top-sale' ? 'current' : '' }}">{{ trans('header.top-sale-short') }}</a>
                 </div>
             </div>
         </div>

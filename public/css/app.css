@@ -11458,6 +11458,20 @@ header .category-nav .flex-container .category-list .show-dropdown-category:hove
   display: block;
 }
 
+header .category-nav .flex-container .nav-novelty-btn a {
+  color: #222222;
+  font-weight: 500;
+}
+
+header .category-nav .flex-container .nav-novelty-btn a:hover {
+  color: #000;
+}
+
+header .category-nav .flex-container .nav-novelty-btn a.current {
+  font-weight: 600;
+  border-bottom: 1px dotted #000;
+}
+
 header .category-nav .flex-container .nav-sale-btn a {
   color: #222222;
   font-weight: 500;
@@ -11465,6 +11479,25 @@ header .category-nav .flex-container .nav-sale-btn a {
 
 header .category-nav .flex-container .nav-sale-btn a:hover {
   color: #000;
+}
+
+header .category-nav .flex-container .nav-sale-btn a.current {
+  font-weight: 600;
+  border-bottom: 1px dotted #000;
+}
+
+header .category-nav .flex-container .nav-top-sale-btn a {
+  color: #222222;
+  font-weight: 500;
+}
+
+header .category-nav .flex-container .nav-top-sale-btn a:hover {
+  color: #000;
+}
+
+header .category-nav .flex-container .nav-top-sale-btn a.current {
+  font-weight: 600;
+  border-bottom: 1px dotted #000;
 }
 
 @media (max-width: 1200px) {

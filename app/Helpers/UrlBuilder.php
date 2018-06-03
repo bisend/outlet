@@ -58,11 +58,25 @@ class UrlBuilder
     const SEARCH_PAGE = 'search';
 
     /**
-     * Search page
+     * Novelty page
+     *
+     * @var string
+     */
+    const NOVELTY_PAGE = 'novelty';
+
+    /**
+     * Sale page
      *
      * @var string
      */
     const SALE_PAGE = 'sale';
+
+    /**
+     * Top sale page
+     *
+     * @var string
+     */
+    const TOP_SALE_PAGE = 'top-sale';
 
     /**
      * confirm page
@@ -76,6 +90,9 @@ class UrlBuilder
      */
     const NEW_EMAIL_CONFIRMATION_PAGE = 'confirm-new-email';
 
+    /**
+     * @var string
+     */
     const SOCIAL_EMAIL_CONFIRMATION_PAGE = 'confirm-social-email';
 
     /**
@@ -214,7 +231,6 @@ class UrlBuilder
     const ORDER_PAYMENT_CALLBACK = 'order/payment/callback';
 
     const ORDER_PAYMENT_ORDER = 'order/payment';
-
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -658,6 +674,41 @@ class UrlBuilder
         return self::localize($url, $language);
     }
 
+    public static function novelty($language = Languages::DEFAULT_LANGUAGE)
+    {
+        $url = self::concatParts([
+            url(self::URL_ROOT),
+            self::NOVELTY_PAGE
+        ]);
+
+        return self::localize($url, $language);
+    }
+
+    public static function noveltyPerPage($sort = 'default', $page = 1, $language = Languages::DEFAULT_LANGUAGE)
+    {
+        if ($sort == 'default')
+        {
+            $url = self::concatParts([
+                url(self::URL_ROOT),
+                self::NOVELTY_PAGE
+            ]);
+        }
+        else
+        {
+            $url = self::concatParts([
+                url(self::URL_ROOT),
+                self::NOVELTY_PAGE,
+                $sort
+            ]);
+        }
+
+        if ($page > 1) {
+            $url = self::concatParts([$url, $page]);
+        }
+
+        return self::localize($url, $language);
+    }
+
     public static function sale($language = Languages::DEFAULT_LANGUAGE)
     {
         $url = self::concatParts([
@@ -682,6 +733,41 @@ class UrlBuilder
             $url = self::concatParts([
                 url(self::URL_ROOT),
                 self::SALE_PAGE,
+                $sort
+            ]);
+        }
+
+        if ($page > 1) {
+            $url = self::concatParts([$url, $page]);
+        }
+
+        return self::localize($url, $language);
+    }
+
+    public static function topSale($language = Languages::DEFAULT_LANGUAGE)
+    {
+        $url = self::concatParts([
+            url(self::URL_ROOT),
+            self::TOP_SALE_PAGE
+        ]);
+
+        return self::localize($url, $language);
+    }
+
+    public static function topSalePerPage($sort = 'default', $page = 1, $language = Languages::DEFAULT_LANGUAGE)
+    {
+        if ($sort == 'default')
+        {
+            $url = self::concatParts([
+                url(self::URL_ROOT),
+                self::TOP_SALE_PAGE
+            ]);
+        }
+        else
+        {
+            $url = self::concatParts([
+                url(self::URL_ROOT),
+                self::TOP_SALE_PAGE,
                 $sort
             ]);
         }

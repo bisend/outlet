@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vlad_
- * Date: 12.04.2018
- * Time: 11:44
- */
 
 namespace App\Services;
-
 
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;

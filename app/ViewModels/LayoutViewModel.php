@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vlad_
- * Date: 30.03.2018
- * Time: 14:30
- */
 
 namespace App\ViewModels;
 
@@ -70,6 +64,22 @@ abstract class LayoutViewModel
     public $h1;
 
     /**
+     * @var string|null
+     */
+    public $metaLinkPrev;
+
+    /**
+     * @var string|null
+     */
+    public $metaLinkNext;
+
+    /**
+     * @var bool
+     */
+    public $setNoIndex;
+
+
+    /**
      * LayoutViewModel constructor.
      * @param $view
      * @param $language
@@ -78,5 +88,9 @@ abstract class LayoutViewModel
     {
         $this->view = $view;
         $this->language = $language;
+
+        $this->metaLinkPrev = null;
+        $this->metaLinkNext = null;
+        $this->setNoIndex = false;
     }
 }

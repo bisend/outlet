@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vlad_
- * Date: 16.04.2018
- * Time: 23:12
- */
 
 namespace App\ViewModels;
 

@@ -1,5 +1,4 @@
-﻿// JClientValidation library created by Mukola Shabarovskiy in 2014.
-// This library was created for inputs validation
+﻿// This library was created for inputs validation
 
 // Regular expressions for validated inputs
 // You can to add new item and use it in parameters

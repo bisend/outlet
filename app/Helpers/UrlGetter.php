@@ -3,7 +3,6 @@
 use App\Helpers\Languages;
 use App\Helpers\UrlBuilder;
 
-
 // ---------------------------------------------------------------------------------------------------------------------
 /**
  * url_home
@@ -406,6 +405,20 @@ if (!function_exists('url_search_per_page')) {
     }
 }
 
+if (!function_exists('url_novelty_per_page')) {
+    function url_novelty_per_page($sort = 'default', $page = 1, $language = Languages::DEFAULT_LANGUAGE)
+    {
+        return UrlBuilder::noveltyPerPage($sort, $page, $language);
+    }
+}
+
+if (!function_exists('url_novelty')) {
+    function url_novelty($language = Languages::DEFAULT_LANGUAGE)
+    {
+        return UrlBuilder::novelty($language);
+    }
+}
+
 if (!function_exists('url_sale_per_page')) {
     function url_sale_per_page($sort = 'default', $page = 1, $language = Languages::DEFAULT_LANGUAGE)
     {
@@ -417,6 +430,20 @@ if (!function_exists('url_sale')) {
     function url_sale($language = Languages::DEFAULT_LANGUAGE)
     {
         return UrlBuilder::sale($language);
+    }
+}
+
+if (!function_exists('url_top_sale_per_page')) {
+    function url_top_sale_per_page($sort = 'default', $page = 1, $language = Languages::DEFAULT_LANGUAGE)
+    {
+        return UrlBuilder::topSalePerPage($sort, $page, $language);
+    }
+}
+
+if (!function_exists('url_top_sale')) {
+    function url_top_sale($language = Languages::DEFAULT_LANGUAGE)
+    {
+        return UrlBuilder::topSale($language);
     }
 }
 

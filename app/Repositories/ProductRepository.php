@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vlad_
- * Date: 30.03.2018
- * Time: 15:55
- */
 
 namespace App\Repositories;
 
@@ -649,6 +643,108 @@ class ProductRepository
      * @param $model
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
      */
+    public function getAllNoveltyProducts($model)
+    {
+        $model->noveltyPromotion = Promotion::wherePriority(1)->first();
+
+        $orderByRaw = 'name';
+
+        if ($model->sort == 'popularity')
+        {
+            $orderByRaw = 'rating desc, name';
+        }
+        elseif ($model->sort == 'new')
+        {
+            $orderByRaw = 'created_at desc, name';
+        }
+        elseif ($model->sort == 'price-asc')
+        {
+            $orderByRaw = 'price asc, name';
+        }
+        elseif ($model->sort == 'price-desc')
+        {
+            $orderByRaw = 'price desc, name';
+        }
+
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->whereHas('promotions', function ($query) use ($model) {
+                $query->where('products_promotions.promotion_id', '=', $model->noveltyPromotion->id);
+            })
+            ->whereIsVisible(true)
+            ->orderByRaw($orderByRaw)
+            ->offset($model->offset)
+            ->limit($model->limit)
+            ->get([
+                'products.id',
+                'category_id',
+                'breadcrumb_category_id',
+                "name_$model->language as name",
+                "slug",
+                "is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$model->language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$model->language as meta_title",
+                "meta_description_$model->language as meta_description",
+                "meta_keywords_$model->language as meta_keywords",
+                "meta_h1_$model->language as meta_h1",
+            ]);
+    }
+
+    /**
+     * @param $model
+     * @return int
+     */
+    public function getCountAllNoveltyProducts($model)
+    {
+        $model->noveltyPromotion = Promotion::wherePriority(1)->first();
+
+        return Product::whereHas('promotions', function ($query) use ($model) {
+            $query->where('products_promotions.promotion_id', '=', $model->noveltyPromotion->id);
+        })->whereIsVisible(true)->count();
+    }
+
+    /**
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
     public function getAllSalesProducts($model)
     {
         $model->salesPromotion = Promotion::wherePriority(3)->first();
@@ -744,6 +840,108 @@ class ProductRepository
 
         return Product::whereHas('promotions', function ($query) use ($model) {
             $query->where('products_promotions.promotion_id', '=', $model->salesPromotion->id);
+        })->whereIsVisible(true)->count();
+    }
+
+    /**
+     * @param $model
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
+    public function getAllTopSaleProducts($model)
+    {
+        $model->topSalePromotion = Promotion::wherePriority(2)->first();
+
+        $orderByRaw = 'name';
+
+        if ($model->sort == 'popularity')
+        {
+            $orderByRaw = 'rating desc, name';
+        }
+        elseif ($model->sort == 'new')
+        {
+            $orderByRaw = 'created_at desc, name';
+        }
+        elseif ($model->sort == 'price-asc')
+        {
+            $orderByRaw = 'price asc, name';
+        }
+        elseif ($model->sort == 'price-desc')
+        {
+            $orderByRaw = 'price desc, name';
+        }
+
+        return Product::with([
+            'images',
+            'sizes' => function ($query) use ($model) {
+                $query->select([
+                    'sizes.id',
+                    "sizes.name_$model->language as name",
+                    'sizes.slug'
+                ]);
+            },
+            'promotions' => function ($query) {
+                $query->orderByRaw('promotions.priority desc');
+            },
+            'properties' => function ($query) use ($model) {
+                $query->select([
+                    'properties.id',
+                    'properties.product_id',
+                    'properties.property_name_id',
+                    'properties.property_value_id',
+                    'properties.priority',
+                    'property_names.id',
+                    'property_values.id',
+                    'property_names.slug',
+                    "property_names.name_$model->language as property_name",
+                    "property_values.name_$model->language as property_value",
+                ]);
+                $query->join('property_names', function ($join) {
+                    $join->on('properties.property_name_id', '=', 'property_names.id');
+                });
+                $query->join('property_values', function ($join) {
+                    $join->on('properties.property_value_id', '=', 'property_values.id');
+                });
+            }
+        ])
+            ->whereHas('promotions', function ($query) use ($model) {
+                $query->where('products_promotions.promotion_id', '=', $model->topSalePromotion->id);
+            })
+            ->whereIsVisible(true)
+            ->orderByRaw($orderByRaw)
+            ->offset($model->offset)
+            ->limit($model->limit)
+            ->get([
+                'products.id',
+                'category_id',
+                'breadcrumb_category_id',
+                "name_$model->language as name",
+                "slug",
+                "is_visible",
+                "in_stock",
+                "price",
+                "old_price",
+                "description_$model->language as description",
+                "products.priority",
+                "vendor_code",
+                "rating",
+                "number_of_views",
+                "meta_title_$model->language as meta_title",
+                "meta_description_$model->language as meta_description",
+                "meta_keywords_$model->language as meta_keywords",
+                "meta_h1_$model->language as meta_h1",
+            ]);
+    }
+
+    /**
+     * @param $model
+     * @return int
+     */
+    public function getCountAllTopSaleProducts($model)
+    {
+        $model->topSalePromotion = Promotion::wherePriority(2)->first();
+
+        return Product::whereHas('promotions', function ($query) use ($model) {
+            $query->where('products_promotions.promotion_id', '=', $model->topSalePromotion->id);
         })->whereIsVisible(true)->count();
     }
 
