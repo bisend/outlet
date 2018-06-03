@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -136,7 +136,11 @@ if (document.getElementById('product-grid')) {
                     var idx = 0;
                     var len = list.length;
                     var match = false;
-                    var item, item_k, item_v, prop_k, prop_val;
+                    var item = void 0,
+                        item_k = void 0,
+                        item_v = void 0,
+                        prop_k = void 0,
+                        prop_val = void 0;
                     for (; idx < len; idx++) {
                         item = list[idx];
                         for (prop_k in props) {
@@ -230,7 +234,7 @@ if (document.getElementById('product-grid')) {
 
 /***/ }),
 
-/***/ 12:
+/***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/product-grid/product-grid.js");

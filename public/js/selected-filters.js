@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -69,7 +69,7 @@
 /***/ (function(module, exports) {
 
 if (document.getElementById('selected-filters-mobile')) {
-    var FILTERS = window.OUTLET.filters;
+    var FILTERS = OUTLET.filters;
 
     var SHOW_APPLY_BTN = {};
 
@@ -81,14 +81,14 @@ if (document.getElementById('selected-filters-mobile')) {
         filters: FILTERS,
         isStateChanged: false,
         show_btn: SHOW_APPLY_BTN,
-        categorySlug: window.OUTLET.categorySlug,
+        categorySlug: OUTLET.categorySlug,
         filterUrl: '',
-        initialPriceMin: Math.floor(window.OUTLET.initialPriceMin),
-        initialPriceMax: Math.round(window.OUTLET.initialPriceMax),
-        oldPriceMin: Math.floor(window.OUTLET.priceMin),
-        oldPriceMax: Math.round(window.OUTLET.priceMax),
-        priceMin: Math.floor(window.OUTLET.priceMin),
-        priceMax: Math.round(window.OUTLET.priceMax)
+        initialPriceMin: Math.floor(OUTLET.initialPriceMin),
+        initialPriceMax: Math.round(OUTLET.initialPriceMax),
+        oldPriceMin: Math.floor(OUTLET.priceMin),
+        oldPriceMax: Math.round(OUTLET.priceMax),
+        priceMin: Math.floor(OUTLET.priceMin),
+        priceMax: Math.round(OUTLET.priceMax)
     };
 
     new Vue({
@@ -134,14 +134,18 @@ if (document.getElementById('selected-filters-mobile')) {
 
                 SHOW_APPLY_BTN[[filterName]] = false;
 
-                for (var fName in FILTERS) {
-                    FILTERS[fName].forEach(function (fValue) {
+                var _loop = function _loop(_fName) {
+                    FILTERS[_fName].forEach(function (fValue) {
 
                         if (fValue.isChecked != fValue.initialState) {
                             _this.isStateChanged = true;
-                            SHOW_APPLY_BTN[[fName]] = true;
+                            SHOW_APPLY_BTN[[_fName]] = true;
                         }
                     });
+                };
+
+                for (var _fName in FILTERS) {
+                    _loop(_fName);
                 }
 
                 _this.buildSelectedFiltersArray();
@@ -154,14 +158,14 @@ if (document.getElementById('selected-filters-mobile')) {
                 var url = '/category/' + _this.categorySlug;
                 var arrayOfPairs = [];
 
-                for (var fName in FILTERS) {
+                var _loop2 = function _loop2(_fName2) {
                     var values = [];
 
                     var valuesStr = '';
 
                     var filterName = '';
 
-                    FILTERS[fName].forEach(function (fValue) {
+                    FILTERS[_fName2].forEach(function (fValue) {
                         if (fValue.isChecked) {
                             filterName = fValue.filter_name_slug;
                             values.push(fValue.filter_value_slug);
@@ -173,6 +177,10 @@ if (document.getElementById('selected-filters-mobile')) {
                     if (valuesStr.length > 0) {
                         arrayOfPairs.push(filterName + '=' + valuesStr);
                     }
+                };
+
+                for (var _fName2 in FILTERS) {
+                    _loop2(_fName2);
                 }
 
                 if (arrayOfPairs.length > 0) {
@@ -200,7 +208,7 @@ if (document.getElementById('selected-filters-mobile')) {
 
 /***/ }),
 
-/***/ 14:
+/***/ 18:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/filters/selected-filters.js");

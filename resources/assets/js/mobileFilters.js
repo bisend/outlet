@@ -25,7 +25,7 @@ function closeNavRight(e) {
 }
 
 $(document).ready(function () {
-    var menuOpenLinkRight = '[data-menu-open-link-right]',
+    let menuOpenLinkRight = '[data-menu-open-link-right]',
         menuCloseLinkRight = '[data-menu-close-link-right]',
         isMenuOpenedRight = false;
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click', 'body', function (e) {
-        var $targetR = $(e.target);
+        let $targetR = $(e.target);
 
         // if (isMenuOpenedRight &&
         //     (($targetR.attr('id') != 'selected-filters-mobile' && $targetR.closest('#selected-filters-mobile').length === 0) ||

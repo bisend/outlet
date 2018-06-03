@@ -2,7 +2,7 @@
 
 // Regular expressions for validated inputs
 // You can to add new item and use it in parameters
-var RegularExpressions = {
+window.RegularExpressions = {
 	NAME: /^[а-яА-ЯёЁіІїЇa-zA-Z]{2,30}$/,                                             // For example "Nicholas" (one word)
 	FULL_NAME: /^[а-яА-ЯёЁіІїЇa-zA-Z'`\s,.-]{2,100}$/,                                  // For example "Nicholas Brick" (two words)
 	PASSWORD: /^\S{6,20}$/,															// For example word.pass123123 (difficult password)
@@ -34,7 +34,7 @@ var RegularExpressions = {
 //}
 function RegExValidatingInput(input, options) {
 	// The context of this object
-	var context = this;
+	let context = this;
 
 	// Input for validation
 	this.input = input;
@@ -100,7 +100,7 @@ function RegExValidatingInput(input, options) {
 	// General validation function
 	this.Validate = function () {
 		// Gets value of input
-		var value = context.input.val();
+		let value = context.input.val();
 
 		if (context.options.required) {
 			if (context.IsValueCorrect(value, context.options.expression)) {
@@ -124,7 +124,7 @@ function RegExValidatingInput(input, options) {
 	// Idle validation function ( without callbacks )
 	this.IdleValidate = function () {
 		// Gets value of input
-		var value = context.input.val();
+		let value = context.input.val();
 
 		if (context.options.required) {
 			if (context.IsValueCorrect(value, context.options.expression)) {
@@ -261,7 +261,7 @@ function RegExValidatingInput(input, options) {
 //}
 function EqualValidatingInput(input, options) {
 	// The context of this object
-	var context = this;
+	let context = this;
 
 	// Input for validation
 	this.input = input;
@@ -323,7 +323,7 @@ function EqualValidatingInput(input, options) {
 	// General validation function
 	this.Validate = function () {
 		// Gets value of input
-		var value = context.input.val();
+		let value = context.input.val();
 
 		if (context.options.required) {
 			if (context.options.compareValue == value) {

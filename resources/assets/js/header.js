@@ -1,10 +1,10 @@
 
 $( document ).ready(function() {
-    var objToStick = $(".category-nav");
-    var topOfObjToStick = $(objToStick).offset().top;
+    let objToStick = $(".category-nav");
+    let topOfObjToStick = $(objToStick).offset().top;
 
     $(window).scroll(function () {
-        var windowScroll = $(window).scrollTop();
+        let windowScroll = $(window).scrollTop();
         if (windowScroll > topOfObjToStick) {
             $(objToStick).addClass("topWindow");
             $('.after-header-mrg').show();

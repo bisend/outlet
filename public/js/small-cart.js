@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -69,7 +69,6 @@
 /***/ (function(module, exports) {
 
 if (document.getElementById('small-cart')) {
-
     new Vue({
         el: '#small-cart',
         data: GD,
@@ -116,7 +115,7 @@ if (document.getElementById('small-cart')) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/cart/small-cart.js");

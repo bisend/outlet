@@ -21,7 +21,7 @@ function closeNav(e) {
 }
 
 $(document).ready(function () {
-    var menuOpenLink = '[data-menu-open-link]',
+    let menuOpenLink = '[data-menu-open-link]',
         menuCloseLink = '[data-menu-close-link]',
         isMenuOpened = false;
 
@@ -40,7 +40,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click', 'body', function (e) {
-        var $target = $(e.target);
+        let $target = $(e.target);
 
         if (isMenuOpened &&
             ($target.attr('id') != 'mySidenav' &&

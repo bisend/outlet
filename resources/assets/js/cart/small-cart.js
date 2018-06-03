@@ -1,6 +1,5 @@
 if (document.getElementById('small-cart'))
 {
-
     new Vue({
         el: '#small-cart',
         data: GD,

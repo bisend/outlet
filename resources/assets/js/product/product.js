@@ -62,10 +62,10 @@ if (document.getElementById('single-product-info-container'))
             },
             //method handles search in cartItems return true|false
             findWhere: function (list, props) {
-                var idx = 0;
-                var len = list.length;
-                var match = false;
-                var item, item_k, item_v, prop_k, prop_val;
+                let idx = 0;
+                let len = list.length;
+                let match = false;
+                let item, item_k, item_v, prop_k, prop_val;
                 for (; idx<len; idx++) {
                     item = list[idx];
                     for (prop_k in props) {
@@ -112,7 +112,7 @@ if (document.getElementById('single-product-info-container'))
             },
             //method handles add to cart
             addToCart: function (productId, sizeId, count) {
-                var obj = {
+                let obj = {
                         productId: parseInt(productId),
                         sizeId: parseInt(sizeId),
                         count: parseInt(count)

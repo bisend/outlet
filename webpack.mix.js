@@ -11,10 +11,15 @@ let mix = require('laravel-mix');
  |
  */
 
+mix.js('resources/assets/js/global.js', 'public/js').version();
+
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css').version();
 
-mix.js('resources/assets/js/global.js', 'public/js').version();
+mix.js('resources/assets/js/auth/login.js', 'public/js').version();
+mix.js('resources/assets/js/auth/register.js', 'public/js').version();
+mix.js('resources/assets/js/auth/restore-password.js', 'public/js').version();
+mix.js('resources/assets/js/auth/social-email.js', 'public/js').version();
 
 mix.js('resources/assets/js/loader.js', 'public/js').version();
 
@@ -41,7 +46,6 @@ mix.js('resources/assets/js/product-grid/product-grid.js', 'public/js').version(
 mix.js('resources/assets/js/filters/filters.js', 'public/js').version();
 
 mix.js('resources/assets/js/filters/selected-filters.js', 'public/js').version();
-
 
 mix.scripts([
     'resources/assets/plugins/jclient-validation/jclient.validation.js',

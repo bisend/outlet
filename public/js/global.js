@@ -72,7 +72,7 @@
  * global data for vue instances
  * @type {{}}
  */
-var GD = {
+window.GD = {
     INIT_CART_WS: undefined,
     IS_DATA_PROCESSING: false,
     INIT_CART_ENDED: false,

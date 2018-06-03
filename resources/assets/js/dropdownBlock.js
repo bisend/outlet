@@ -2,8 +2,8 @@
 $( document ).ready(function() {
   $( ".dropdown-div-btn" ).click(function() {
 
-    var i = $(this).find('svg');
-    var display =  $(this).next().css('display');
+    let i = $(this).find('svg');
+    let display =  $(this).next().css('display');
 
     switch (display){
       case 'none': {

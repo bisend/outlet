@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -69,7 +69,6 @@
 /***/ (function(module, exports) {
 
 if (document.getElementById('big-cart')) {
-
     new Vue({
         el: '#big-cart',
         data: GD,
@@ -78,7 +77,11 @@ if (document.getElementById('big-cart')) {
                 var idx = 0;
                 var len = list.length;
                 var match = false;
-                var item, item_k, item_v, prop_k, prop_val;
+                var item = void 0,
+                    item_k = void 0,
+                    item_v = void 0,
+                    prop_k = void 0,
+                    prop_val = void 0;
                 for (; idx < len; idx++) {
                     item = list[idx];
                     for (prop_k in props) {
@@ -223,7 +226,7 @@ if (document.getElementById('big-cart')) {
                 },
                     _this = this;
 
-                var oldCount;
+                var oldCount = void 0;
                 var newCount = 1;
 
                 GD.cart.cartItems.forEach(function (item) {
@@ -271,7 +274,7 @@ if (document.getElementById('big-cart')) {
                     sizeId: sizeId
                 },
                     _this = this;
-                var oldCount;
+                var oldCount = void 0;
                 var newCount = 1;
 
                 GD.cart.cartItems.forEach(function (item) {
@@ -318,7 +321,7 @@ if (document.getElementById('big-cart')) {
 
 /***/ }),
 
-/***/ 7:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/cart/big-cart.js");

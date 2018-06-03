@@ -1,6 +1,8 @@
 if (document.getElementById('single-product-reviews-description'))
 {
-    let reviewNameValidator, reviewEmailValidator, reviewTextValidator;
+    let reviewNameValidator,
+        reviewEmailValidator,
+        reviewTextValidator;
 
     GD.singleProductPage.product = OUTLET.product;
     GD.singleProductPage.reviews = OUTLET.reviews;
@@ -64,10 +66,10 @@ if (document.getElementById('single-product-reviews-description'))
         },
         methods: {
             range: function(low, high, step) {
-                var matrix = [];
-                var inival, endval, plus;
-                var walker = step || 1;
-                var chars  = false;
+                let matrix = [];
+                let inival, endval, plus;
+                let walker = step || 1;
+                let chars  = false;
 
                 if ( !isNaN ( low ) && !isNaN ( high ) ) {
                     inival = low;
@@ -97,17 +99,17 @@ if (document.getElementById('single-product-reviews-description'))
                 return matrix;
             },
             createPagination: function (page, itemsPerPage, totalItemsCount) {
-                var _this = this;
-                var maxElements = 7;
-                var pages = [];
-                var lastPage = Math.ceil(totalItemsCount / itemsPerPage);
-                var minMiddle;
-                var maxMiddle;
-                var pagesPerBothSides;
-                var min;
-                var max;
-                var pagesPerLeftSide;
-                var pagesPerRightSide;
+                let _this = this;
+                let maxElements = 7;
+                let pages = [];
+                let lastPage = Math.ceil(totalItemsCount / itemsPerPage);
+                let minMiddle;
+                let maxMiddle;
+                let pagesPerBothSides;
+                let min;
+                let max;
+                let pagesPerLeftSide;
+                let pagesPerRightSide;
 
                 if (maxElements >= lastPage)
                 {
@@ -128,7 +130,7 @@ if (document.getElementById('single-product-reviews-description'))
                         pagesPerBothSides = Math.floor(maxElements / 4);
                         min = page - pagesPerBothSides;
                         max = page + pagesPerBothSides;
-                        for (var i = min; i <= max; i++) {
+                        for (let i = min; i <= max; i++) {
                             pages.push(i);
                         }
                     }

@@ -24,9 +24,12 @@
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 </head>
 <body>
-@include('modals.loginModal')
-@include('modals.registrModal')
-@include('modals.restoreModal')
+
+@if(!Auth::check())
+    @include('modals.loginModal')
+    @include('modals.registrModal')
+    @include('modals.restoreModal')
+@endif
 @include('modals.messageModal')
 @include('modals.cartModal')
 @include('modals.orderModal')
@@ -64,6 +67,13 @@
 <script defer src="{{ mix('/js/product-grid.js') }}"></script>
 <script defer src="{{ mix('/js/filters.js') }}"></script>
 <script defer src="{{ mix('/js/selected-filters.js') }}"></script>
+
+@if(!Auth::check())
+    <script defer src="{{ mix('/js/login.js') }}"></script>
+    <script defer src="{{ mix('/js/register.js') }}"></script>
+    <script defer src="{{ mix('/js/restore-password.js') }}"></script>
+    <script defer src="{{ mix('/js/social-email.js') }}"></script>
+@endif
 
 @include('modals.loader')
 </body>

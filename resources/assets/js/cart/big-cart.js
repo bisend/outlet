@@ -1,15 +1,14 @@
 if (document.getElementById('big-cart'))
 {
-
     new Vue({
         el: '#big-cart',
         data: GD,
         methods: {
             findWhere: function (list, props) {
-                var idx = 0;
-                var len = list.length;
-                var match = false;
-                var item, item_k, item_v, prop_k, prop_val;
+                let idx = 0;
+                let len = list.length;
+                let match = false;
+                let item, item_k, item_v, prop_k, prop_val;
                 for (; idx<len; idx++) {
                     item = list[idx];
                     for (prop_k in props) {
@@ -39,7 +38,7 @@ if (document.getElementById('big-cart'))
             },
             //method handles onChange count input
             toInteger: function (productId, sizeId, count) {
-                var _this = this;
+                let _this = this;
 
                 if (count < 1 || count == '')
                 {
@@ -84,7 +83,7 @@ if (document.getElementById('big-cart'))
                 //loader
                 GD.LOADING = true;
 
-                var obj = {
+                let obj = {
                         productId: parseInt(productId),
                         sizeId: parseInt(sizeId),
                         count: parseInt(count)
@@ -158,14 +157,14 @@ if (document.getElementById('big-cart'))
             },
             //method handles + button incrementing value
             increment: function (productId, sizeId) {
-                var searchObj = {
+                let searchObj = {
                         productId: productId,
                         sizeId: sizeId
                     },
                     _this = this;
 
-                var oldCount;
-                var newCount = 1;
+                let oldCount;
+                let newCount = 1;
 
                 GD.cart.cartItems.forEach(function (item) {
                     if (item.productId == productId && item.sizeId == sizeId)
@@ -213,13 +212,13 @@ if (document.getElementById('big-cart'))
             },
             //method handles - button decrementing value
             decrement: function (productId, sizeId) {
-                var searchObj = {
+                let searchObj = {
                         productId: productId,
                         sizeId: sizeId
                     },
                     _this = this;
-                var oldCount;
-                var newCount = 1;
+                let oldCount;
+                let newCount = 1;
 
                 GD.cart.cartItems.forEach(function (item) {
                     if (item.productId == productId && item.sizeId == sizeId)

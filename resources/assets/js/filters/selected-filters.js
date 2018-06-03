@@ -1,37 +1,37 @@
 if (document.getElementById('selected-filters-mobile'))
 {
-    var FILTERS = window.OUTLET.filters;
+    let FILTERS = OUTLET.filters;
 
-    var SHOW_APPLY_BTN = {};
+    let SHOW_APPLY_BTN = {};
 
-    for (var fName in FILTERS)
+    for (let fName in FILTERS)
     {
         SHOW_APPLY_BTN[fName] = false;
     }
 
-    var FILTERS_DATA = {
+    let FILTERS_DATA = {
         filters: FILTERS,
         isStateChanged: false,
         show_btn: SHOW_APPLY_BTN,
-        categorySlug: window.OUTLET.categorySlug,
+        categorySlug: OUTLET.categorySlug,
         filterUrl: '',
-        initialPriceMin: Math.floor(window.OUTLET.initialPriceMin),
-        initialPriceMax: Math.round(window.OUTLET.initialPriceMax),
-        oldPriceMin: Math.floor(window.OUTLET.priceMin),
-        oldPriceMax: Math.round(window.OUTLET.priceMax),
-        priceMin: Math.floor(window.OUTLET.priceMin),
-        priceMax: Math.round(window.OUTLET.priceMax)
+        initialPriceMin: Math.floor(OUTLET.initialPriceMin),
+        initialPriceMax: Math.round(OUTLET.initialPriceMax),
+        oldPriceMin: Math.floor(OUTLET.priceMin),
+        oldPriceMax: Math.round(OUTLET.priceMax),
+        priceMin: Math.floor(OUTLET.priceMin),
+        priceMax: Math.round(OUTLET.priceMax)
     };
 
     new Vue({
         el: '#selected-filters-mobile',
         data: FILTERS_DATA,
         mounted: function () {
-            var _this = this;
+            let _this = this;
 
             this.$nextTick(function () {
                 /*------------------- Sidebar Filter Range -------------------*/
-                var priceSliderRange = $('#price-range');
+                let priceSliderRange = $('#price-range');
                 if ($.ui) {
                     if ($(priceSliderRange).length) {
                         $(priceSliderRange).slider({
@@ -58,7 +58,7 @@ if (document.getElementById('selected-filters-mobile'))
         },
         methods: {
             setCheck: function (filterName, valueCounter) {
-                var _this = this;
+                let _this = this;
 
                 _this.isStateChanged = false;
 
@@ -66,7 +66,7 @@ if (document.getElementById('selected-filters-mobile'))
 
                 SHOW_APPLY_BTN[[filterName]] = false;
 
-                for (var fName in FILTERS)
+                for (let fName in FILTERS)
                 {
                     FILTERS[fName].forEach(function (fValue) {
 
@@ -84,17 +84,17 @@ if (document.getElementById('selected-filters-mobile'))
                 return (SHOW_APPLY_BTN[[filterName]] ? true : false);
             },
             buildSelectedFiltersArray: function () {
-                var _this = this;
-                var url = '/category/' + _this.categorySlug;
-                var arrayOfPairs = [];
+                let _this = this;
+                let url = '/category/' + _this.categorySlug;
+                let arrayOfPairs = [];
 
-                for (var fName in FILTERS)
+                for (let fName in FILTERS)
                 {
-                    var values = [];
+                    let values = [];
 
-                    var valuesStr = '';
+                    let valuesStr = '';
 
-                    var filterName = '';
+                    let filterName = '';
 
                     FILTERS[fName].forEach(function (fValue) {
                         if (fValue.isChecked)

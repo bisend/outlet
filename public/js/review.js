@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -136,7 +136,9 @@ if (document.getElementById('single-product-reviews-description')) {
         methods: {
             range: function range(low, high, step) {
                 var matrix = [];
-                var inival, endval, plus;
+                var inival = void 0,
+                    endval = void 0,
+                    plus = void 0;
                 var walker = step || 1;
                 var chars = false;
 
@@ -172,13 +174,13 @@ if (document.getElementById('single-product-reviews-description')) {
                 var maxElements = 7;
                 var pages = [];
                 var lastPage = Math.ceil(totalItemsCount / itemsPerPage);
-                var minMiddle;
-                var maxMiddle;
-                var pagesPerBothSides;
-                var min;
-                var max;
-                var pagesPerLeftSide;
-                var pagesPerRightSide;
+                var minMiddle = void 0;
+                var maxMiddle = void 0;
+                var pagesPerBothSides = void 0;
+                var min = void 0;
+                var max = void 0;
+                var pagesPerLeftSide = void 0;
+                var pagesPerRightSide = void 0;
 
                 if (maxElements >= lastPage) {
                     pages = _this.range(1, lastPage);
@@ -195,8 +197,8 @@ if (document.getElementById('single-product-reviews-description')) {
                         pagesPerBothSides = Math.floor(maxElements / 4);
                         min = page - pagesPerBothSides;
                         max = page + pagesPerBothSides;
-                        for (var i = min; i <= max; i++) {
-                            pages.push(i);
+                        for (var _i = min; _i <= max; _i++) {
+                            pages.push(_i);
                         }
                     } else if (page <= minMiddle) {
                         pagesPerLeftSide = maxElements - 2;
@@ -356,7 +358,7 @@ if (document.getElementById('single-product-reviews-description')) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/product/review.js");
