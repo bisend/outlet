@@ -48,7 +48,7 @@
 @include('php-js-vars')
 
 {{--JS--}}
-<script defer src="/js/global.js"></script>
+<script defer src="{{ mix('/js/global.js') }}"></script>
 <script defer src="{{ mix('/js/app.js') }}"></script>
 <script defer src="{{ mix('/js/all.js') }}"></script>
 <script defer src="{{ mix('/js/loader.js') }}"></script>
