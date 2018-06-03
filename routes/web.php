@@ -280,3 +280,8 @@ Route::group(['prefix' => 'cart'], function () {
     Route::post('/delete-from-cart', 'CartController@deleteFromCart');
 });
 // ---------------------------------------------------------------------------------------------------------------------
+
+// Artisan group routes
+Route::group(['prefix' => 'artisan'], function () {
+    Route::get('/config-gen', 'ArtisanController@generateConfiguration');
+});

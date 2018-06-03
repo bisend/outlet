@@ -38,13 +38,16 @@ class HomeController extends LayoutController
 
         $this->home_service->fill($model);
 
+        \Debugbar::info($model);
+
         JavaScript::put([
             'newSliderProducts' => $model->new_slider_products,
             'salesSliderProducts' => $model->sales_slider_products,
             'topSliderProducts' => $model->top_slider_products
         ]);
 
-        \Debugbar::info($model);
+        // Adds stored in the session notification message to the page
+        $this->addNotificationMessage();
 
         return view('pages.home', compact('model'));
     }

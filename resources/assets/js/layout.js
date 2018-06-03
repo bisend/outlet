@@ -1,11 +1,12 @@
 $(document).ready(function () {
     initCart();
+});
 
-
+$(window).on('load', function (e) {
+    initNotification();
 });
 
 function initCart() {
-
     // GD.INIT_CART_WS = new WaitSync(function () {
 
         if (GD.IS_DATA_PROCESSING)
@@ -36,4 +37,13 @@ function initCart() {
             }
         });
     // });
+}
+
+function initNotification() {
+    if (OUTLET.NOTIFICATION_MESSAGE) {
+        $('[data-notification]').find('[data-notification-message]').html(OUTLET.NOTIFICATION_MESSAGE);
+        $('[data-notification-button]').trigger('click');
+
+        OUTLET.NOTIFICATION_MESSAGE = undefined;
+    }
 }
