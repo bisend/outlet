@@ -152,6 +152,8 @@ return [
          */
         browner12\helpers\HelperServiceProvider::class,
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -213,6 +215,7 @@ return [
          * Additional
          */
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
