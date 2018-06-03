@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Languages;
-// use App\Services\ProfileService;
 use App\Services\SaleService;
 use App\ViewModels\SaleViewModel;
 use JavaScript;
+
+// use App\Services\ProfileService;
 
 class SaleController extends LayoutController
 {

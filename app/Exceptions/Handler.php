@@ -3,7 +3,12 @@
 namespace App\Exceptions;
 
 use Exception;
+use HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -44,10 +49,57 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
+        if (str_contains($request->getRequestUri(), '/ru')) {
+            $language = 'ru';
+        } else {
+            $language = '';
+        }
+
+        if ($exception instanceof BadRequestHttpException)
+        {
+            \Log::info($exception);
+            return redirect()->action('ErrorController@index', [
+                'error' => 400,
+                'language' => $language
+            ]);
+        }
+        else if ($exception instanceof UnauthorizedHttpException)
+        {
+            \Log::info($exception);
+            return redirect()->action('ErrorController@index', [
+                'error' => 401,
+                'language' => $language
+            ]);
+        }
+        else if ($exception instanceof AccessDeniedHttpException)
+        {
+            \Log::info($exception);
+            return redirect()->action('ErrorController@index', [
+                'error' => 403,
+                'language' => $language
+            ]);
+        }
+        else if($exception instanceof NotFoundHttpException)
+        {
+            \Log::info($exception);
+            return redirect()->action('ErrorController@index', [
+                'error' => 404,
+                'language' => $language
+            ]);
+        }
+        else if ($exception instanceof HttpException)
+        {
+            \Log::info($exception);
+            return redirect()->action('ErrorController@index', [
+                'error' => 500,
+                'language' => $language
+            ]);
+        }
+
         return parent::render($request, $exception);
     }
 }

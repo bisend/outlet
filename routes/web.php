@@ -285,3 +285,60 @@ Route::group(['prefix' => 'cart'], function () {
 Route::group(['prefix' => 'artisan'], function () {
     Route::get('/config-gen', 'ArtisanController@generateConfiguration');
 });
+// ---------------------------------------------------------------------------------------------------------------------
+
+// Auth group routes
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('register', 'Auth\RegisterController@register');
+
+    Route::get('login', 'Auth\LoginController@login');
+
+    Route::get('logout', 'Auth\LoginController@logout');
+
+    Route::get('login/facebook/{language?}', 'Auth\FacebookLoginController@redirectToProvider')
+        ->where([
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::get('login/facebook/callback', 'Auth\FacebookLoginController@handleProviderCallback');
+
+    Route::post('social-email', 'Auth\FacebookLoginController@socialEmailHandler');
+
+    Route::get('login/google/{language?}', 'Auth\GoogleLoginController@redirectToProvider')
+        ->where([
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::get('login/google/callback', 'Auth\GoogleLoginController@handleProviderCallback');
+
+    Route::post('restore-password', 'Auth\RestorePasswordController@restore');
+});
+// ---------------------------------------------------------------------------------------------------------------------
+
+// Confirm email route
+Route::get('/confirm/{confirmationToken}/{language?}', 'Auth\ConfirmationEmailController@confirm')
+    ->where([
+        'language' => '^(ru|uk)?$'
+    ]);
+// ---------------------------------------------------------------------------------------------------------------------
+
+// Confirm social email route
+Route::get('/confirm-social-email/{confirmationToken}/{language?}', 'Auth\FacebookLoginController@confirmSocialEmail')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ]);
+// ---------------------------------------------------------------------------------------------------------------------
+
+// Errors group routes
+Route::group(['prefix' => 'errors'], function ()
+{
+    /**
+     * Error page
+     */
+    Route::get('/{error}/{language?}', 'ErrorController@index')
+        ->where([
+            'error' => '^(400|401|403|404|500)$',
+            'language' => '^(uk|ru)?$'
+        ]);
+});
+// ---------------------------------------------------------------------------------------------------------------------

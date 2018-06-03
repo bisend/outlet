@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Languages;
-// use App\Services\ProfileService;
 use App\Services\NoveltyService;
 use App\ViewModels\NoveltyViewModel;
 use JavaScript;
+
+// use App\Services\ProfileService;
 
 /**
  * Class NoveltyController

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Languages;
-// use App\Services\ProfileService;
 use App\Services\TopSaleService;
 use App\ViewModels\TopSaleViewModel;
 use JavaScript;
+
+// use App\Services\ProfileService;
 
 /**
  * Class TopSaleController

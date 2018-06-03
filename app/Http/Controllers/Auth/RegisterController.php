@@ -2,71 +2,80 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\DatabaseModels\User;
+use App\Http\Controllers\LayoutController;
+use App\Mail\EmailConfirm;
+use DB;
+use Exception;
+use Illuminate\Http\Request;
+use Mail;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Validator;
 
-class RegisterController extends Controller
+/**
+ * Class RegisterController
+ * @package App\Http\Controllers\Auth
+ */
+class RegisterController extends LayoutController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
+     * registering user
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function register(Request $request)
     {
-        $this->middleware('guest');
-    }
+        if(!request()->ajax())
+        {
+            throw new BadRequestHttpException();
+        }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+        $language = request('language');
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|max:191|unique:users,email',
+            'password' => 'required|string|min:6'
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        if ($validator->fails())
+        {
+            return response()->json([
+                'status' => 'error',
+                'failed' => 'email'
+            ]);
+        }
+
+        DB::beginTransaction();
+
+        $user = new User();
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = bcrypt(request('password'));
+        $user->save();
+        $confirmationToken = str_random(31) . $user->id;
+        $user->confirmation_token = $confirmationToken;
+        $user->save();
+        
+        try {
+            $confirmationUrl = url_confirmation($confirmationToken, $language);
+
+            Mail::to($user)->send(new EmailConfirm($user, $confirmationUrl, $language));
+        }
+        catch (Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'failed' => 'server'
+            ]);
+        }
+
+        DB::commit();
+
+        return response()->json([
+            'status' => 'success'
         ]);
     }
 }

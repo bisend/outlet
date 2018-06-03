@@ -11342,6 +11342,7 @@ header .main-nav .flex-container .main-nav_btn ul .show-prods:hover > .smoll-car
 
 header .category-nav {
   background-color: #ffffff;
+  border-bottom: 1px solid #1e201f;
   -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.02);
           box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.02);
   -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.02);
@@ -13779,6 +13780,7 @@ textarea.incorrect-field:-ms-input-placeholder {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
 }
 
 .error-section h2 {

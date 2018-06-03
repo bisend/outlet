@@ -2,38 +2,82 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\DatabaseModels\User;
+use App\Http\Controllers\LayoutController;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Validator;
 
-class LoginController extends Controller
+/**
+ * Class LoginController
+ * @package App\Http\Controllers\Auth
+ */
+class LoginController extends LayoutController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
+     * method handles login user to site
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function login(Request $request)
     {
-        $this->middleware('guest')->except('logout');
+        if(!request()->ajax())
+        {
+            throw new BadRequestHttpException();
+        }
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email'
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json([
+                'status' => 'error',
+                'failed' => 'email'
+            ]);
+        }
+
+        $isActive = User::whereEmail(request('email'))->whereActive(1)->count();
+
+        if (!$isActive)
+        {
+            return response()->json([
+                'status' => 'error',
+                'failed' => 'active'
+            ]);
+        }
+
+        if (!auth()->guard()->attempt([
+            'email' => request('email'),
+            'password' => request('password'),
+            'active' => 1
+        ], request('remember')))
+        {
+            return response()->json([
+                'status' => 'error',
+                'failed' => 'password'
+            ]);
+        }
+        
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
+
+    /**
+     * logout user from site
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function logout()
+    {
+        if (!auth()->check())
+        {
+            return redirect('/');
+        }
+
+        auth()->logout();
+
+        return redirect(url()->previous());
     }
 }

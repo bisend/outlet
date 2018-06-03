@@ -126,6 +126,18 @@ class MetaTagsSeeder extends Seeder
         $meta_tag->meta_h1_uk = 'lorem ipsum uk';
         $meta_tag->save();
 
+        $metaTag = new MetaTag();
+        $metaTag->page_name = 'error';
+        $metaTag->meta_title_ru = 'Ошибка | Outlet Shoes | Интернет-магазин';
+        $metaTag->meta_title_uk = 'Помилка | Outlet Shoes | Інтернет-магазин';
+        $metaTag->meta_description_ru = 'lorem ipsum ru';
+        $metaTag->meta_description_uk = 'lorem ipsum uk';
+        $metaTag->meta_keywords_ru = 'lorem ipsum ru';
+        $metaTag->meta_keywords_uk = 'lorem ipsum uk';
+        $metaTag->meta_h1_ru = 'lorem ipsum ru';
+        $metaTag->meta_h1_uk = 'lorem ipsum uk';
+        $metaTag->save();
+
         DB::commit();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
