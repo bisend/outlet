@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\GenerateConfiguration;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use LaravelMakeView\MakeView;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,7 +15,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        GenerateConfiguration::class
+        GenerateConfiguration::class,
+        // https://github.com/benjaminhansen/LaravelArtisanMakeView
+        MakeView::class
     ];
 
     /**
