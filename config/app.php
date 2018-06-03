@@ -154,6 +154,7 @@ return [
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        BenComeau\ArtisanMakeView\ArtisanMakeViewServiceProvider::class,
         /*
          * Application Service Providers...
          */
