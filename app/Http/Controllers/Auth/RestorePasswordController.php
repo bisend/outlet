@@ -23,8 +23,7 @@ class RestorePasswordController extends LayoutController
      */
     public function restore()
     {
-        if(!request()->ajax())
-        {
+        if(!request()->ajax()) {
             throw new BadRequestHttpException();
         }
 
@@ -34,27 +33,23 @@ class RestorePasswordController extends LayoutController
 
         $user = User::whereEmail(request('email'))->first();
 
-        if (!$user)
-        {
+        if (!$user) {
             return response()->json([
                 'status' => 'error',
                 'failed' => 'email'
             ]);
         }
 
-        $newPassword = str_random(10);
+        $newPassword = (str_random(15) . $user->id);
 
         DB::beginTransaction();
 
-        $user->password = bcrypt($newPassword);
-
+        $user->password = bcrypt(md5($newPassword));
         $user->save();
 
         try {
             Mail::to($user)->send(new RestorePassword($user, $newPassword, $language));
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             DB::rollBack();
             return response()->json([
                 'status' => 'error',

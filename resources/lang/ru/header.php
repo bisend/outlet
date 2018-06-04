@@ -15,4 +15,9 @@ return [
     'search' => 'Поиск...',
     'not_found' => 'Товаров не найдено',
     'all_results' => 'Все результаты',
+    // Static pages
+    'about' => 'О нас',
+    'payment-and-delivery' => 'Оплата и доставка',
+    'guarantee' => 'Гарантия',
+    'exchange-and-refund' => 'Обмен и возврат',
 ];

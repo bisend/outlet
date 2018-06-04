@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Кошик</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ trans('cart.cart') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -83,15 +83,15 @@
                 <div class="cart-footer">
                     <div class="total_count_price">
                         <div class="cart_total-count">
-                            Всього товарів: <span>@{{ cart.totalCount }}</span>
+                            {{ trans('cart.products-count') }}: <span>@{{ cart.totalCount }}</span>
                         </div>
                         <div class="cart_total-price">
-                            Сумма: <span>@{{ cart.totalAmount.toFixed(2) }} грн</span>
+                            {{ trans('cart.sum') }}: <span>@{{ cart.totalAmount.toFixed(2) }} грн</span>
                         </div>
                     </div>
                     <div class="cart_btn">
-                        <a href="" class="btn">Оформити замовлення</a>
-                        <a href="#" class="btn" data-dismiss="modal" aria-label="Close">Продовжити покупки</a>
+                        <a href="#" class="btn">{{ trans('cart.make-order') }}</a>
+                        <a href="#" class="btn" data-dismiss="modal" aria-label="Close">{{ trans('cart.continue-shopping') }}</a>
                     </div>
                 </div>
             </div>

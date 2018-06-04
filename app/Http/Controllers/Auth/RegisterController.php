@@ -25,8 +25,7 @@ class RegisterController extends LayoutController
      */
     public function register(Request $request)
     {
-        if(!request()->ajax())
-        {
+        if(!request()->ajax()) {
             throw new BadRequestHttpException();
         }
 
@@ -38,8 +37,7 @@ class RegisterController extends LayoutController
             'password' => 'required|string|min:6'
         ]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
                 'failed' => 'email'
@@ -71,8 +69,6 @@ class RegisterController extends LayoutController
         }
 
         DB::commit();
-
-        $this->storeNotificationMessage('Дякуємо за реєстрацію!');
 
         return response()->json([
             'status' => 'success'

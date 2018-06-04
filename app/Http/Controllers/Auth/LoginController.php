@@ -21,8 +21,7 @@ class LoginController extends LayoutController
      */
     public function login(Request $request)
     {
-        if(!request()->ajax())
-        {
+        if(!request()->ajax()) {
             throw new BadRequestHttpException();
         }
 
@@ -30,8 +29,7 @@ class LoginController extends LayoutController
             'email' => 'required|email|exists:users,email'
         ]);
         
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
                 'failed' => 'email'
@@ -40,8 +38,7 @@ class LoginController extends LayoutController
 
         $isActive = User::whereEmail(request('email'))->whereActive(1)->count();
 
-        if (!$isActive)
-        {
+        if (!$isActive) {
             return response()->json([
                 'status' => 'error',
                 'failed' => 'active'
@@ -52,8 +49,7 @@ class LoginController extends LayoutController
             'email' => request('email'),
             'password' => request('password'),
             'active' => 1
-        ], request('remember')))
-        {
+        ], request('remember'))) {
             return response()->json([
                 'status' => 'error',
                 'failed' => 'password'
@@ -71,8 +67,7 @@ class LoginController extends LayoutController
      */
     public function logout()
     {
-        if (!auth()->check())
-        {
+        if (!auth()->check()) {
             return redirect('/');
         }
 

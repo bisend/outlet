@@ -8,7 +8,6 @@ if (document.getElementById('restoreModal')) {
         },
         mounted: function () {
             let _this = this;
-            // `this` указывает на экземпляр vm
 
             restorePasswordEmailValidator = new RegExValidatingInput($('[data-restore-email-input]'), {
                 expression: RegularExpressions.EMAIL,
@@ -19,8 +18,8 @@ if (document.getElementById('restoreModal')) {
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
         },
         methods: {
@@ -41,69 +40,79 @@ if (document.getElementById('restoreModal')) {
             restorePassword() {
                 let _this = this;
 
-                showLoader();
+                GD.IS_DATA_PROCESSING = true;
+                GD.LOADING = true;
 
                 $.ajax({
                     type: 'post',
-                    url: '/user/restore-password',
+                    url: '/auth/restore-password',
                     data: {
                         email: _this.email,
                         language: GD.LANGUAGE
                     },
                     success: function (data) {
-                        hideLoader();
-
                         let LOADED = true;
 
-                        if (data.status == 'success') {
-                            $('[data-restore-password]').modal('hide');
+                        if (data.status === 'success') {
+                            $('#restoreModal').modal('hide');
 
-                            $('[data-restore-password]').on('hidden.bs.modal', function () {
+                            $('#restoreModal').on('hidden.bs.modal', function () {
                                 if (LOADED) {
-                                    showPopup(RESTORE_SUCCESS);
+                                    GD.NOTIFICATION.show(OUTLET.TRANS.AUTH.PASSWORD_RESTORED
+                                        + '<b>' + _this.email + '</b>');
+
                                     LOADED = false;
                                 }
                             });
                         }
 
-                        if (data.status == 'error') {
-                            if (data.failed == 'email') {
-                                $('[data-restore-password]').modal('hide');
+                        if (data.status === 'error') {
+                            if (data.failed === 'email') {
+                                $('#restoreModal').modal('hide');
 
-                                $('[data-restore-password]').on('hidden.bs.modal', function () {
+                                $('#restoreModal').on('hidden.bs.modal', function () {
                                     if (LOADED) {
-                                        showPopup(EMAIL_NOT_EXISTS);
+                                        GD.NOTIFICATION.show(OUTLET.TRANS.AUTH.EMAIL_NOT_EXISTS);
+
                                         LOADED = false;
                                     }
                                 });
                             }
 
-                            if (data.failed == 'server') {
-                                $('[data-restore-password]').modal('hide');
+                            if (data.failed === 'server') {
+                                $('#restoreModal').modal('hide');
 
-                                $('[data-restore-password]').on('hidden.bs.modal', function () {
+                                $('#restoreModal').on('hidden.bs.modal', function () {
                                     if (LOADED) {
-                                        showPopup(SERVER_ERROR);
+                                        GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.SERVER_ERROR);
+
                                         LOADED = false;
                                     }
                                 });
                             }
 
                         }
+
+                        GD.IS_DATA_PROCESSING = false;
+                        GD.LOADING = false;
+
+                        console.log(data);
                     },
                     error: function (error) {
-                        hideLoader();
-
-                        $('[data-restore-password]').modal('hide');
-
                         let LOADED = true;
 
-                        $('[data-restore-password]').on('hidden.bs.modal', function () {
+                        $('#restoreModal').modal('hide');
+
+                        $('#restoreModal').on('hidden.bs.modal', function () {
                             if (LOADED) {
-                                showPopup(SERVER_ERROR);
+                                GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.SERVER_ERROR);
+
                                 LOADED = false;
                             }
                         });
+
+                        GD.IS_DATA_PROCESSING = false;
+                        GD.LOADING = false;
 
                         console.log(error);
                     }

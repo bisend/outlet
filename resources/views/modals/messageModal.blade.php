@@ -1,5 +1,3 @@
-<a href="#" data-toggle="modal" data-target="#messageModal" class="btn" data-notification-button></a>
-
 <div class="modal fade default-modal messageModal" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModal" aria-hidden="true" data-notification>
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -9,8 +9,6 @@ window.GD = {
     LANGUAGE: document.getElementsByTagName('html')[0].getAttribute("lang"),
     DEFAULT_LANGUAGE: 'ru',
     INCORRECT_FIELD_CLASS: 'incorrect-field',
-    REQUIRED_FIELD_TEXT: (this.LANGUAGE === this.DEFAULT_LANGUAGE) ? 'Обязательное поле' : 'Обов`язкове поле',
-    INCORRECT_FIELD_TEXT: (this.LANGUAGE === this.DEFAULT_LANGUAGE) ? 'Неправильные данные' : 'Невірно введені дані',
     //showing loader true/false
     LOADING: false,
 

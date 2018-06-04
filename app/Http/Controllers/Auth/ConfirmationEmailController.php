@@ -44,15 +44,17 @@ class ConfirmationEmailController extends LayoutController
      */
     public function confirm($confirmationToken = null, $language = Languages::DEFAULT_LANGUAGE)
     {
+        Languages::localizeApp($language);
+
         $user = User::whereConfirmationToken($confirmationToken)->first();
 
-        if (!$user)
-        {
+        if (!$user) {
             abort(404);
         }
 
-        if ($user->active == true)
-        {
+        if ($user->active == true) {
+            $this->storeNotificationMessage(trans('js.auth.EMAIL_ALREADY_CONFIRMED'));
+
             return redirect(url_home($language));
         }
 
@@ -65,6 +67,8 @@ class ConfirmationEmailController extends LayoutController
         $this->profileRepository->createProfile($user);
 
         $this->wishListRepository->createWishList($user->id);
+
+        $this->storeNotificationMessage(trans('js.auth.EMAIL_CONFIRMED'));
 
         return redirect(url_home($language));
     }

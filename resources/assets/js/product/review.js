@@ -25,8 +25,8 @@ if (document.getElementById('single-product-reviews-description'))
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
 
             reviewEmailValidator = new RegExValidatingInput($('[data-review-email]'), {
@@ -38,8 +38,8 @@ if (document.getElementById('single-product-reviews-description'))
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
 
             reviewTextValidator = new RegExValidatingInput($('[data-review-text]'), {
@@ -51,8 +51,8 @@ if (document.getElementById('single-product-reviews-description'))
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
         },
         watch: {

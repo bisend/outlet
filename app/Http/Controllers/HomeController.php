@@ -49,6 +49,9 @@ class HomeController extends LayoutController
         // Adds stored in the session notification message to the page
         $this->addNotificationMessage();
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.home', compact('model'));
     }
 }

@@ -25,8 +25,8 @@ if (document.getElementById('registrModal')) {
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
             
             registerEmailValidator = new RegExValidatingInput($('[data-register-email]'), {
@@ -38,8 +38,8 @@ if (document.getElementById('registrModal')) {
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
             
             registerPasswordValidator = new RegExValidatingInput($('[data-register-password]'), {
@@ -51,8 +51,8 @@ if (document.getElementById('registrModal')) {
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
             
             registerConfirmValidator = new RegExValidatingInput($('[data-register-confirm]'), {
@@ -64,53 +64,44 @@ if (document.getElementById('registrModal')) {
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
         },
         methods: {
             validateBeforeSubmit() {
                 let _this = this;
-
                 let isValid = true;
 
                 registerNameValidator.Validate();
-                if (!registerNameValidator.IsValid())
-                {
+                if (!registerNameValidator.IsValid()) {
                     isValid = false;
                 }
 
                 registerEmailValidator.Validate();
-                if (isValid && !registerEmailValidator.IsValid())
-                {
+                if (isValid && !registerEmailValidator.IsValid()) {
                     isValid = false;
                 }
 
                 registerPasswordValidator.Validate();
-                if (isValid && !registerPasswordValidator.IsValid())
-                {
+                if (isValid && !registerPasswordValidator.IsValid()) {
                     isValid = false;
                 }
 
                 registerConfirmValidator.Validate();
-                if (isValid && !registerConfirmValidator.IsValid())
-                {
+                if (isValid && !registerConfirmValidator.IsValid()) {
                     isValid = false;
                 }
 
-                if (_this.password != _this.confirmPassword)
-                {
+                if (_this.password !== _this.confirmPassword) {
                     $('[data-register-confirm]').addClass(GD.INCORRECT_FIELD_CLASS);
                     isValid = false;
                     _this.isConfirmInvalid = true;
-                }
-                else
-                {
+                } else {
                     _this.isConfirmInvalid = false;
                 }
 
-                if (isValid)
-                {
+                if (isValid) {
                     _this.registerUser();
                 }
             },
@@ -134,37 +125,33 @@ if (document.getElementById('registrModal')) {
 
                         $('#registrModal').modal('hide');
 
-                        if (data.status == 'success')
-                        {
+                        if (data.status === 'success') {
                             $('#registrModal').on('hidden.bs.modal', function () {
-                                if (LOADED)
-                                {
-                                    //showPopup(REGISTER_SUCCESS);
+                                if (LOADED) {
+                                    GD.NOTIFICATION.show(OUTLET.TRANS.AUTH.THANKS_FOR_REGISTRATION
+                                        + '<b>' + _this.email + '</b>');
 
                                     LOADED = false;
                                 }
                             });
                         }
 
-                        if (data.status == 'error')
-                        {
-                            if (data.failed == 'email')
-                            {
+                        if (data.status === 'error') {
+                            if (data.failed === 'email') {
                                 $('#registrModal').on('hidden.bs.modal', function () {
-                                    if (LOADED)
-                                    {
-                                        //showPopup(EMAIL_NOT_VALID);
+                                    if (LOADED) {
+                                        GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.EMAIL_NOT_VALID);
+
                                         LOADED = false;
                                     }
                                 });
                             }
 
-                            if (data.failed == 'server')
-                            {
+                            if (data.failed === 'server') {
                                 $('#registrModal').on('hidden.bs.modal', function () {
-                                    if (LOADED)
-                                    {
-                                        //showPopup(SERVER_ERROR);
+                                    if (LOADED) {
+                                        GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.SERVER_ERROR);
+
                                         LOADED = false;
                                     }
                                 });
@@ -177,28 +164,25 @@ if (document.getElementById('registrModal')) {
                         console.log(data);
                     },
                     error: function (error) {
-                        $('#register-popup').modal('hide');
-
                         let LOADED = true;
 
-                        $('#register-popup').on('hidden.bs.modal', function () {
-                            if (LOADED)
-                            {
-                                //showPopup(SERVER_ERROR);
+                        $('#registrModal').modal('hide');
+
+                        $('#registrModal').on('hidden.bs.modal', function () {
+                            if (LOADED) {
+                                GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.SERVER_ERROR);
+
                                 LOADED = false;
                             }
                         });
 
-                        console.log(error);
-
                         GD.IS_DATA_PROCESSING = false;
                         GD.LOADING = false;
+
+                        console.log(error);
                     }
                 });
-
             }
         }
     });
-    
-    
 }

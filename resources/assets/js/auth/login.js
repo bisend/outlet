@@ -11,7 +11,6 @@ if (document.getElementById('loginModal')) {
         },
         mounted: function () {
             let _this = this;
-            // `this` указывает на экземпляр vm
 
             loginEmailValidator = new RegExValidatingInput($('[data-login-email]'), {
                 expression: RegularExpressions.EMAIL,
@@ -22,8 +21,8 @@ if (document.getElementById('loginModal')) {
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
 
             loginPasswordValidator = new RegExValidatingInput($('[data-login-password]'), {
@@ -35,8 +34,8 @@ if (document.getElementById('loginModal')) {
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
         },
         methods: {
@@ -46,19 +45,16 @@ if (document.getElementById('loginModal')) {
                 let isValid = true;
 
                 loginEmailValidator.Validate();
-                if (!loginEmailValidator.IsValid())
-                {
+                if (!loginEmailValidator.IsValid()) {
                     isValid = false;
                 }
 
                 loginPasswordValidator.Validate();
-                if (isValid && !loginPasswordValidator.IsValid())
-                {
+                if (isValid && !loginPasswordValidator.IsValid()) {
                     isValid = false;
                 }
 
-                if (isValid)
-                {
+                if (isValid) {
                     _this.loginUser();
                 }
             },
@@ -80,65 +76,63 @@ if (document.getElementById('loginModal')) {
                     success: function (data) {
                         let LOADED = true;
 
-                        if (data.status == 'success')
-                        {
+                        if (data.status === 'success') {
                             window.location.reload(true);
-                        }
+                        } else if (data.status === 'error') {
+                            if (data.failed === 'email') {
+                                $('#loginModal').modal('hide');
 
-                        if (data.status == 'error')
-                        {
-                            if (data.failed == 'email')
-                            {
-                                $('#login-popup').modal('hide');
+                                $('#loginModal').on('hidden.bs.modal', function () {
+                                    if (LOADED) {
+                                        GD.NOTIFICATION.show(OUTLET.TRANS.AUTH.EMAIL_NOT_EXISTS);
 
-                                $('#login-popup').on('hidden.bs.modal', function () {
-                                    if (LOADED)
-                                    {
-                                        //showPopup(EMAIL_NOT_EXISTS);
                                         LOADED = false;
                                     }
                                 });
                             }
 
-                            if (data.failed == 'active')
-                            {
-                                $('#login-popup').modal('hide');
+                            if (data.failed === 'active') {
+                                $('#loginModal').modal('hide');
 
-                                $('#login-popup').on('hidden.bs.modal', function () {
-                                    if (LOADED)
-                                    {
-                                        //showPopup(EMAIL_CONFIRM_NOT_VALID);
+                                $('#loginModal').on('hidden.bs.modal', function () {
+                                    if (LOADED) {
+                                        GD.NOTIFICATION.show(OUTLET.TRANS.AUTH.EMAIL_NOT_CONFIRMED);
+
                                         LOADED = false;
                                     }
                                 });
                             }
 
-                            if (data.failed == 'password')
-                            {
-                                $('[data-login-password]').val('').addClass(GD.INCORRECT_FIELD_CLASS).attr("placeholder", GD.INCORRECT_FIELD_TEXT);
+                            if (data.failed === 'password') {
+                                $('[data-login-password]')
+                                    .val('')
+                                    .addClass(GD.INCORRECT_FIELD_CLASS)
+                                    .attr("placeholder", OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT);
                             }
+
+                            GD.IS_DATA_PROCESSING = false;
+                            GD.LOADING = false;
                         }
 
-                        GD.IS_DATA_PROCESSING = false;
-                        GD.LOADING = false;
+                        console.log(data);
                     },
                     error: function (error) {
-                        $('#login-popup').modal('hide');
-
                         let LOADED = true;
 
-                        $('#login-popup').on('hidden.bs.modal', function () {
-                            if (LOADED)
-                            {
-                                //showPopup(SERVER_ERROR);
+                        $('#loginModal').modal('hide');
+
+                        $('#loginModal').on('hidden.bs.modal', function () {
+                            if (LOADED) {
+                                GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.SERVER_ERROR);
+
                                 LOADED = false;
                             }
                         });
 
-                        console.log(error);
-
                         GD.IS_DATA_PROCESSING = false;
                         GD.LOADING = false;
+
+                        console.log(error);
                     }
                 });
 

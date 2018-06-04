@@ -19,8 +19,8 @@ if (document.getElementById('socialEmailModal')) {
                     input.addClass(GD.INCORRECT_FIELD_CLASS);
                 },
                 showErrors: true,
-                requiredErrorMessage: GD.REQUIRED_FIELD_TEXT,
-                regExErrorMessage: GD.INCORRECT_FIELD_TEXT
+                requiredErrorMessage: OUTLET.TRANS.ERROR.REQUIRED_FIELD_TEXT,
+                regExErrorMessage: OUTLET.TRANS.ERROR.INCORRECT_FIELD_TEXT
             });
         },
         methods: {

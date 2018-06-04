@@ -1,10 +1,19 @@
-$(document).ready(function () {
-    initCart();
-});
+GD.NOTIFICATION = {
+    modal: $('[data-notification]'),
+    modalText: $('[data-notification]').find('[data-notification-message]'),
+    show: function (message) {
+        this.clearMessage();
 
-$(window).on('load', function (e) {
-    initNotification();
-});
+        if (message) {
+            this.modalText.html(message);
+
+            this.modal.modal('show');
+        }
+    },
+    clearMessage: function () {
+        this.modalText.html('');
+    }
+};
 
 function initCart() {
     // GD.INIT_CART_WS = new WaitSync(function () {
@@ -41,9 +50,16 @@ function initCart() {
 
 function initNotification() {
     if (OUTLET.NOTIFICATION_MESSAGE) {
-        $('[data-notification]').find('[data-notification-message]').html(OUTLET.NOTIFICATION_MESSAGE);
-        $('[data-notification-button]').trigger('click');
+        GD.NOTIFICATION.show(OUTLET.NOTIFICATION_MESSAGE);
 
         OUTLET.NOTIFICATION_MESSAGE = undefined;
     }
 }
+
+$(document).ready(function () {
+    initCart();
+});
+
+$(window).on('load', function (e) {
+    initNotification();
+});

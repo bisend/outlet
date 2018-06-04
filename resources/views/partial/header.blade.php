@@ -4,16 +4,16 @@
             <div class="flex-container">
                 <ul class="staticPage">
                     <li>
-                        <a href="">Про нас</a>
+                        <a href="">{{ trans('header.about') }}</a>
                     </li>
                     <li>
-                        <a href="">Оплата та доставка</a>
+                        <a href="">{{ trans('header.payment-and-delivery') }}</a>
                     </li>
                     <li>
-                        <a href="">Гарантії</a>
+                        <a href="">{{ trans('header.guarantee') }}</a>
                     </li>
                     <li>
-                        <a href="">Обмін та повернення</a>
+                        <a href="">{{ trans('header.exchange-and-refund') }}</a>
                     </li>
                 </ul>
                 <div class="lang_login">
@@ -111,30 +111,33 @@
                                     @endif
                                 @endforeach
                                 <li>
-                                    <a class="default-link" href="">Розпродаж</a>
+                                    <a class="default-link" href="">{{ trans('header.sale') }}</a>
                                 </li>
                                 <li>
-                                    <a class="default-link" href="">Про нас</a>
+                                    <a class="default-link" href="">{{ trans('header.about') }}</a>
                                 </li>
                                 <li>
-                                    <a class="default-link" href="">Оплата та доставка</a>
+                                    <a class="default-link" href="">{{ trans('header.payment-and-delivery') }}</a>
                                 </li>
                                 <li>
-                                    <a class="default-link" href="">Гарантії</a>
+                                    <a class="default-link" href="">{{ trans('header.guarantee') }}</a>
                                 </li>
                                 <li>
-                                    <a class="default-link" href="">Обмін та повернення</a>
+                                    <a class="default-link" href="">{{ trans('header.exchange-and-refund') }}</a>
                                 </li>
                                 @if(auth()->check())
                                     <li>
-                                        <a href="#">John Doe</a>
+                                        <a href="#">{{ Auth::user()->first_name }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('auth-logout') }}">{{ trans('header.logout') }}</a>
                                     </li>
                                 @else
                                     <li>
-                                        <a class="default-link" href="#">{{ trans('header.login') }}</a>
+                                        <a class="default-link" data-toggle="modal" data-target="#loginModal"  href="#">{{ trans('header.login') }}</a>
                                     </li>
                                     <li>
-                                        <a class="default-link" href="#">{{ trans('header.register') }}</a>
+                                        <a class="default-link" data-toggle="modal" data-target="#registrModal" href="#">{{ trans('header.register') }}</a>
                                     </li>
                                 @endif
                                 <li>
