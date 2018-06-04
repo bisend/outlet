@@ -40,7 +40,7 @@ class RestorePasswordController extends LayoutController
             ]);
         }
 
-        $newPassword = (str_random(15) . $user->id);
+        $newPassword = str_random(16);
 
         DB::beginTransaction();
 

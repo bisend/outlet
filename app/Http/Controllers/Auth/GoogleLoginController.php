@@ -71,37 +71,30 @@ class GoogleLoginController extends LayoutController
 
         $socialLogin = SocialLogin::whereProviderId($providerId)->first();
         
-        if ($socialLogin)
-        {
+        if ($socialLogin) {
             $user = User::whereId($socialLogin->user_id)->first();
 
             auth()->login($user);
 
-            if (Session::has('previousSocialLoginUrl'))
-            {
+            if (Session::has('previousSocialLoginUrl')) {
                 return redirect(Session::get('previousSocialLoginUrl'));
             }
 
-            if (Session::has('language'))
-            {
+            if (Session::has('language')) {
                 return redirect(url_home(Session::get('language')));
-            }
-            else
-            {
+            } else {
                 return redirect('/');
             }
         }
 
-        if (!$socialLogin)
-        {
+        if (!$socialLogin) {
             $user = User::whereEmail($email)->first();
 
-            if (!$user)
-            {
+            if (!$user) {
                 $user = new User();
                 $user->name = $name;
                 $user->email = $email;
-                $user->password = bcrypt(str_random(8));
+                $user->password = bcrypt(md5(str_random(16)));
                 $user->active = true;
                 $user->save();
                 $confirmationToken = str_random(31) . $user->id;
@@ -121,32 +114,24 @@ class GoogleLoginController extends LayoutController
 
             auth()->login($user);
 
-            if (Session::has('previousSocialLoginUrl'))
-            {
+            if (Session::has('previousSocialLoginUrl')) {
                 return redirect(Session::get('previousSocialLoginUrl'));
             }
 
-            if (Session::has('language'))
-            {
+            if (Session::has('language')) {
                 return redirect(url_home(Session::get('language')));
-            }
-            else
-            {
+            } else {
                 return redirect('/');
             }
         }
 
-        if (Session::has('previousSocialLoginUrl'))
-        {
+        if (Session::has('previousSocialLoginUrl')) {
             return redirect(Session::get('previousSocialLoginUrl'));
         }
 
-        if (Session::has('language'))
-        {
+        if (Session::has('language')) {
             return redirect(url_home(Session::get('language')));
-        }
-        else
-        {
+        } else {
             return redirect('/');
         }
     }

@@ -58,3 +58,95 @@
     color: #ffffff;
   }
 }
+
+.btn-google-login {
+  display: inline-block;
+  width: 48%;
+  background-color: #e65540;
+  color: #ffffff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 23px;
+  margin-right: 1%;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  outline: none;
+  &:hover{
+    background-color: #eee !important;
+    color: #e65540 !important;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+
+    outline: none!important;
+  }
+
+  &:focus{
+    outline: none!important;
+    background-color: #e65540;
+    color: #ffffff;
+  }
+
+  &:active{
+    outline: none!important;
+    background-color: #e65540;
+    color: #ffffff;
+  }
+
+  &:visited{
+    outline: none!important;
+    background-color: #e65540;
+    color: #ffffff;
+  }
+}
+
+.btn-facebook-login {
+  display: inline-block;
+  width: 48%;
+  background-color: #4267B2;
+  color: #ffffff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 23px;
+  margin-left: 1%;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  outline: none;
+  &:hover{
+    background-color: #eee !important;
+    color: #4267B2 !important;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+
+    outline: none!important;
+  }
+
+  &:focus{
+    outline: none!important;
+    background-color: #4267B2;
+    color: #ffffff;
+  }
+
+  &:active{
+    outline: none!important;
+    background-color: #4267B2;
+    color: #ffffff;
+  }
+
+  &:visited{
+    outline: none!important;
+    background-color: #4267B2;
+    color: #ffffff;
+  }
+}

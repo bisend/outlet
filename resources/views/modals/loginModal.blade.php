@@ -45,6 +45,10 @@
                         </a>
                     </span>
                 </div>
+                <div class="input-group-default social-login-box">
+                    <a class="btn-google-login" href="{{ route('google-login', ['language' => get_url_language($model->language)]) }}">Google+</a>
+                    <a class="btn-facebook-login" href="{{ route('facebook-login', ['language' => get_url_language($model->language)]) }}">Facebook</a>
+                </div>
             </div>
         </div>
     </div>

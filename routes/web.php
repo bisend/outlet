@@ -298,7 +298,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('login/facebook/{language?}', 'Auth\FacebookLoginController@redirectToProvider')
         ->where([
             'language' => '^(uk|ru)?$'
-        ]);
+        ])->name('facebook-login');
 
     Route::get('login/facebook/callback', 'Auth\FacebookLoginController@handleProviderCallback');
 
@@ -307,7 +307,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('login/google/{language?}', 'Auth\GoogleLoginController@redirectToProvider')
         ->where([
             'language' => '^(uk|ru)?$'
-        ]);
+        ])->name('google-login');
 
     Route::get('login/google/callback', 'Auth\GoogleLoginController@handleProviderCallback');
 

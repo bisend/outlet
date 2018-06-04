@@ -78,31 +78,24 @@ class FacebookLoginController extends LayoutController
 
         $socialLogin = SocialLogin::whereProviderId($providerId)->first();
 
-        if ($socialLogin)
-        {
+        if ($socialLogin) {
             $user = User::whereId($socialLogin->user_id)->first();
 
             auth()->login($user);
 
-            if (Session::has('previousSocialLoginUrl'))
-            {
+            if (Session::has('previousSocialLoginUrl')) {
                 return redirect(Session::get('previousSocialLoginUrl'));
             }
 
-            if (Session::has('language'))
-            {
+            if (Session::has('language')) {
                 return redirect(url_home(Session::get('language')));
-            }
-            else
-            {
+            } else {
                 return redirect('/');
             }
         }
 
-        if (!$socialLogin)
-        {
-            if (!$email)
-            {
+        if (!$socialLogin) {
+            if (!$email) {
                 Session::put('social_email', [
                     'isEmail' => false,
                     'name' => $name,
@@ -110,24 +103,21 @@ class FacebookLoginController extends LayoutController
                     'confirmationToken' => str_random(31) . $providerId
                 ]);
 
-                if (Session::has('previousSocialLoginUrl'))
-                {
+                if (Session::has('previousSocialLoginUrl')) {
                     return redirect(Session::get('previousSocialLoginUrl'));
                 }
 
                 return redirect(url_home(Session::get('language')));
             }
 
-            if ($email)
-            {
+            if ($email) {
                 $user = User::whereEmail($email)->first();
 
-                if (!$user)
-                {
+                if (!$user) {
                     $user = new User();
                     $user->name = $name;
                     $user->email = $email;
-                    $user->password = bcrypt(str_random(8));
+                    $user->password = bcrypt(md5(str_random(16)));
                     $user->active = true;
                     $user->save();
                     $confirmationToken = str_random(31) . $user->id;
@@ -146,23 +136,18 @@ class FacebookLoginController extends LayoutController
 
                     $this->wishListRepository->createWishList($user->id);
 
-                    if (Session::has('previousSocialLoginUrl'))
-                    {
+                    if (Session::has('previousSocialLoginUrl')) {
                         return redirect(Session::get('previousSocialLoginUrl'));
                     }
 
-                    if (Session::has('language'))
-                    {
+                    if (Session::has('language')) {
                         return redirect(url_home(Session::get('language')));
-                    }
-                    else
-                    {
+                    } else {
                         return redirect('/');
                     }
                 }
 
-                if ($user)
-                {
+                if ($user) {
                     $sLogin = new SocialLogin();
                     $sLogin->user_id = $user->id;
                     $sLogin->provider_id = $providerId;
@@ -171,34 +156,26 @@ class FacebookLoginController extends LayoutController
 
                     auth()->login($user);
 
-                    if (Session::has('previousSocialLoginUrl'))
-                    {
+                    if (Session::has('previousSocialLoginUrl')) {
                         return redirect(Session::get('previousSocialLoginUrl'));
                     }
 
-                    if (Session::has('language'))
-                    {
+                    if (Session::has('language')) {
                         return redirect(url_home(Session::get('language')));
-                    }
-                    else
-                    {
+                    } else {
                         return redirect('/');
                     }
                 }
             }
         }
 
-        if (Session::has('previousSocialLoginUrl'))
-        {
+        if (Session::has('previousSocialLoginUrl')) {
             return redirect(Session::get('previousSocialLoginUrl'));
         }
 
-        if (Session::has('language'))
-        {
+        if (Session::has('language')) {
             return redirect(url_home(Session::get('language')));
-        }
-        else
-        {
+        } else {
             return redirect('/');
         }
     }
@@ -210,8 +187,7 @@ class FacebookLoginController extends LayoutController
      */
     public function socialEmailHandler(Request $request)
     {
-        if(!request()->ajax())
-        {
+        if(!request()->ajax()) {
             throw new BadRequestHttpException();
         }
 
@@ -219,16 +195,14 @@ class FacebookLoginController extends LayoutController
             'email' => 'required|string|max:191'
         ]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
                 'failed' => 'email'
             ]);
         }
         
-        try
-        {
+        try {
             $confirmationToken = Session::get('social_email.confirmationToken');
             
             Session::put('social_email.email', request('email'));
@@ -236,10 +210,11 @@ class FacebookLoginController extends LayoutController
             $confirmationUrl = url_social_email_confirmation($confirmationToken, request('language'));
 
             Mail::to(request('email'))->send(new SocialEmailConfirm($confirmationUrl, request('language')));
-        }
-        catch (Exception $e)
-        {
-            \Debugbar::info($e->getMessage());
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'failed' => 'server'
+            ]);
         }
 
         return response()->json([
@@ -255,39 +230,31 @@ class FacebookLoginController extends LayoutController
      */
     public function confirmSocialEmail($confirmationToken, $language = Languages::DEFAULT_LANGUAGE)
     {
-        if (!Session::has('social_email'))
-        {
-            if (Session::has('previousSocialLoginUrl'))
-            {
+        if (!Session::has('social_email')) {
+            if (Session::has('previousSocialLoginUrl')) {
                 return redirect(Session::get('previousSocialLoginUrl'));
             }
 
-            if (Session::has('language'))
-            {
+            if (Session::has('language'))  {
                 return redirect(url_home(Session::get('language')));
-            }
-            else
-            {
+            } else {
                 return redirect('/');
             }
         }
 
         DB::beginTransaction();
 
-        try
-        {
+        try {
             $userProvider = Session::pull('social_email');
 
-            if ($confirmationToken == $userProvider['confirmationToken'])
-            {
+            if ($confirmationToken == $userProvider['confirmationToken']) {
                 $user = User::whereEmail($userProvider['email'])->first();
 
-                if (!$user)
-                {
+                if (!$user) {
                     $user = new User();
                     $user->name = $userProvider['name'];
                     $user->email = $userProvider['email'];
-                    $user->password = bcrypt(str_random(8));
+                    $user->password = bcrypt(md5(str_random(16)));
                     $user->active = true;
                     $user->save();
                     $confirmationToken = str_random(31) . $user->id;
@@ -306,15 +273,11 @@ class FacebookLoginController extends LayoutController
                 $sLogin->save();
 
                 auth()->login($user);
-            }
-            else
-            {
+            } else {
                 Session::put('social_email', $userProvider);
             }
 
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             Session::put('social_email', $userProvider);
 
             DB::rollBack();
@@ -322,17 +285,13 @@ class FacebookLoginController extends LayoutController
 
         DB::commit();
 
-        if (Session::has('previousSocialLoginUrl'))
-        {
+        if (Session::has('previousSocialLoginUrl')) {
             return redirect(Session::get('previousSocialLoginUrl'));
         }
 
-        if (Session::has('language'))
-        {
+        if (Session::has('language')) {
             return redirect(url_home(Session::get('language')));
-        }
-        else
-        {
+        } else {
             return redirect('/');
         }
     }

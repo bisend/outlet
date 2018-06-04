@@ -1,3 +1,27 @@
+if (!!window.location.hash && window.location.hash === '#_=_') {
+    if (window.history && history.pushState) {
+        window.history.pushState("", document.title, window.location.pathname);
+    } else {
+        // Prevent scrolling by storing the page's current scroll offset
+        let scroll = {
+            top: document.body.scrollTop,
+            left: document.body.scrollLeft
+        };
+        window.location.hash = '';
+        // Restore the scroll offset, should be flicker free
+        document.body.scrollTop = scroll.top;
+        document.body.scrollLeft = scroll.left;
+    }
+}
+
+console.log(window.location.hash);
+
+// Force page reload on browser back button click
+if (window.performance && window.performance.navigation.type === 2) {
+    // value 2 means "The page was accessed by navigating into the history"
+    window.location.reload(); // reload whole page
+}
+
 /**
  * global data for vue instances
  * @type {{}}
