@@ -19,4 +19,6 @@ return [
     'restore-password-link' => 'Восстановить пароль',
 
     'restore-password-instruction' => 'Укажите электронный адрес Вашей учётной записи. Мы вышлем Вам инструкцию по восстановлению пароля',
+
+    'social-registration-finish' => 'Завершение регистрации через Facebook',
 ];

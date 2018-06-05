@@ -2,13 +2,12 @@ if (document.getElementById('socialEmailModal')) {
     let socialEmailValidator;
 
     new Vue({
-        el: '[data-social-email]',
+        el: '#socialEmailModal',
         data: {
             email: ''
         },
         mounted: function () {
             let _this = this;
-            // `this` указывает на экземпляр vm
 
             socialEmailValidator = new RegExValidatingInput($('[data-social-email-input]'), {
                 expression: RegularExpressions.EMAIL,
@@ -35,69 +34,80 @@ if (document.getElementById('socialEmailModal')) {
                 }
 
                 if (isValid) {
-                    _this.loginUser();
+                    _this.registerUser();
                 }
             },
-            loginUser: function () {
+            registerUser: function () {
                 let _this = this;
 
-                showLoader();
+                GD.IS_DATA_PROCESSING = true;
+                GD.LOADING = true;
 
                 $.ajax({
                     type: 'post',
-                    url: '/user/social-email',
+                    url: '/auth/social-email',
                     data: {
                         email: _this.email,
                         language: GD.LANGUAGE
                     },
                     success: function (data) {
-                        hideLoader();
-
                         let LOADED = true;
 
-                        if (data.status == 'success') {
-                            $('[data-social-email]').modal('hide');
+                        if (data.status === 'success') {
+                            $('#socialEmailModal').modal('hide');
 
-                            $('[data-social-email]').on('hidden.bs.modal', function () {
+                            $('#socialEmailModal').on('hidden.bs.modal', function () {
                                 if (LOADED) {
-                                    showPopup(REGISTER_SUCCESS);
+                                    GD.NOTIFICATION.show(OUTLET.TRANS.AUTH.THANKS_FOR_REGISTRATION
+                                        + '<b>' + _this.email + '</b>');
+
                                     LOADED = false;
                                 }
                             });
                         }
 
-                        if (data.status == 'error') {
-                            if (data.failed == 'email') {
-                                $('[data-social-email]').modal('hide');
+                        if (data.status === 'error') {
+                            if (data.failed === 'email') {
+                                GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.EMAIL_NOT_VALID);
 
-                                $('[data-social-email]').on('hidden.bs.modal', function () {
+                                LOADED = false;
+                            }
+
+                            if (data.failed === 'server') {
+                                $('#registrModal').on('hidden.bs.modal', function () {
                                     if (LOADED) {
-                                        showPopup(EMAIL_NOT_VALID);
+                                        GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.SERVER_ERROR);
+
                                         LOADED = false;
                                     }
                                 });
                             }
-
                         }
+
+                        GD.IS_DATA_PROCESSING = false;
+                        GD.LOADING = false;
+
+                        console.log(data);
                     },
                     error: function (error) {
-                        hideLoader();
-
-                        $('[data-social-email]').modal('hide');
-
                         let LOADED = true;
 
-                        $('[data-social-email]').on('hidden.bs.modal', function () {
+                        $('#socialEmailModal').modal('hide');
+
+                        $('#socialEmailModal').on('hidden.bs.modal', function () {
                             if (LOADED) {
-                                showPopup(SERVER_ERROR);
+                                GD.NOTIFICATION.show(OUTLET.TRANS.ERROR.SERVER_ERROR);
+
                                 LOADED = false;
                             }
                         });
 
+                        GD.IS_DATA_PROCESSING = false;
+                        GD.LOADING = false;
+
                         console.log(error);
                     }
                 });
-
             }
         }
     });

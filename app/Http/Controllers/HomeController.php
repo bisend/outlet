@@ -43,7 +43,7 @@ class HomeController extends LayoutController
         JavaScript::put([
             'newSliderProducts' => $model->new_slider_products,
             'salesSliderProducts' => $model->sales_slider_products,
-            'topSliderProducts' => $model->top_slider_products
+            'topSliderProducts' => $model->top_slider_products,
         ]);
 
         // Adds stored in the session notification message to the page

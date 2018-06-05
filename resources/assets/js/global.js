@@ -14,8 +14,6 @@ if (!!window.location.hash && window.location.hash === '#_=_') {
     }
 }
 
-console.log(window.location.hash);
-
 // Force page reload on browser back button click
 if (window.performance && window.performance.navigation.type === 2) {
     // value 2 means "The page was accessed by navigating into the history"

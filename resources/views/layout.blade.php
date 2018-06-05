@@ -29,6 +29,7 @@
     @include('modals.loginModal')
     @include('modals.registrModal')
     @include('modals.restoreModal')
+    @include('modals.socialEmailModal')
 @endif
 @include('modals.messageModal')
 @include('modals.cartModal')

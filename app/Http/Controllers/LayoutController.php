@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\NotificationMessage;
 use Auth;
 use JavaScript;
+use Session;
 
 /**
  * Class LayoutController
@@ -36,10 +37,17 @@ class LayoutController extends Controller
         $trans['ERROR'] = trans('js.error');
         if (!Auth::check()) {
             $trans['AUTH'] = trans('js.auth');
+
+            if (Session::has('social_email')) {
+                JavaScript::put([
+                    'SOCIAL_EMAIL' => true,
+                    'SOCIAL_EMAIL_USER_NAME' => Session::get('social_email.name'),
+                ]);
+            }
         }
 
         JavaScript::put([
-            'TRANS' => $trans
+            'TRANS' => $trans,
         ]);
     }
 }

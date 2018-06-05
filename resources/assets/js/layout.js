@@ -18,8 +18,7 @@ GD.NOTIFICATION = {
 function initCart() {
     // GD.INIT_CART_WS = new WaitSync(function () {
 
-        if (GD.IS_DATA_PROCESSING)
-        {
+        if (GD.IS_DATA_PROCESSING) {
             return false;
         }
 
@@ -56,10 +55,25 @@ function initNotification() {
     }
 }
 
+function initSocialEmail() {
+    if (OUTLET.SOCIAL_EMAIL && OUTLET.SOCIAL_EMAIL === true
+        && OUTLET.SOCIAL_EMAIL_USER_NAME) {
+
+        var $socialEmailModal = $('#socialEmailModal'),
+            $socialEmailModalUserName = $socialEmailModal.find('[data-social-name-input]');
+
+        $socialEmailModalUserName.val(OUTLET.SOCIAL_EMAIL_USER_NAME);
+
+        $socialEmailModal.modal('show');
+    }
+}
+
 $(document).ready(function () {
     initCart();
 });
 
 $(window).on('load', function (e) {
     initNotification();
+
+    initSocialEmail();
 });

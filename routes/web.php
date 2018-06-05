@@ -302,7 +302,8 @@ Route::group(['prefix' => 'auth'], function () {
 
     Route::get('login/facebook/callback', 'Auth\FacebookLoginController@handleProviderCallback');
 
-    Route::post('social-email', 'Auth\FacebookLoginController@socialEmailHandler');
+    Route::post('social-email', 'Auth\FacebookLoginController@socialEmailHandler')
+        ->name('social-email');
 
     Route::get('login/google/{language?}', 'Auth\GoogleLoginController@redirectToProvider')
         ->where([
