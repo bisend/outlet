@@ -49,20 +49,32 @@ Route::get('/product/{slug}/{language?}', 'ProductController@index')->where([
 //})->name('error');
 // ---------------------------------------------------------------------------------------------------------------------
 
+Route::get('/profile/personal-info/{language?}', 'Profile\PersonalInfoController@index')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ])->name('personal-info');
+
+
+Route::get('profile/wishlist/{language?}', 'Profile\WishListController@index')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ])->name('wishlist');
+
+
 // Profile group routes
-//Route::get('/profile/personal-info', function () {
-//    return view('profile.personal-info');
-//})->name('personal-info');
+/*Route::get('/profile/personal-info', function () {
+    return view('pages.personal-info');
+})->name('personal-info');*/
 
 // Profile wish list
-//Route::get('/profile/wishlist', function () {
-//    return view('profile.wishlist');
-//})->name('wishlist');
+/*Route::get('/profile/wishlist', function () {
+    return view('pages.wishlist');
+})->name('wishlist');*/
 
 // Profile orders
-//Route::get('/profile/my-orders', function () {
-//    return view('profile.my-orders');
-//})->name('my-orders');
+Route::get('/profile/my-orders' , function () {
+    return view('pages.my-orders');
+})->name('my-orders');
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Search group routes

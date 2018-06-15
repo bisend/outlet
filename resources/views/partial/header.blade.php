@@ -42,7 +42,7 @@
 
                         @if(Auth::check())
                             <li>
-                                <a href="#">{{ Auth::user()->first_name }}</a>
+                                <a href="{{route('personal-info')}}">{{ Auth::user()->first_name }}</a>
                             </li>
                             <li>
                                 <a href="{{ route('auth-logout') }}">{{ trans('header.logout') }}</a>
