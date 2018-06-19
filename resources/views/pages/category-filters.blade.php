@@ -101,7 +101,7 @@
                                 @foreach($model->categoryProducts as $product)
                                     <div class="col-sm-12 col-md-6 col-lg-4">
                                         <div class="prod-item">
-                                            <div class="prod-img">
+                                            <a href="{{ url_product($product->slug, $model->language) }}" class="prod-img">
                                                 @if(!is_null($product->promotions) && $product->promotions->count() > 0)
                                                     @if($product->promotions[0]->priority == 3)
                                                         <div class="label sale">
@@ -124,9 +124,9 @@
                                                     {{--<a class="add-to-wishlist" href="">--}}
                                                     {{--<i class="fas fa-heart"></i>--}}
                                                     {{--</a>--}}
-                                                    <a class="add-to-wishlist" href="">
+                                                    <div class="add-to-wishlist">
                                                         <i class="fas fa-heart"></i>
-                                                    </a>
+                                                    </div>
 
                                                     <div class="size-addToCart">
                                                         <div class="size">
@@ -136,10 +136,9 @@
                                                                 @{{ size.name }}
                                                             </span>
                                                         </div>
-                                                        <a href="#"
-                                                           @click.prevent="addToCart(productGrid.products[{{$counter}}].id, productGrid.products[{{$counter}}].currentSizeId, 1)"
-                                                           class="btn"
-                                                           :class="{'active': findWhere(cart.cartItems, {'productId': productGrid.products[{{$counter}}].id, 'sizeId': productGrid.products[{{$counter}}].currentSizeId})}">
+                                                        <div @click.prevent="addToCart(productGrid.products[{{$counter}}].id, productGrid.products[{{$counter}}].currentSizeId, 1)"
+                                                             class="btn"
+                                                             :class="{'active': findWhere(cart.cartItems, {'productId': productGrid.products[{{$counter}}].id, 'sizeId': productGrid.products[{{$counter}}].currentSizeId})}">
                                                             <span v-cloak
                                                                   v-if="!findWhere(cart.cartItems, {'productId': productGrid.products['{{$counter}}'].id, 'sizeId': productGrid.products['{{$counter}}'].currentSizeId})">
                                                                 {{ trans('layout.add_to_cart') }}
@@ -147,9 +146,8 @@
                                                             <span v-cloak v-else>
                                                                 {{ trans('layout.in_cart') }}
                                                             </span>
-                                                        </a>
+                                                        </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                             <div class="stars">

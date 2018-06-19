@@ -26,11 +26,13 @@
     <div class="product-page">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 col-lg-7">
+                <div class="col-xs-12 col-md-6">
                     <div class="owl-carousel owl-theme product-big-photo">
                         @foreach($model->product->images as $image)
                             <div>
-                                <div class="prod-big-img">
+                                <a data-fancybox="gallery"
+                                   href="{{ $image->original }}"
+                                   class="prod-big-img">
 
                                     @if(!is_null($model->product->promotions) && $model->product->promotions->count() > 0)
                                         @if($model->product->promotions[0]->priority == 3)
@@ -50,7 +52,7 @@
                                         @endif
                                     @endif
                                     <img src="{{ $image->big }}" alt="{{ $model->product->name }}">
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -68,7 +70,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-12 col-lg-5" id="single-product-info-container">
+                <div class="col-xs-12 col-md-6" id="single-product-info-container">
                     <div class="product-info">
                         <div class="stars-comments">
                             <div class="stars">

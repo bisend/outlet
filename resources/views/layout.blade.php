@@ -10,6 +10,9 @@
     <meta name="description" content="{{ $model->description }}">
     <meta name="keywords" content="{{ $model->keywords }}">
 
+    <!-- fancybox -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+
     @if(isset($model->metaLinkPrev) && !is_null($model->metaLinkPrev))
         <link rel="prev" href="{{ $model->metaLinkPrev }}">
     @endif
@@ -75,6 +78,29 @@
     <script defer src="{{ mix('/js/restore-password.js') }}"></script>
     <script defer src="{{ mix('/js/social-email.js') }}"></script>
 @endif
+
+
+<!-- fancybox -->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+
+<!-- <script src="/js/jquery-1.11.2.min.js"></script> -->
+<script>
+    $(document).ready(function (){
+        $("body").on("click", ".size-addToCart span", function(e){
+            var el = e.target,
+                $this = $(this),
+                elBlock = $(".size-addToCart");
+
+            e.stopPropagation();
+            e.preventDefault();
+
+            if (el = elBlock){
+                return false;
+            }
+        });
+    });
+</script>
 
 @include('modals.loader')
 </body>

@@ -7,7 +7,7 @@
         @foreach($model->similar_products as $similar_product)
             <div>
                 <div class="prod-item">
-                    <div class="prod-img">
+                    <a href="{{ url_product($similar_product->slug, $model->language) }}" class="prod-img">
                         @if(!is_null($similar_product->promotions) && $similar_product->promotions->count() > 0)
                             @if($similar_product->promotions[0]->priority == 3)
                                 <div class="label sale">
@@ -27,9 +27,9 @@
                         @endif
                         <img src="{{ $similar_product->images[0]->medium }}" alt="{{ $similar_product->name }}">
                         <div class="item-overlay">
-                            <a class="add-to-wishlist" href="">
+                            <div class="add-to-wishlist" href="">
                                 <i class="fas fa-heart"></i>
-                            </a>
+                            </div>
                             <div class="size-addToCart">
                                 <div class="size">
                                     <span v-for="size in singleProductPage.similarProducts[{{$counter}}].sizes"
@@ -53,7 +53,7 @@
                                         {{--@php($counterSize++)--}}
                                     {{--@endforeach--}}
                                 </div>
-                                <a href="#"
+                                <div href="#"
                                    @click.prevent="addToCart(singleProductPage.similarProducts[{{$counter}}].id, singleProductPage.similarProducts[{{$counter}}].currentSizeId, 1)"
                                    class="btn"
                                    :class="{'active': findWhere(cart.cartItems, {'productId': singleProductPage.similarProducts[{{$counter}}].id, 'sizeId': singleProductPage.similarProducts[{{$counter}}].currentSizeId})}">
@@ -64,11 +64,11 @@
                                     <span v-cloak v-else>
                                         {{ trans('layout.in_cart') }}
                                     </span>
-                                </a>
+                                </div>
                             </div>
 
                         </div>
-                    </div>
+                    </a>
                     <div class="stars">
                         @for($i = 1; $i <= 5; $i++)
                             @if(!is_null($similar_product->rating))
