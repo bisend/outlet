@@ -55,10 +55,33 @@ Route::get('/profile/personal-info/{language?}', 'Profile\PersonalInfoController
     ])->name('personal-info');
 
 
-Route::get('profile/wishlist/{language?}', 'Profile\WishListController@index')
+Route::get('profile/wish-list/{language?}', 'Profile\WishListController@index')
     ->where([
         'language' => '^(uk|ru)?$'
     ])->name('wishlist');
+
+Route::get('profile/my-orders/{language?}', 'Profile\MyOrdersController@index')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ])->name('my-orders');
+
+Route::get('/profile/payment-delivery/{language?}', 'Profile\PaymentDeliveryController@index')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ]);
+
+
+Route::post('profile/save-personal-info', 'Profile\PersonalInfoController@savePersonalInfo');
+
+Route::post('profile/change-password', 'Profile\ChangePasswordController@changePassword');
+
+Route::post('profile/save-payment-delivery', 'Profile\PaymentDeliveryController@savePaymentDelivery');
+
+Route::post('profile/add-to-wish-list', 'Profile\WishListController@addToWishList');
+
+Route::post('profile/delete-from-wish-list', 'Profile\WishListController@deleteFromWishList');
+
+Route::post('profile/my-orders', 'Profile\MyOrdersController@indexPagination');
 
 
 // Profile group routes
@@ -70,12 +93,12 @@ Route::get('profile/wishlist/{language?}', 'Profile\WishListController@index')
 /*Route::get('/profile/wishlist', function () {
     return view('pages.wishlist');
 })->name('wishlist');*/
-
+/*
 // Profile orders
 Route::get('/profile/my-orders' , function () {
     return view('pages.my-orders');
 })->name('my-orders');
-// ---------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------*/
 
 // Search group routes
 Route::group(['prefix' => 'search'], function () {

@@ -13,7 +13,7 @@ class CreateNpDeliveryTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('np_delivery_types', function (Blueprint $table) {
+        Schema::create('delivery_types', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -37,6 +37,6 @@ class CreateNpDeliveryTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('np_delivery_types');
+        Schema::dropIfExists('delivery_types');
     }
 }

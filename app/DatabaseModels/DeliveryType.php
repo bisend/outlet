@@ -29,5 +29,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DeliveryType extends Model
 {
-    protected $table = 'np_delivery_types';
+    protected $table = 'delivery_types';
 }
