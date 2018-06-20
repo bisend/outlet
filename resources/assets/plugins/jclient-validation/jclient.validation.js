@@ -3,18 +3,18 @@
 // Regular expressions for validated inputs
 // You can to add new item and use it in parameters
 window.RegularExpressions = {
-	NAME: /^[а-яА-ЯёЁіІїЇa-zA-Z]{2,30}$/,                                             // For example "Nicholas" (one word)
-	FULL_NAME: /^[а-яА-ЯёЁіІїЇa-zA-Z'`\s,.-]{2,100}$/,                                  // For example "Nicholas Brick" (two words)
+	NAME: /^[a-zA-Zа-яА-ЯїЇіІьЬєЄэЭъЪёЁґҐ]{2,30}$/,                                             // For example "Nicholas" (one word)
+	FULL_NAME: /^[a-zA-Zа-яА-ЯїЇіІьЬєЄэЭъЪёЁґҐ'`\s,.-]{2,100}$/,                                  // For example "Nicholas Brick" (two words)
 	PASSWORD: /^\S{6,20}$/,															// For example word.pass123123 (difficult password)
 	SIMPLE_PASSWORD: /^[\w.]{6,20}$/,                                               // For example 123123 (similar password)
 	EMAIL: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,	 // For example nicholas.brick@mail.com
 	PHONE_NUMBER: /^[0-9\-\(\)\+ ]{5,30}$/,											// For example +38(012) 345-67-89
 	PHONE_NUMBER_MOBILE: /^[0-9\-\(\)\+ ]{15,30}$/,											// For example +38(012) 345-67-89
 	URL_LINK: /^http:+|https:+.+$/,                                                 // For example http://fs.to
-	LETTERS_ONLY: /^[а-яА-ЯёЁіІїЇa-zA-Z]+$/,                                          // Letters only
+	LETTERS_ONLY: /^[a-zA-Zа-яА-ЯїЇіІьЬєЄэЭъЪёЁґҐ]+$/,                                          // Letters only
 	SIMPLE_TEXT: /.{2,}\s*/,                                                        // Just simple text (more than two symbols)
 	MIN_TEXT: /.{1,}\s*/,                                                           // Just simple text (more than one symbol)
-	FILE_PATH: /^[а-яА-ЯёЁіІїЇa-zA-Z]{2,200}$/,                                       // For example drive:\dir\dir\file.ext
+	FILE_PATH: /^[a-zA-Zа-яА-ЯїЇіІьЬєЄэЭъЪёЁґҐ]{2,200}$/,                                       // For example drive:\dir\dir\file.ext
 	DATE_TIME_R: /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/,         // For example 2016-04-13 09:41:46
 	DATE_RANGE: /^([0-9]{2}\/[0-9]{2}\/[0-9]{4})|([0-9]{2}\/[0-9]{2}\/[0-9]{4} \- [0-9]{2}\/[0-9]{2}\/[0-9]{4})$/, // For example 04/25/2016 or 04/25/2016 - 05/26/2017
 	OKPO_CODE: /.{2,}\s*/,                                                          // OKPO code

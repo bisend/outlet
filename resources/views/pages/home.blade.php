@@ -40,13 +40,13 @@
                         @foreach($model->new_slider_products as $product)
                             <div>
                                 <div class="prod-item">
-                                    <div class="prod-img">
+                                    <a href="{{ url_product($product->slug, $model->language) }}" class="prod-img">
                                         <div class="label new">New</div>
                                         <img src="{{ $product->images[0]->medium }}" alt="{{ $product->name }}">
                                         <div class="item-overlay">
-                                            <a class="add-to-wishlist" href="#">
+                                            <div class="add-to-wishlist" href="#">
                                                 <i class="fas fa-heart"></i>
-                                            </a>
+                                            </div>
                                             <div class="size-addToCart">
                                                 <div class="size">
                                                     <span v-for="size in homePage.newSliderProducts[{{$counter}}].sizes"
@@ -55,7 +55,7 @@
                                                         @{{ size.name }}
                                                     </span>
                                                 </div>
-                                                <a href="#"
+                                                <div href="#"
                                                    @click.prevent="addToCart(homePage.newSliderProducts[{{$counter}}].id, homePage.newSliderProducts[{{$counter}}].currentSizeId, 1)"
                                                    class="btn"
                                                    :class="{'active': findWhere(cart.cartItems, {'productId': homePage.newSliderProducts[{{$counter}}].id, 'sizeId': homePage.newSliderProducts[{{$counter}}].currentSizeId})}">
@@ -66,11 +66,11 @@
                                                     <span v-cloak v-else>
                                                         {{ trans('layout.in_cart') }}
                                                     </span>
-                                                </a>
+                                                </div>
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </a>
                                     <div class="stars">
 
                                         @for($i = 1; $i <= 5; $i++)
@@ -171,13 +171,13 @@
                         @foreach($model->sales_slider_products as $product)
                             <div>
                                 <div class="prod-item">
-                                    <div class="prod-img">
+                                    <a href="{{ url_product($product->slug, $model->language) }}" class="prod-img">
                                         <div class="label sale">Sale</div>
                                         <img src="{{ $product->images[0]->medium }}" alt="{{ $product->name }}">
                                         <div class="item-overlay">
-                                            <a class="add-to-wishlist" href="#">
+                                            <div class="add-to-wishlist" href="#">
                                                 <i class="fas fa-heart"></i>
-                                            </a>
+                                            </div>
                                             <div class="size-addToCart">
                                                 <div class="size">
                                                     <span v-for="size in homePage.salesSliderProducts[{{$counter}}].sizes"
@@ -186,7 +186,7 @@
                                                         @{{ size.name }}
                                                     </span>
                                                 </div>
-                                                <a href="#"
+                                                <div href="#"
                                                    @click.prevent="addToCart(homePage.salesSliderProducts[{{$counter}}].id, homePage.salesSliderProducts[{{$counter}}].currentSizeId, 1)"
                                                    class="btn"
                                                    :class="{'active': findWhere(cart.cartItems, {'productId': homePage.salesSliderProducts[{{$counter}}].id, 'sizeId': homePage.salesSliderProducts[{{$counter}}].currentSizeId})}">
@@ -197,11 +197,11 @@
                                                     <span v-cloak v-else>
                                                         {{ trans('layout.in_cart') }}
                                                     </span>
-                                                </a>
+                                                </div>
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </a>
                                     <div class="stars">
 
                                         @for($i = 1; $i <= 5; $i++)
@@ -254,13 +254,13 @@
                     @foreach($model->top_slider_products as $product)
                         <div>
                             <div class="prod-item">
-                                <div class="prod-img">
+                                <a href="{{ url_product($product->slug, $model->language) }}" class="prod-img">
                                     <div class="label top">Top</div>
                                     <img src="{{ $product->images[0]->medium }}" alt="{{ $product->name }}">
                                     <div class="item-overlay">
-                                        <a class="add-to-wishlist" href="#">
+                                        <div class="add-to-wishlist" href="#">
                                             <i class="fas fa-heart"></i>
-                                        </a>
+                                        </div>
                                         <div class="size-addToCart">
                                             <div class="size">
                                                 <span v-for="size in homePage.topSliderProducts[{{$counter}}].sizes"
@@ -269,7 +269,7 @@
                                                         @{{ size.name }}
                                                 </span>
                                             </div>
-                                            <a href="#"
+                                            <div href="#"
                                                @click.prevent="addToCart(homePage.topSliderProducts[{{$counter}}].id, homePage.topSliderProducts[{{$counter}}].currentSizeId, 1)"
                                                class="btn"
                                                :class="{'active': findWhere(cart.cartItems, {'productId': homePage.topSliderProducts[{{$counter}}].id, 'sizeId': homePage.topSliderProducts[{{$counter}}].currentSizeId})}">
@@ -280,11 +280,11 @@
                                                 <span v-cloak v-else>
                                                     {{ trans('layout.in_cart') }}
                                                 </span>
-                                            </a>
+                                            </div>
                                         </div>
 
                                     </div>
-                                </div>
+                                </a>
                                 <div class="stars">
 
                                     @for($i = 1; $i <= 5; $i++)
