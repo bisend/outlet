@@ -31,6 +31,9 @@ class SaleController extends LayoutController
             'sortItems' => $model->sortItems->items
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.sale', compact('model'));
     }
 
@@ -46,6 +49,9 @@ class SaleController extends LayoutController
             'products' => $model->products,
             'sortItems' => $model->sortItems->items
         ]);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.sale', compact('model'));
     }
@@ -63,6 +69,9 @@ class SaleController extends LayoutController
             'sortItems' => $model->sortItems->items
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.sale', compact('model'));
     }
 
@@ -78,6 +87,9 @@ class SaleController extends LayoutController
             'products' => $model->products,
             'sortItems' => $model->sortItems->items
         ]);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.sale', compact('model'));
     }

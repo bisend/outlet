@@ -38,6 +38,9 @@ class TopSaleController extends LayoutController
             'sortItems' => $model->sortItems->items
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.top-sale', compact('model'));
     }
 
@@ -53,6 +56,9 @@ class TopSaleController extends LayoutController
             'products' => $model->products,
             'sortItems' => $model->sortItems->items
         ]);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.top-sale', compact('model'));
     }
@@ -70,6 +76,9 @@ class TopSaleController extends LayoutController
             'sortItems' => $model->sortItems->items
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.top-sale', compact('model'));
     }
 
@@ -85,6 +94,9 @@ class TopSaleController extends LayoutController
             'products' => $model->products,
             'sortItems' => $model->sortItems->items
         ]);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.top-sale', compact('model'));
     }

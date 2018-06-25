@@ -38,6 +38,9 @@ class NoveltyController extends LayoutController
             'sortItems' => $model->sortItems->items
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.novelty', compact('model'));
     }
 
@@ -54,6 +57,9 @@ class NoveltyController extends LayoutController
             'sortItems' => $model->sortItems->items
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.novelty', compact('model'));
     }
 
@@ -69,6 +75,9 @@ class NoveltyController extends LayoutController
             'products' => $model->products,
             'sortItems' => $model->sortItems->items
         ]);
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
 
         return view('pages.novelty', compact('model'));
     }
@@ -85,6 +94,9 @@ class NoveltyController extends LayoutController
             'products' => $model->products,
             'sortItems' => $model->sortItems->items
         ]);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.novelty', compact('model'));
     }

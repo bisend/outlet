@@ -62,6 +62,9 @@ class MyOrdersController extends LayoutController
             'totalOrdersCount' => $model->totalOrdersCount
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.my-orders', compact('model'));
     }
 

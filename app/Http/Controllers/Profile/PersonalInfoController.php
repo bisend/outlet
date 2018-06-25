@@ -46,6 +46,9 @@ class PersonalInfoController extends LayoutController
 
         $this->profileService->fill($model);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.personal-info', compact('model'));
     }
 

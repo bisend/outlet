@@ -55,6 +55,9 @@ class ProductController extends LayoutController
             'reviews_total_count' => $reviews_total_count
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.product', compact('model'));
     }
 

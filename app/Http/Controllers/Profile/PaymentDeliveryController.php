@@ -98,6 +98,9 @@ class PaymentDeliveryController extends LayoutController
             'selectedIndex' => $model->selectedIndex,
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.payment-delivery', compact('model'));
     }
 

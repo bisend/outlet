@@ -48,6 +48,10 @@ class SearchController extends LayoutController
 
         \Debugbar::info($model);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
+
         return view('pages.search', compact('model'));
     }
 
@@ -70,6 +74,9 @@ class SearchController extends LayoutController
         ]);
 
         \Debugbar::info($model);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.search', compact('model'));
     }
@@ -94,6 +101,9 @@ class SearchController extends LayoutController
 
         \Debugbar::info($model);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.search', compact('model'));
     }
 
@@ -117,6 +127,9 @@ class SearchController extends LayoutController
         ]);
 
         \Debugbar::info($model);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.search', compact('model'));
     }

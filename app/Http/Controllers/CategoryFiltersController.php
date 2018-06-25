@@ -55,6 +55,9 @@ class CategoryFiltersController extends LayoutController
             'priceMax' => $model->priceMax
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.category-filters', compact('model'));
     }
 
@@ -84,6 +87,9 @@ class CategoryFiltersController extends LayoutController
             'priceMin' => $model->priceMin,
             'priceMax' => $model->priceMax
         ]);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.category-filters', compact('model'));
     }
@@ -115,6 +121,9 @@ class CategoryFiltersController extends LayoutController
             'priceMax' => $model->priceMax
         ]);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return view('pages.category-filters', compact('model'));
     }
 
@@ -145,6 +154,9 @@ class CategoryFiltersController extends LayoutController
             'priceMin' => $model->priceMin,
             'priceMax' => $model->priceMax
         ]);
+
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
 
         return view('pages.category-filters', compact('model'));
     }
