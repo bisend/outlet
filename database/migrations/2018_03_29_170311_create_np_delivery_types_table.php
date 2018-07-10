@@ -13,7 +13,7 @@ class CreateNpDeliveryTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('delivery_types', function (Blueprint $table) {
+        /*Schema::create('delivery_types', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -25,9 +25,9 @@ class CreateNpDeliveryTypesTable extends Migration
             $table->string('slug')->unique();
             $table->boolean('is_visible')->default(true);
             $table->integer('priority')->default(1000);
-            $table->string('code_1c')->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
-        });
+        });*/
     }
 
     /**
@@ -37,6 +37,6 @@ class CreateNpDeliveryTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delivery_types');
+        //Schema::dropIfExists('delivery_types');
     }
 }

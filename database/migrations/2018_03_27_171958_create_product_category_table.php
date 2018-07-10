@@ -24,7 +24,7 @@ class CreateProductCategoryTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->boolean('is_visible')->default(true);
             $table->integer('priority')->default(1000);
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
 
             $table->unique(['product_id', 'category_id'], 'unique_product_id_category_id');

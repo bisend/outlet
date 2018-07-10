@@ -23,7 +23,7 @@ class CreateWishListProductsTable extends Migration
             $table->integer('wish_list_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->integer('size_id')->unsigned();
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
         });
     }

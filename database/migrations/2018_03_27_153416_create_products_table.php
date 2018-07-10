@@ -36,7 +36,7 @@ class CreateProductsTable extends Migration
             $table->string('vendor_code')->nullable()->unique();
             $table->decimal('rating', 8, 2)->nullable();
             $table->integer('number_of_views')->unsigned()->default(0);
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             //meta
             $table->string('meta_title_ru')->nullable();
             $table->string('meta_title_uk')->nullable();

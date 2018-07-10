@@ -28,7 +28,7 @@ class CreateReviewsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->decimal('rating', 8, 2);
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
         });
     }

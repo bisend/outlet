@@ -29,7 +29,7 @@ class CreateMetaTagsTable extends Migration
             $table->string('meta_keywords_uk');
             $table->string('meta_h1_ru');
             $table->string('meta_h1_uk');
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
         });
     }

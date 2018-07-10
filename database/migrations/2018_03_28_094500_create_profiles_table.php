@@ -25,7 +25,7 @@ class CreateProfilesTable extends Migration
             $table->integer('delivery_id')->unsigned()->nullable();
             $table->string('phone_number')->nullable();
             $table->string('address_delivery')->nullable();
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
         });
     }

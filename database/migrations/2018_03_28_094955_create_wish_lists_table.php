@@ -21,7 +21,7 @@ class CreateWishListsTable extends Migration
 
             $table->increments('id');
             $table->integer('user_id')->unsigned()->unique();
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
         });
     }

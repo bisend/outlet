@@ -30,7 +30,7 @@ class CreateCategoriesTable extends Migration
             $table->string('image')->nullable();
             $table->text('description_ru')->nullable();
             $table->text('description_uk')->nullable();
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             //meta
             $table->string('meta_title_ru')->nullable();
             $table->string('meta_title_uk')->nullable();

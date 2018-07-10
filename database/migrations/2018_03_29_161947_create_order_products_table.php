@@ -25,7 +25,7 @@ class CreateOrderProductsTable extends Migration
             $table->integer('size_id')->unsigned();
             $table->integer('product_count')->unsigned();
             $table->decimal('price', 8, 2);
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
         });
     }

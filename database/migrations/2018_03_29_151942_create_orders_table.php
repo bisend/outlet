@@ -41,7 +41,7 @@ class CreateOrdersTable extends Migration
             $table->string('a_city')->nullable();
             $table->string('post_index')->nullable();
             $table->text('comment')->nullable();
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
 
             $table->timestamps();
         });

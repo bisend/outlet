@@ -13,7 +13,7 @@ class NpDeliveryTypesSeeder extends Seeder
     public function run()
     {
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        /*DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DeliveryType::truncate();
         DB::beginTransaction();
 
@@ -30,7 +30,7 @@ class NpDeliveryTypesSeeder extends Seeder
             $delivery_type->save();
 
         DB::commit();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');*/
 
     }
 }

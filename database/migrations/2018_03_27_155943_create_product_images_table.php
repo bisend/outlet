@@ -24,7 +24,7 @@ class CreateProductImagesTable extends Migration
             $table->integer('image_id')->unsigned();
             $table->boolean('is_visible')->default(true);
             $table->integer('priority')->default(1000);
-            $table->string('code_1c', 36)->nullable();
+            $table->string('code_1c', 255)->nullable();
             $table->timestamps();
         });
     }
