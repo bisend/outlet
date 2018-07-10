@@ -38,6 +38,9 @@ class ErrorController extends LayoutController
 
         $this->errorService->fill($model);
 
+        // Puts trans for JS
+        $this->putJavaScriptTrans($model->view);
+
         return response()->view("errors.$error", compact('model'), $error);
     }
 }
