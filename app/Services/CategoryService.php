@@ -86,10 +86,10 @@ class CategoryService extends LayoutService
     {
         $model->currentCategory = $this->categoryRepository->getCurrentCategoryBySlug($model);
 
-        if (empty($model->currentCategory) || !isset($model->currentCategory) || is_null($model->currentCategory))
-        {
-            abort(404);
-        }
+//        if (empty($model->currentCategory) || !isset($model->currentCategory) || is_null($model->currentCategory))
+//        {
+//            abort(404);
+//        }
     }
 
     /**
@@ -108,10 +108,10 @@ class CategoryService extends LayoutService
             }
         }
 
-        if (empty($model->categoryProducts) || !isset($model->categoryProducts) || is_null($model->categoryProducts) || $model->categoryProducts->count() < 1)
-        {
-            abort(404);
-        }
+//        if (empty($model->categoryProducts) || !isset($model->categoryProducts) || is_null($model->categoryProducts) || $model->categoryProducts->count() < 1)
+//        {
+//            abort(404);
+//        }
     }
 
     /**
