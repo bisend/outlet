@@ -2,7 +2,8 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -11,7 +12,7 @@
     <meta name="keywords" content="{{ $model->keywords }}">
 
     <!-- fancybox -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css"/>
 
     @if(isset($model->metaLinkPrev) && !is_null($model->metaLinkPrev))
         <link rel="prev" href="{{ $model->metaLinkPrev }}">
@@ -72,36 +73,49 @@
 <script defer src="{{ mix('/js/filters.js') }}"></script>
 <script defer src="{{ mix('/js/selected-filters.js') }}"></script>
 
+<script defer src="{{ mix ('/js/jquery.matchHeight.js') }}"></script>
+
+{{--<script defer src="{{ mix ('/js/launch.js') }}"></script>--}}
+
+
+
+<script defer src="{{ mix('/js/wishlist.js') }}"></script>
+<script defer src="{{ mix('/js/PaymentDelivery.js') }}"></script>
+<script defer src="{{ mix('/js/MyOrders.js') }}"></script>
+<script defer src="{{ mix('/js/PersonalInfo.js') }}"></script>
+<script defer src="{{ mix('/js/ChangePassword.js') }}"></script>
+
+
 @if(!Auth::check())
     <script defer src="{{ mix('/js/login.js') }}"></script>
     <script defer src="{{ mix('/js/register.js') }}"></script>
     <script defer src="{{ mix('/js/restore-password.js') }}"></script>
     <script defer src="{{ mix('/js/social-email.js') }}"></script>
-@endif
+    @endif
 
 
-<!-- fancybox -->
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+            <!-- fancybox -->
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
 
-<!-- <script src="/js/jquery-1.11.2.min.js"></script> -->
-<script>
-    $(document).ready(function (){
-        $("body").on("click", ".size-addToCart span", function(e){
-            var el = e.target,
-                $this = $(this),
-                elBlock = $(".size-addToCart");
+    <!-- <script src="/js/jquery-1.11.2.min.js"></script> -->
+    <script>
+        $(document).ready(function () {
+            $("body").on("click", ".size-addToCart span", function (e) {
+                var el = e.target,
+                        $this = $(this),
+                        elBlock = $(".size-addToCart");
 
-            e.stopPropagation();
-            e.preventDefault();
+                e.stopPropagation();
+                e.preventDefault();
 
-            if (el = elBlock){
-                return false;
-            }
+                if (el = elBlock) {
+                    return false;
+                }
+            });
         });
-    });
-</script>
+    </script>
 
-@include('modals.loader')
+    @include('modals.loader')
 </body>
 </html>

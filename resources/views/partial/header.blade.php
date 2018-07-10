@@ -4,10 +4,10 @@
             <div class="flex-container">
                 <ul class="staticPage">
                     <li>
-                        <a href="">{{ trans('header.about') }}</a>
+                        <a href="{{ url_about($model->language) }}">{{ trans('header.about') }}</a>
                     </li>
                     <li>
-                        <a href="">{{ trans('header.payment-and-delivery') }}</a>
+                        <a href="{{ url_static_payment_delivery($model->language) }}">{{ trans('header.payment-and-delivery') }}</a>
                     </li>
                     <li>
                         <a href="">{{ trans('header.guarantee') }}</a>
@@ -322,12 +322,13 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="smoll-cart-footer">
                                     <div class="all-count-price">
                                         {{ trans('header.sum') }}: @{{ cart.totalAmount.toFixed(2) }} грн
                                     </div>
                                     <div class="smoll-cart-footer-btn">
-                                        <a href="#" class="btn">{{ trans('header.to_order') }}</a>
+                                        <a href="{{ url_order($model->language) }}" class="btn">{{ trans('header.to_order') }}</a>
                                         <a href="#" data-toggle="modal" data-target="#big-cart" class="btn">{{ trans('header.open_cart') }}</a>
                                     </div>
                                 </div>

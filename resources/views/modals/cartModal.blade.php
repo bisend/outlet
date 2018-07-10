@@ -90,8 +90,9 @@
                         </div>
                     </div>
                     <div class="cart_btn">
-                        <a href="#" class="btn">{{ trans('cart.make-order') }}</a>
+                        <a href="{{ url_order($model->language) }}" class="btn">{{ trans('cart.make-order') }}</a>
                         <a href="#" class="btn" data-dismiss="modal" aria-label="Close">{{ trans('cart.continue-shopping') }}</a>
+
                     </div>
                 </div>
             </div>

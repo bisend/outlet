@@ -316,6 +316,8 @@ Route::group(['prefix' => 'cart'], function () {
 });
 // ---------------------------------------------------------------------------------------------------------------------
 
+Route::post('/get-user', 'LayoutController@getUser');
+
 // Artisan group routes
 Route::group(['prefix' => 'artisan'], function () {
     Route::get('/config-gen', 'ArtisanController@generateConfiguration');
@@ -378,3 +380,36 @@ Route::group(['prefix' => 'errors'], function ()
         ]);
 });
 // ---------------------------------------------------------------------------------------------------------------------
+
+Route::group(['prefix' => 'order'], function () {
+
+    Route::get('confirm/{language?}', 'OrderController@index')
+        ->where([
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::post('create', 'OrderController@create');
+
+    Route::get('payment/{orderNumber}/{language?}', 'OrderPaymentController@index')
+        ->where([
+            'orderNumber' => '^[0-9]+',
+            'language' => '^(uk|ru)?$'
+        ]);
+
+    Route::post('payment/callback', 'OrderPaymentController@liqpayCallbackHandler');
+
+});
+
+Route::get('/payment-delivery/{language?}', 'StaticPaymentDeliveryController@index')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ]);
+Route::get('/about/{language?}', 'AboutController@index')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ]);
+
+Route::get('/contact/{language?}', 'ContactController@index')
+    ->where([
+        'language' => '^(uk|ru)?$'
+    ]);
